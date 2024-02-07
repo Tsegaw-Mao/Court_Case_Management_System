@@ -17,3 +17,4 @@ use App\Http\Controllers\TemplateController;
 
 route::get('/', [TemplateController::class,'index']);
 route::get('/admin/home', [AdminController::class,'index']);
+route::get('/uploadpage', [DocumentController::class,'uploadpage']);

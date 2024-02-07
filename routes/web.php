@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TemplateController;
 /*
@@ -13,9 +14,6 @@ use App\Http\Controllers\TemplateController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-
-route::get('/home', [TemplateController::class,'index']);
+route::get('/', [TemplateController::class,'index']);
+route::get('/admin/home', [AdminController::class,'index']);

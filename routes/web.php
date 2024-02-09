@@ -33,4 +33,3 @@ route::post('/create/case', [AdminController::class,'store'])->name('admin.save'
 Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');
 Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');
 
-

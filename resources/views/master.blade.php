@@ -49,13 +49,16 @@
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    @yield('navbar')
-                    
+                    <li><a class="nav-link scrollto " href="#hero">Case</a></li>
+                    <li><a class="nav-link scrollto " href="#hero">Home2</a></li>
+                    <li><a class="nav-link scrollto " href="#hero">Home3</a></li>
+                    <li><a class="nav-link scrollto " href="#hero">Home4</a></li>
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-            <a href="#about" class="get-started-btn scrollto">Get Started</a>
+            <a href="#about" class="get-started-btn scrollto">Account</a>
 
         </div>
     </header><!-- End Header -->

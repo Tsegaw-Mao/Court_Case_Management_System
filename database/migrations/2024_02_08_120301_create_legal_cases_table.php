@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('Case_Type');
             $table->text('Case_Details');
             $table->string('Cause_of_Action')->default('null');
+            $table->softDeletes('deleted_at');
         });
     }
 

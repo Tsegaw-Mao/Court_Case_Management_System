@@ -19,3 +19,4 @@ use App\Http\Controllers\FileUploadController;
 route::get('/', [TemplateController::class,'index']);
 Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');
 Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');
+Route::get('add document', [FileUploadController::class, 'index'])->name('create.index');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Judge\JudgeCaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\FileUploadController;
@@ -16,6 +17,11 @@ use App\Http\Controllers\FileUploadController;
 */
 
 
-route::get('/', [TemplateController::class,'index']);
+
+route::get('/', [TemplateController::class,'index'])->name('landing');
+route::get('/admin/home', [AdminController::class,'index'])->name('admin.home');
+route::get('/admin/create', [AdminController::class,'create'])->name('admin.create');
+route::post('/create/case', [AdminController::class,'store'])->name('admin.save');
+route::get('/hh',[JudgeCaseController::class,'index'])->name('JudgeCase');
 Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');
 Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');

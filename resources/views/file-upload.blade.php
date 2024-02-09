@@ -45,7 +45,7 @@
             <table class="table table-bordered mt-3">
                 <thead>
                     <tr>
-                        <th>File |Name</th>
+                        <th>File Name</th>
                         <th>File Path</th>
                         <th>File Discription</th>
                         <th>File Type</th>

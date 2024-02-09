@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\FileUploadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,4 +17,5 @@ use App\Http\Controllers\TemplateController;
 
 
 route::get('/', [TemplateController::class,'index']);
-route::get('/admin/home', [AdminController::class,'index']);
+Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');
+Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');

@@ -49,6 +49,7 @@
                         <th>File Path</th>
                         <th>File Discription</th>
                         <th>File Type</th>
+                        <th>Action Type</th>
 
                         {{-- <th>File Descreption</th> --}}
                     </tr>
@@ -60,6 +61,9 @@
                         <td>{{ $fileUpload->filepath }}</td>
                         <td>{{ $fileUpload->discription}}
                         <td>{{ $fileUpload->type }}</td>
+                        <td>
+                            <a href="url {{'edit/.$fileUpload->id'}}" class="btn btn sucess">Edit</a>
+                            <a href="url {{'delete/.$fileUpload->id'}}"class="btn btn-danger">Delete</a>
 
                     </tr>
                 @endforeach

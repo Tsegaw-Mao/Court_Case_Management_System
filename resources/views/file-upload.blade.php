@@ -1,76 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Multitple File Upload</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head>
-<body>
+@extends('master')
+@section('body')
+<div class="card">
+    <div class="card-header"> Manage Cases
+    </div>
+    <div class="card-body">
+        <div>
+            <a href="{{ route('admin.addFile') }}">
+                <button type="button" class="btn btn-primary float-end">
+                    Add Document
+                </button>
+            </a>
+
+            <br>
+        </div>
 
 
-<div class="container">
-    <h2 class="text-center mt-5 mb-3">Multitple File Upload</h2>
-    <div class="card">
-        <div class="card-body">
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <b>{{ $message }}</b>
-                </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+        <table class="table table-bordered table-striped">
+            <br>
+            <thead>
 
-            <form class="row" method="post" action="{{url('multiple-file-upload')}}" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <div class="col-auto">
-                    {{-- <a href="{{ url('add')}}" class="btn  btn-primary float-end">add document</a> --}}
-                    <input type="file" name="fileuploads[]" class=" form-control" multiple >
-                </div>
-                <div class="col-auto">
-                    <label for="discription" class="btn btn-outline-primary mb-3">File Discription</button>
-                    <input type="text" name="discription" class=" form-control">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-outline-primary mb-3">Upload Files</button>
-                </div>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Case ID</th>
+                    <th scope="col">Document Name</th>
+                    <th scope="col">Document Type</th>
+                    <th scope="col">Document Discription</th>
+                    <th scope="col">View</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
 
-            </form>
-            <table class="table table-bordered mt-3">
-                <thead>
-                    <tr>
-                        <th>File Name</th>
-                        <th>File Path</th>
-                        <th>File Discription</th>
-                        <th>File Type</th>
-
-                        {{-- <th>File Descreption</th> --}}
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($fileUploads as $fileUpload)
-                    <tr>
-                        <td>{{ $fileUpload->filename }}</td>
-                        <td>{{ $fileUpload->filepath }}</td>
-                        <td>{{ $fileUpload->discription}}
-                        <td>{{ $fileUpload->type }}</td>
-
-                    </tr>
+            </thead>
+            <tbody>
+                <?php
+                $count = 0;
+                ?>
+                @foreach ($fileuploads as $file)
+                <?php
+                $count++;
+                ?>
+                <tr>
+                    <td>{{ $count }}</td>
+                    <td>{{ $file->Case_Id }}</td>
+                    <td>{{ $file->filename }}</td>
+                    <td>{{ $file->type }}</td>
+                    <td>{{ $file->discription }}</td>
+                    <td>
+                        <a href="{{ route('admin.showFile', ['id' => $file->id]) }}">
+                            <button class="btn btn-primary">
+                                <i class="bi-eye"></i>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.editFile', ['id' => $file->id]) }}">
+                            <button class="btn btn-primary">
+                                <i class="bi-pencil"></i>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <form action="{{ route('admin.deleteFile', ['id' => $file->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">
+                                <i class="bi-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
                 @endforeach
-                </tbody>
-
-            </table>
+            </tbody>
+        </table>
+        <div>
+            <a href="{{ route('admin.readalldeletedFiles')}}">
+                <button type="button" class="btn btn-primary left">
+                    <i>Restore Deletes</i>
+                </button>
+            </a>
         </div>
     </div>
-
 </div>
-
-
-</body>
-</html>
+@endsection

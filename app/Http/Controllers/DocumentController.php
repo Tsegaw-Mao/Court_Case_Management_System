@@ -1,12 +1,39 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Support\Http\Request;
+use Illuminate\Http\Request;
+use App\Models\FileUpload;
 class DocumentController extends Controller
 {
+    public function index()
+    {
+        $fileUplaods = FileUpload::all();
+        return view('file-upload', ['fileUploads' => $fileUplaods]);
+    }
 
-    public function uploadpage()
+    public function multipleUpload(Request $request)
+    {
+        $this->validate($request, [
+            'fileuploads' => 'required',
+            'fileuploads.*' => 'mimes:doc,pdf,docx,pptx,zip,jpg,png,jpeg,ppt'
+        ]);
+
+        $files = $request->file('fileuploads');
+        foreach($files as $file){
+            $fileUpload = new FileUpload;
+            $fileUpload->filename = $file->getClientOriginalName();
+            $fileUpload->filepath = $file->store('fileuploads');
+            $fileUpload->discription = $request->discription;
+            $fileUpload->type= $file->getClientOriginalExtension();
+            $fileUpload->save();
+        }
+
+        return redirect()->route('fileupload.index')->with('success','Files uploaded successfully!');
+    }
+
+    public function create()
     {
 
-        return view ('document');
+        return view('create');
     }
+
 }

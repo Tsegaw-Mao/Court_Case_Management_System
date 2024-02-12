@@ -29,4 +29,7 @@ class LegalCase extends Model
             "detail" => "required|max:5000",
         ]);
     }
+    public function fileUploads(){
+        return $this->hasMany(FileUpload::class);
+    }
 }

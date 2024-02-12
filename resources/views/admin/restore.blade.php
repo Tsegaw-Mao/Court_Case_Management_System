@@ -6,16 +6,6 @@
     <div class="card-header"> Manage Cases
     </div>
     <div class="card-body">
-        <div>
-            <a href="{{ route('admin.create') }}">
-                <button type="button" class="btn btn-primary float-end">
-                    Create Case
-                </button>
-            </a>
-
-            <br>
-        </div>
-
 
         <table class="table table-bordered table-striped">
             <br>
@@ -28,9 +18,9 @@
                     <th scope="col">Case Type</th>
                     <th scope="col">Case Detail</th>
                     <th scope="col">Cause of Action</th>
-                    <th scope="col">View</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Deleted at</th>
+                    <th scope="col">Restore</th>
+                    <th scope="col">Permanent Delete</th>
                 </tr>
 
             </thead>
@@ -49,22 +39,16 @@
                     <td>{{ $case->Case_Type }}</td>
                     <td>{{ $case->Case_Details }}</td>
                     <td>{{ $case->Cause_of_Action }}</td>
+                    <td>{{ $case->deleted_at}}</td>
                     <td>
-                        <a href="{{ route('admin.show', ['id' => $case->Case_Id]) }}">
+                        <a href="{{ route('admin.restore', ['id' => $case->Case_Id]) }}">
                             <button class="btn btn-primary">
-                                <i class="bi-eye"></i>
+                                <i class="bi-recycle"></i>
                             </button>
                         </a>
                     </td>
                     <td>
-                        <a href="{{ route('admin.edit', ['id' => $case->Case_Id]) }}">
-                            <button class="btn btn-primary">
-                                <i class="bi-pencil"></i>
-                            </button>
-                        </a>
-                    </td>
-                    <td>
-                        <form action="{{ route('admin.delete', ['id' => $case->Case_Id]) }}" method="POST">
+                        <form action="{{ route('admin.permanentdelete', ['id' => $case->Case_Id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger">
@@ -77,9 +61,9 @@
             </tbody>
         </table>
         <div>
-            <a href="{{ route('admin.readalldeletes')}}">
+            <a href="{{ route('admin.restoreall')}}">
                 <button type="button" class="btn btn-primary left">
-                    <i>Restore Deletes</i>
+                    <i class="bi-recycle">Restore All</i>
                 </button>
             </a>
         </div>

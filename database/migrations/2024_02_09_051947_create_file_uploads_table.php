@@ -19,6 +19,9 @@ class CreateFileUploadsTable extends Migration
             $table->string('filepath');
             $table->string('type');
             $table->timestamps();
+            $table->string('Case_Id');
+
+            $table->foreign('Case_Id')->references('Case_Id')->on('legal_cases')->onDelete('cascade');
         });
     }
 

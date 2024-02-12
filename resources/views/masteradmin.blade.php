@@ -28,6 +28,9 @@
 
     <!-- Template Main CSS File -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/css/admin.css') }}" rel="stylesheet" />
 
     <!-- =======================================================
   * Template Name: Gp
@@ -40,43 +43,43 @@
 
 <body>
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top ">
-        <div class="container d-flex align-items-center justify-content-lg-between">
+    <!-- Side Bar -->
+    <div class="row g-0 ">
+        <div class="p-3 vh-100 col-lg-3 text-white bg-dark">
+            <a href="{{ route('admin.home') }}" class="text-white text-decoration-none">
+                <span class="fs-4">Super Admin Panel</span>
+            </a>
+            <hr />
+            <ul class="nav flex-column sidebar">
+                <li><a href="{{ route('admin.home') }}" class="nav-link text-white">- SuperAdmin - Home</a></li>
 
-            <h1 class="logo me-auto me-lg-0"><a href=""><img src="{{asset('assets/img/judge hammer.jpg')}}" class="img-fluid" alt=""><span> Justice Dep.</span></a></h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                @can('case-list')
+                <li><a href="{{ route('admin.home') }}" class="nav-link text-white">- SuperAdmin - Cases</a></li>
+                @endcan
 
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">Home</a></li>
-                    <li><a class="nav-link scrollto " href="#hero">Case</a></li>
-                    <li><a class="nav-link scrollto " href="#hero">Home2</a></li>
-                    <li><a class="nav-link scrollto " href="#hero">Home3</a></li>
-                    <li><a class="nav-link scrollto " href="#hero">Home4</a></li>
+                @can('user-list')
+                <li><a class="nav-link text-white" href="{{ route('users.index') }}">Manage Users</a></li>
+                @endcan
 
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
+                @can('role-list')
+                <li><a class="nav-link text-white" href="{{ route('roles.index') }}">Manage Role</a></li>
+                @endcan
 
-            <a href="#about" class="get-started-btn scrollto">Account</a>
-
+                <li><a href="{{ route('admin.home') }}" class="mt-2 btn bg-primary text-white">Go back to the home page</a></li>
+            </ul>
         </div>
-    </header><!-- End Header -->
 
-    <section id="hero" class="d-flex align-items-center justify-content-center">
-        <div class="container" data-aos="fade-up">
+        <!-- ======= End of Side Bar ======= -->
 
-            <div class="col-lg-15 content-grey">
-                <div class="g-0 m-5 page_content"> @yield('body')
-                </div>
+        <div class="col-lg-9 content-grey">
+            <nav class="p-3 shadow text-end">
+                <span class="profile-font">Admin</span>
+                <!-- <img class="img-profile rounded-circle" src="{{ asset('/img/undraw_profile.svg') }}"> -->
+            </nav>
+            <div class="g-0 m-5 page_content"> @yield('body')
             </div>
-
         </div>
-    </section><!-- End About Section -->
-
-    </main><!-- End #main -->
+    </div>
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">

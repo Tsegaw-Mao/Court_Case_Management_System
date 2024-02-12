@@ -5,14 +5,15 @@
     <div class="card-header"> Create Case</div>
     <div class="card-body">
 
-        <form action="/create/case" method="post">
+        <form method="POST" action="{{ route('admin.update', ['id' => $viewData['case']->Case_Id]) }}" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="row">
                 <div class="col">
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label">ID:</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input name="id" value="{{ old('Case_Id') }}" type="text" class="form-control"><br>
+                            <input name="id" value="{{ $viewData['case']->Case_Id }}" type="text" class="form-control"><br>
                         </div>
                     </div>
                 </div>
@@ -22,7 +23,7 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label">Case Title</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input type="text" name="title" value="{{ old('title') }}" class="form-control"><br>
+                            <input type="text" name="title" value="{{ $viewData['case']->Case_Title }}" class="form-control"><br>
                         </div>
 
                     </div>
@@ -33,7 +34,7 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label">Case type</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input type="text" name="type" value=" {{ old('type') }} " class="form-control"><br>
+                            <input type="text" name="type" value=" {{ $viewData['case']->Case_Type }} " class="form-control"><br>
                         </div>
                     </div>
                 </div>
@@ -43,12 +44,12 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label">Case Details</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input type="text" name="details" value="{{ old('details') }} " class="form-control"><br>
+                            <input type="text" name="details" value="{{ $viewData['case']->Case_Details }} " class="form-control"><br>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Edit</button>
         </form>
     </div>
 </div>

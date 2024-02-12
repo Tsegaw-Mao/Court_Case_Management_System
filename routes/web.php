@@ -33,3 +33,11 @@ route::post('/create/case', [AdminController::class,'store'])->name('admin.save'
 Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');
 Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');
 
+Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
+    Route::get('categories', 'index');
+    Route::get('categories/create', 'create');
+    Route::post('categories/create', 'store');
+    Route::get('categories/{id}/edit', 'edit');
+    Route::put('categories/{id}/edit', 'update');
+    Route::get('categories/{id}/delete', 'destroy');
+});

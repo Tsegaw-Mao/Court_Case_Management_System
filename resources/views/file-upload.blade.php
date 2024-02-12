@@ -30,6 +30,7 @@
                     <th scope="col">Delete</th>
                 </tr>
 
+<<<<<<< HEAD
             </thead>
             <tbody>
                 <?php
@@ -69,6 +70,33 @@
                         </form>
                     </td>
                 </tr>
+=======
+            </form>
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>File Path</th>
+                        <th>File Discription</th>
+                        <th>File Type</th>
+                        <th>Action Type</th>
+
+                        {{-- <th>File Descreption</th> --}}
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($fileUploads as $fileUpload)
+                    <tr>
+                        <td>{{ $fileUpload->filename }}</td>
+                        <td>{{ $fileUpload->filepath }}</td>
+                        <td>{{ $fileUpload->discription}}
+                        <td>{{ $fileUpload->type }}</td>
+                        <td>
+                            <a href="url {{'edit/.$fileUpload->id'}}" class="btn btn sucess">Edit</a>
+                            <a href="url {{'delete/.$fileUpload->id'}}"class="btn btn-danger">Delete</a>
+
+                    </tr>
+>>>>>>> 554a7c9781f88f7cde5681e602a04c32e25d4b08
                 @endforeach
             </tbody>
         </table>

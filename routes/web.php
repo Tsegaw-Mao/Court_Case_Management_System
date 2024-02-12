@@ -38,7 +38,14 @@ route::get("/super/home",[AdminController::class,"index2"])->name('super.home');
 route::post('/create/case', [AdminController::class,'store'])->name('admin.save');
 Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');
 Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');
-
+Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
+    Route::get('categories', 'index');
+    Route::get('categories/create', 'create');
+    Route::post('categories/create', 'store');
+    Route::get('categories/{id}/edit', 'edit');
+    Route::put('categories/{id}/edit', 'update');
+    Route::get('categories/{id}/delete', 'destroy');
+});
 
 
 Route::controller(AuthController::class)->group(function(){
@@ -56,9 +63,12 @@ Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/logout', 'logout')->name('logout');
 });
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+>>>>>>> 554a7c9781f88f7cde5681e602a04c32e25d4b08

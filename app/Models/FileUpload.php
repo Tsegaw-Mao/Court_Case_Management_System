@@ -8,8 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class FileUpload extends Model
 {
     use HasFactory;
+    protected $table = 'file_uploads';
+    protected $filable =
+        [
+            'filename',
+            'filepath',
+            'discription',
+            'type'
+        ];
 
-    public function legalCase(){
-        return $this->belongsTo(LegalCase::class);
-    }
+
+
+
 }

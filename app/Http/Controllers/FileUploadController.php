@@ -17,7 +17,7 @@ class FileUploadController extends Controller
     {
         $this->validate($request, [
             'fileuploads' => 'required',
-            'fileuploads.*' => 'mimes:doc,pdf,docx,pptx,zip,jpg,png,jpeg'
+            'fileuploads.*' => 'mimes:doc,pdf,docx,pptx,zip,jpg,png,jpeg,ppt'
         ]);
 
         $files = $request->file('fileuploads');

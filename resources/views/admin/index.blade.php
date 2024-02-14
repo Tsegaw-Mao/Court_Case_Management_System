@@ -1,6 +1,6 @@
 @extends('masteradmin')
 
-@section('title',$viewData['title'])
+
 
 @section('body')
 <div class="card">

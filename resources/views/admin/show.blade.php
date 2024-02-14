@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         <div>
-            <a href="{{ route('admin.create') }}">
+            <a href="{{ route('categories.create',['id'=>$viewData['case']->Case_Id]) }}">
                 <button type="button" class="btn btn-primary float-end">
                     Add Document
                 </button>
@@ -46,7 +46,7 @@
                     <tr>
                         <td scope='col'>Case Files</td>
                         <td>
-                            <a href="{{ route('admin.create') }}">
+                            <a href="{{ route('categories.index',['id'=>$viewData['case']->Case_Id]) }}">
                                 <button type="button" class="btn btn-primary float-end">
                                     View Documents
                                 </button>

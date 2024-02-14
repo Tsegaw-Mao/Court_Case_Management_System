@@ -9,6 +9,10 @@ class Clerk extends Model
 {
     use HasFactory;
     protected $table="clerks";
-    protected $primaryKey = "id";
+    protected $primaryKey = "UserId";
+     protected $keyType = 'string';
+     public function Cases(){
+        return $this->belongsToMany( LegalCase::class);
+     }
     
 }

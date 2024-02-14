@@ -5,6 +5,7 @@ use App\Http\Controllers\Judge\JudgeCaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\JudgeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 /*
@@ -33,18 +34,23 @@ route::get('/admin/restore/{id}',[AdminController::class,'restoreSoftDeletes'])-
 route::get('/admin/restoreall',[AdminController::class,'restoreAllSoftDeletes'])->name('admin.restoreall');
 route::delete('/admin/permanentdelete/{id}',[AdminController::class,'permanentDelete'])->name("admin.permanentdelete");
 route::get("/super/home",[AdminController::class,"index2"])->name('super.home');
+route::post('/create/case', [AdminController::class,'store'])->name('admin.store');
 
 
-route::post('/create/case', [AdminController::class,'store'])->name('admin.save');
+route::get('/judge',[JudgeController::class,'index'])->name('judge.index');
+
+
 Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');
 Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');
+
+
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
-    Route::get('categories', 'index');
-    Route::get('categories/create', 'create');
-    Route::post('categories/create', 'store');
-    Route::get('categories/{id}/edit', 'edit');
-    Route::put('categories/{id}/edit', 'update');
-    Route::get('categories/{id}/delete', 'destroy');
+    Route::get('categories/{id}', 'index')->name('categories.index');
+    Route::get('categories/create/{id}', 'create')->name('categories.create');
+    Route::post('categories/create/{id}', 'store')->name('categories.store');
+    Route::get('categories/{id}/edit/{cId}', 'edit')->name('categories.edit');
+    Route::put('categories/{id}/edit/{cId}', 'update')->name('categories.update');
+    Route::get('categories/{id}/delete/{cId}', 'destroy')->name('categories.delete');
 });
 
 
@@ -63,12 +69,9 @@ Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/logout', 'logout')->name('logout');
 });
-<<<<<<< HEAD
 
 
 
 
 
 
-=======
->>>>>>> 554a7c9781f88f7cde5681e602a04c32e25d4b08

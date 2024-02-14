@@ -20,6 +20,11 @@ return new class extends Migration
             $table->text('Case_Details');
             $table->string('Cause_of_Action')->default('null');
             $table->softDeletes('deleted_at');
+            $table->string('plaintiff_UserId')->nullable();
+            $table->string('attorney_UserId')->nullable();
+            $table->string('lawyer_UserId')->nullable();
+            $table->string('judge_UserId')->nullable();
+            $table->string('detective_UserId')->nullable();
         });
     }
 

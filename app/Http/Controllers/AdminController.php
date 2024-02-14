@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Defendant;
 use App\Models\LegalCase;
 use Illuminate\Http\Request;
+use App\Models\Plaintiff;
 
 class AdminController extends Controller
 {
@@ -15,6 +17,11 @@ class AdminController extends Controller
         $viewData["cases"] = LegalCase::all();
         return view("admin.home")->with("viewData", $viewData);
     }
+    public function index2(){
+        $viewData = [];
+        $viewData = null;
+        return view("admin.index")->with("viewData",$viewData);
+    }
     public function create(Request $request)
     {
         $viewData = [];
@@ -23,15 +30,20 @@ class AdminController extends Controller
     }
     public function store(Request $request)
     {
-        LegalCase::validate($request);
         $case = new LegalCase();
+
+        $plaintiff = Plaintiff::where("UserId", $request->input("pid"))->first();
+        $defendant = Defendant::where("UserId", $request->input("did"))->first();
 
         $case->Case_Id = $request->input('id');
         $case->Case_Title = $request->input('title');
         $case->Case_Type = $request->input('type');
         $case->Case_Details = $request->input('details');
 
-        $case->save();
+        $plaintiff->Case()->save( $case );
+        $defendant->Cases()->attach($case->Case_Id);
+        // $case->Defendants()->attach($defendant->UserId);
+        // $case->save();
         return redirect()->back()->with("success", "Case Created Successfully");
     }
 

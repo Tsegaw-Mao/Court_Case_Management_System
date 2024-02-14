@@ -1,17 +1,22 @@
 @extends('master')
 
-@section('title',$viewData['title'])
 @section('body')
 <div class="card">
-    <div class="card-header"> Manage Cases
+    <div class="card-header"> List of Cases
     </div>
     <div class="card-body">
         <div>
-            <a href="{{ route('admin.create') }}">
+            <a href="{{  }}">
                 <button type="button" class="btn btn-primary float-end">
-                    Create Case
+                    List Unassigned Cases
                 </button>
             </a>
+            <a href="{{  }}">
+                <button type="button" class="btn btn-primary float-end">
+                    List Assigned Cases
+                </button>
+            </a>
+            
 
             <br>
         </div>
@@ -24,15 +29,12 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Case ID</th>
+                    <th scope="col">Case Title</th>
                     <th scope="col">Plaintiff</th>
                     <th scope="col">Defendant</th>
-                    <th scope="col">Case Title</th>
-                    <th scope="col">Case Type</th>
-                    <th scope="col">Case Detail</th>
-                    <th scope="col">Cause of Action</th>
-                    <th scope="col">View</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Plaintiff Lawyer</th>
+                    <th scope="col">Defendant Lawyer</th>
+                    <th scope="col">Assigned</th>
                 </tr>
 
             </thead>
@@ -47,10 +49,8 @@
                 <tr>
                     <td>{{ $count }}</td>
                     <td>{{ $case->Case_Id }}</td>
-                    <td>{{ $case->Plaintiff()->get()->value("FirstName") }}</td>
-                    <td>{{ $case->Defendants()->get()->value("FirstName") }}</td>
                     <td>{{ $case->Case_Title }}</td>
-                    <td>{{ $case->Case_Type }}</td>
+                    <td>{{ $case->P }}</td>
                     <td>{{ $case->Case_Details }}</td>
                     <td>{{ $case->Cause_of_Action }}</td>
                     <td>

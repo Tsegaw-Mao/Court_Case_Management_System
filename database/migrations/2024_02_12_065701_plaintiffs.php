@@ -14,11 +14,14 @@ return new class extends Migration
         //
         Schema::create("plaintiffs", function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->unsignedBigInteger("UserId");
+            $table->string("UserId")->unique();
             $table->string("FirstName");
             $table->string("LastName");
             $table->string("email");
             $table->string("address");
+            $table->string("lawyers_UserId")->nullable();
+            $table->string("legal_case_Case_Id")->nullable();
+            $table->timestamps();
         });
     }
 

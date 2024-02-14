@@ -70,6 +70,7 @@ class AdminController extends Controller
     {
         // LegalCase::validate($request);
         $case = LegalCase::where('Case_Id', $id)->first();
+        $plaintiff = $case->Plaintiff()->first();
         $case->Case_Id = $request->input('id');
         $case->Case_Title = $request->input('title');
         $case->Case_Type = $request->input('type');

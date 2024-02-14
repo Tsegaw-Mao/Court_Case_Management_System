@@ -1,7 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AttorneyController;
+use App\Http\Controllers\DefendantController;
+use App\Http\Controllers\DetectiveController;
 use App\Http\Controllers\Judge\JudgeCaseController;
+use App\Http\Controllers\LawyerController;
+use App\Http\Controllers\PlaintiffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\FileUploadController;
@@ -35,6 +40,31 @@ route::get('/admin/restoreall',[AdminController::class,'restoreAllSoftDeletes'])
 route::delete('/admin/permanentdelete/{id}',[AdminController::class,'permanentDelete'])->name("admin.permanentdelete");
 route::get("/super/home",[AdminController::class,"index2"])->name('super.home');
 route::post('/create/case', [AdminController::class,'store'])->name('admin.store');
+
+
+
+route::get('/plaintiff/create',[PlaintiffController::class,'create'])->name('plaintiff.create');
+route::post('/plaintiff/store', [ PlaintiffController::class,'store'])->name('plaintiff.store');
+
+route::get('/defendant/create',[DefendantController::class,'create'])->name('defendant.create');
+route::post('/defendant/store', [ DefendantController::class,'store'])->name('defendant.store');
+
+route::get('/lawyer/create',[LawyerController::class,'create'])->name('lawyer.create');
+route::post('/lawyer/store', [ LawyerController::class,'store'])->name('lawyer.store');
+
+route::get('/attorney/create',[AttorneyController::class,'create'])->name('attorney.create');
+route::post('/attorney/store', [ AttorneyController::class,'store'])->name('attorney.store');
+
+route::get('/judge/create',[JudgeController::class,'create'])->name('judge.create');
+route::post('/judge/store', [ JudgeController::class,'store'])->name('judge.store');
+
+route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
+route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
+
+
+
+
+
 
 
 route::get('/judge',[JudgeController::class,'index'])->name('judge.index');

@@ -45,7 +45,8 @@ class AdminController extends Controller
         // $defendant->Cases()->attach([$case->Case_Id]);
         // $case->Defendants()->attach($defendant->UserId);
         // $case->save();
-        return redirect()->back()->with("success", "Case Created Successfully");
+        return redirect()->back()->with('status', 'Case Created Successfully');
+
     }
 
     public function show($id)
@@ -62,23 +63,28 @@ class AdminController extends Controller
         $viewData['title'] = "Edit Case";
         $viewData["case"] = LegalCase::where('Case_Id', $id)->first();
         return view('admin.edit')->with('viewData', $viewData);
+
+
     }
     public function update(Request $request, $id)
     {
-        LegalCase::validate($request);
+        // LegalCase::validate($request);
         $case = LegalCase::where('Case_Id', $id)->first();
         $case->Case_Id = $request->input('id');
         $case->Case_Title = $request->input('title');
         $case->Case_Type = $request->input('type');
         $case->Case_Details = $request->input('details');
         $case->save();
-        return redirect()->route('admin.home')->with('success', 'Case Edited Sussesfully');
+        // return view('master');
+        // return redirect()->route('admin.home')->with('status', 'Case Edited Sussesfully');
+       return redirect()->back()->with('status', 'Case Edited Sussesfully');
     }
     public function delete($id)
     {
         $case = LegalCase::where("Case_Id", $id)->first();
         $case->delete();
-        return redirect()->route("admin.home")->with("success", "Case Deleted");
+         return redirect()->route("admin.home")->with("status", "Case Deleted");
+
     }
     public function readSoftDeletes($id)
     {

@@ -1,11 +1,15 @@
 @extends('master')
 
 @section('title',$viewData['title'])
+
 @section('body')
 <div class="card">
     <div class="card-header"> Manage Cases
     </div>
     <div class="card-body">
+        @if (session('status'))
+<div class="alert alert-success">{{session('status')}}</div>
+@endif
         <div>
             <a href="{{ route('admin.create') }}">
                 <button type="button" class="btn btn-primary float-end">

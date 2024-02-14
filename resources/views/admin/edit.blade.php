@@ -1,8 +1,12 @@
 @extends('master')
 @section('title',$viewData['title'])
 @section('body')
+@if (session('status'))
+<div class="alert alert-success">{{session('status')}}</div>
+@endif
 <div class="card">
-    <div class="card-header"> Create Case</div>
+
+    <div class="card-header"> Edit Case</div>
     <div class="card-body">
 
         <form method="POST" action="{{ route('admin.update', ['id' => $viewData['case']->Case_Id]) }}" enctype="multipart/form-data">

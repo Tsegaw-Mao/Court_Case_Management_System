@@ -4,7 +4,7 @@
 
 @section('body')
 <div class="card">
-    <div class="card-header"> Manage Cases
+    <div class="card-header bold"> Manage Cases
     </div>
     <div class="card-body">
         @if (session('status'))
@@ -25,7 +25,7 @@
             <br>
             <thead>
 
-                <tr>
+                <tr class = "bold">
                     <th scope="col">#</th>
                     <th scope="col">Case ID</th>
                     <th scope="col">Plaintiff</th>

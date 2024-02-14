@@ -67,11 +67,14 @@ class AdminController extends Controller
     {
         LegalCase::validate($request);
         $case = LegalCase::where('Case_Id', $id)->first();
+        $plaintiff = $case->Plaintiff()->first();
         $case->Case_Id = $request->input('id');
         $case->Case_Title = $request->input('title');
         $case->Case_Type = $request->input('type');
         $case->Case_Details = $request->input('details');
-        $case->save();
+        // $case->save();
+        $plaintiff->Case()->update($case);        
+        $case->refresh();
         return redirect()->route('admin.home')->with('success', 'Case Edited Sussesfully');
     }
     public function delete($id)

@@ -14,6 +14,7 @@ class CategoryController extends Controller
         return view('category.index', compact('categories'));
     }
 
+
     public function create()
     {
         return view('category.create');

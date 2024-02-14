@@ -5,6 +5,9 @@ use App\Http\Controllers\Judge\JudgeCaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\Admin\AdminHomeController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +18,11 @@ use App\Http\Controllers\FileUploadController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+ Route::get('/',function() {
+    return view('index');
+});
+
 
 
 
@@ -34,10 +42,23 @@ Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileup
 Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
-    Route::get('categories', 'index');
+    Route::get('/Ctegory','App\Http\Controllers\CategoryController@index')->name("Category.categories");
+
+    Route::get('categories', 'index')->name("Category.categories");
+    Route::get('categories', 'plaintregisteration')->name("Category.plaintregisteration");
     Route::get('categories/create', 'create');
     Route::post('categories/create', 'store');
     Route::get('categories/{id}/edit', 'edit');
     Route::put('categories/{id}/edit', 'update');
     Route::get('categories/{id}/delete', 'destroy');
+
+    Route::get('/admin','App\Http\Controllers\Admin\AdminHomeController@index')->name("admin.home.index");
+
+ });
+
+Route::get('/plaintregisteration',function() {
+     return view('plaintregisteration');
 });
+
+Route::get('/admin','App\Http\Controllers\Admin\AdminHomeController@index')->name("admin.home.index");
+

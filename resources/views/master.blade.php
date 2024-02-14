@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>MoD Justice Department - Index</title>
+    <title>
+        @yield('title','MoD Justice Department - Index')
+    </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -48,7 +50,7 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                    <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">Home</a></li>
                     <li><a class="nav-link scrollto " href="#hero">Case</a></li>
                     <li><a class="nav-link scrollto " href="#hero">Home2</a></li>
                     <li><a class="nav-link scrollto " href="#hero">Home3</a></li>
@@ -63,8 +65,18 @@
         </div>
     </header><!-- End Header -->
 
-    @yield('body')
+    <section id="hero" class="d-flex align-items-center justify-content-center">
+        <div class="container" data-aos="fade-up">
 
+            <div class="col-lg-15 content-grey">
+                <div class="g-0 m-5 page_content"> @yield('body')
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+
+    </main><!-- End #main -->
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">

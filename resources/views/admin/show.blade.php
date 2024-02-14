@@ -3,7 +3,7 @@
 @section('body')
 <div class="card">
     <div class="card-header">
-        Manage Case {$viewData['case']->Case_Title}
+        Manage Case {{$viewData['case']->Case_Title}}
     </div>
     <div class="card-body">
         <div>

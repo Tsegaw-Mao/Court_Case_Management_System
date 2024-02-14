@@ -11,8 +11,10 @@ class CategoryController extends Controller
 {
     public function index($id)
     {
+        $categories = [];
         $case = LegalCase::where("Case_Id", $id)->first();
-        $categories = $case->Categories()->get();
+        $categories['id'] = $id;
+        $categories['categories'] = $case->Categories()->get();
         return view('category.index', compact('categories'));
     }
 

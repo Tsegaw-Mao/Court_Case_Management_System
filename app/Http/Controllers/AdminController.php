@@ -41,7 +41,8 @@ class AdminController extends Controller
         $case->Case_Details = $request->input('details');
 
         $plaintiff->Case()->save( $case );
-        $defendant->Cases()->attach($case->Case_Id);
+        $defendant->Cases()->attach([$request->input('id')]);
+        // $defendant->Cases()->attach([$case->Case_Id]);
         // $case->Defendants()->attach($defendant->UserId);
         // $case->save();
         return redirect()->back()->with("success", "Case Created Successfully");

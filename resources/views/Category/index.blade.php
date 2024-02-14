@@ -37,7 +37,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>DOCUMENTS
-                        <a href="{{ url('categories/create/'.$categories[0]->legal_case_Case_Id) }}" class="btn btn-primary float-end">Upload File</a>
+                        <a href="{{ url('categories/create/'.$categories['id']) }}" class="btn btn-primary float-end">Upload File</a>
                     </h4>
                 </div>
                 <div class="card-body">
@@ -54,7 +54,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $item)
+                            @foreach ($categories['categories'] as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->name}}</td>

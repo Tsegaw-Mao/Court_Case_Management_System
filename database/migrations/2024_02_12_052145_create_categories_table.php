@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('file')->nullable();
             $table->boolean('is_active')->default(1);
             $table->timestamps();
+            $table->string('legal_case_Case_Id')->nullable();
         });
     }
 

@@ -29,4 +29,18 @@ class LegalCase extends Model
             "detail" => "required|max:5000",
         ]);
     }
+    public function Categories(){
+        return $this->hasMany(Category::class);
+
+    }
+
+    public function Plaintiff(){
+        return $this->belongsTo(Plaintiff::class);
+    }
+    public function Defendants(){
+        return $this->belongsToMany( Defendant::class);
+    }
+    public function Clerks(){
+        return $this->belongsToMany( Clerk::class);
+    }
 }

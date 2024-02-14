@@ -17,7 +17,11 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
+     * 
      */
+
+     protected $primaryKey = "UserId";
+     protected $keyType = 'string';
     protected $fillable = [
         'name',
         'email',
@@ -43,4 +47,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    
 }

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class permission extends Model
 {
     use HasFactory;
+
+    public function Case(){
+        return $this->hasOne(LegalCase::class);
+    }
 }

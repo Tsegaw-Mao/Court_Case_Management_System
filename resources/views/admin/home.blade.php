@@ -75,7 +75,7 @@
                         <form action="{{ route('admin.delete', ['id' => $case->Case_Id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger">
+                            <button class="btn btn-danger"  onclick="return confirm('Are you sure you want delete the case?')">
                                 <i class="bi-trash"></i>
                             </button>
                         </form>

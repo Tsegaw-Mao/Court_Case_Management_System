@@ -1,6 +1,9 @@
 @extends('master')
 
 @section('body')
+@if (session('status'))
+<div class="alert alert-success">{{session('status')}}</div>
+@endif
 <div class="card">
     <div class="card-header"> List of Cases
     </div>
@@ -16,7 +19,7 @@
                     List Assigned Cases
                 </button>
             </a>
-            
+
 
             <br>
         </div>

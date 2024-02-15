@@ -83,7 +83,7 @@ Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUplo
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
     Route::get('categories/{id}', 'index')->name('categories.index');
     Route::get('categories/create/{id}', 'create')->name('categories.create');
-    Route::post('categories/create/{id}', 'store')->name('categories.store');
+    Route::post('categories/store/{id}', 'store')->name('categories.store');
     Route::get('categories/{id}/edit/{cId}', 'edit')->name('categories.edit');
     Route::put('categories/{id}/edit/{cId}', 'update')->name('categories.update');
     Route::get('categories/{id}/delete/{cId}', 'destroy')->name('categories.delete');

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html>
 <head>
     <title>Multitple File Upload</title>
@@ -18,51 +18,77 @@
 <body>
    <div class="container mt-5">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12"> --}}
+@extends('master')
 
-            @if (session('status'))
-                <div class="alert alert-success">{{session('status')}}</div>
-            @endif
+@section('body')
+    @if (session('status'))
+        <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
 
-            <div class="card">
-                <div class="card-header">
-                    <h4>Upload File
-                        <a href="{{ url('categories/'.$Case_Id) }}" class="btn btn-primary float-end">Back</a>
-                    </h4>
-                </div>
-                <div class="card-body">
-                    <form action="{{ route('categories.create',['id'=>$Case_Id]) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
+    <div class="card">
+        <div class="card-header">
+            <h3>Upload File
+                <a href="{{ url('categories/' . $Case_Id) }}" class="btn btn-primary float-end">Back</a>
+            </h3>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('categories.store', ['id' => $Case_Id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
 
-                        <div class="mb-3">
-                            <label>Name</label>
+                <div class="mb-3 row">
+                    <label class="col-lg-2 col-md-0 col-sm-1 col-form-label bold">Name:</label>
+                    <div class="col-lg-10 col-md-8 col-sm-20">
+                        <div class="col-lg-7 col-md-4 col-sm-10">
                             <input type="text" name="name" class="form-control" value="{{ old('name') }}" />
-                            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="mb-3">
-                            <label>Description</label>
-                            <textarea name="description" class="form-control" rows="3">{{ old('description') }}</textarea>
-                            @error('description') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="mb-3">
-                            {{-- <label>Is Active</label> --}}
-                            {{-- <input type="checkbox" name="is_active" {{ old('is_active') == true ? checked:'' }} /> --}}
-                            @error('is_active') <span class="text-danger">{{ $message }}</span> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label>Upload File/Image</label>
-                            <input type="file" name="file" class="form-control" />
-                        </div>
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
-            </div>
+
+                <div class="mb-4 row">
+                    <label class="col-lg-2 col-md-0 col-sm-1 col-form-label bold">Description:</label><br>
+                    <div class="col-lg-10 col-md-1 col-sm-10">
+                        <div class="col-lg-7 col-md-4 col-sm-10">
+
+                    <textarea name="description" class="form-control" rows="4">{{ old('description') }}</textarea>
+                    @error('description')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                   </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    {{-- <label>Is Active</label> --}}
+                    {{-- <input type="checkbox" name="is_active" {{ old('is_active') == true ? checked:'' }} /> --}}
+                    @error('is_active')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <div class="mb-3 row">
+                        <label class="col-lg-3 col-md-0 col-sm-1 col-form-label bold">Upload File/Image:</label>
+                        <div class="col-lg-9 col-md-2 col-sm-10">
+
+                             <div class="col-lg-6 col-md-4 col-sm-10">
+
+                                <div class="mb-3 row">
+                            <input type="file" name="file" class="form-control" />
+                </div>
+                <div class="mb-3"><br>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
         </div>
     </div>
-</div>
-</tbody>
-</body>
-</html
+    </div>
+    </div>
+    </div>
+    </tbody>
+    {{-- </body>
+</html --}}
+@endsection

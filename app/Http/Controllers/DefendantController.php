@@ -19,7 +19,7 @@ class DefendantController extends Controller
         $viewData = [];
         $viewData['defendant'] = Defendant::where('UserId', $id)->get();
         return view('defendant.show')->with ('viewData',$viewData);
-    
+
     }
     public function create(){
 
@@ -36,14 +36,16 @@ class DefendantController extends Controller
         $defendant->address = $request->input('address');
 
         $defendant->save();
-        return redirect()->back()->with("success", "Case Created Successfully");
+       // return redirect()->back()->with("success", "Case Created Successfully");
+                return redirect()->back()->with('status', 'defendant Created Successfully');
+
 
     }
     public function delete($id){
         $defendant = Defendant::where('UserId',$id)->first();
         $defendant->delete();
-        return redirect()->back()->with('success','Deleted');
-
+       // return redirect()->back()->with('success','Deleted');
+        return redirect()->back()->with('status','Successfully Deleted');
     }
     public function edit($id){
         $viewData = [];
@@ -59,7 +61,9 @@ class DefendantController extends Controller
         $defendant->email = $request->input('email');
         $defendant->address = $request->input('address');
         $defendant->save();
-        return redirect()->route('defendant.index')->with('success','');
+        // return redirect()->route('defendant.index')->with('success','');
+
+        return redirect()->route('defendant.index')->with('status','defendant updated');
 
     }
 }

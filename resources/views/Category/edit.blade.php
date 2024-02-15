@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html>
 <head>
     <title>Multitple File Upload</title>
@@ -14,31 +14,17 @@
 
     <!-- Template Main CSS File -->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-</head>
-<body>
+</head> --}}
+{{-- <body>
    <div class="container mt-5">
     <div class="row">
-        <div class="col-md-12">
-
+        <div class="col-md-12"> --}}
+            @extends('master')
+            @section('body')
             @if (session('status'))
                 <div class="alert alert-success">{{session('status')}}</div>
             @endif
-<!--
-            <div class="card">
-                <div class="card-header">
-                    <h4>Add Categories
-                        <a href="{{ url('categories') }}" class="btn btn-primary float-end">Back</a>
-                    </h4>
-                </div>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-
-            @if (session('status'))
-                <div class="alert alert-success">{{session('status')}}</div>
-            @endif -->
-
-            <div class="card">
+                                       <div class="card">
                 <div class="card-header">
                     <h4>Edit Document
                         <a href="{{ url('categories/'.$category->legal_case_Case_Id) }}" class="btn btn-primary float-end">Back</a>
@@ -71,6 +57,10 @@
         </div>
     </div>
 </div>
-</div>
+{{-- </div>
 </body>
-</html
+</html --}}
+</tbody>
+{{-- </body>
+</html --}}
+@endsection

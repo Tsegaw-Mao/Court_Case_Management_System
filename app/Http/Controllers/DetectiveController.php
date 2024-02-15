@@ -21,7 +21,7 @@ class DetectiveController extends Controller
         $viewData = [];
         $viewData['detective'] = Detective::where('UserId', $id)->get();
         return view('detective.show')->with ('viewData',$viewData);
-    
+
     }
     public function create(){
 
@@ -38,13 +38,13 @@ class DetectiveController extends Controller
         $detective->address = $request->input('address');
 
         $detective->save();
-        return redirect()->back()->with("success", "Case Created Successfully");
+        return redirect()->back()->with("status", "Detective Created Successfully");
 
     }
     public function delete($id){
         $detective = Detective::where('UserId',$id)->first();
         $detective->delete();
-        return redirect()->back()->with('success','Deleted');
+        return redirect()->back()->with('status','Deleted Successfully');
 
     }
     public function edit($id){
@@ -61,7 +61,7 @@ class DetectiveController extends Controller
         $detective->email = $request->input('email');
         $detective->address = $request->input('address');
         $detective->save();
-        return redirect()->route('detective.index')->with('success','');
+        return redirect()->route('detective.index')->with('status','updated sucessfully');
 
     }
     public function assignCase($did, $cid){
@@ -69,6 +69,6 @@ class DetectiveController extends Controller
         $case = LegalCase::where('Case_Id',$cid)->first();
         $detective->Cases()->save($case);
         $detective->save();
-        return redirect()->back();   
+        return redirect()->back();
     }
 }

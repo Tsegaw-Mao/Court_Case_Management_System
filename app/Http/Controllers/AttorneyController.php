@@ -21,7 +21,7 @@ class AttorneyController extends Controller
         $viewData = [];
         $viewData['attorney'] = Attorney::where('UserId', $id)->get();
         return view('attorney.show')->with ('viewData',$viewData);
-    
+
     }
     public function create(){
 
@@ -38,13 +38,16 @@ class AttorneyController extends Controller
         $attorney->address = $request->input('address');
 
         $attorney->save();
-        return redirect()->back()->with("success", "Case Created Successfully");
+
+        return redirect()->back()->with('status', 'Attorney Created Successfully');
 
     }
     public function delete($id){
         $attorney = Attorney::where('UserId',$id)->first();
         $attorney->delete();
-        return redirect()->back()->with('success','Deleted');
+        //return redirect()->back()->with('success','Deleted');
+
+        return redirect()->back()->with('status', 'Attorney deleted Successfully');
 
     }
     public function edit($id){
@@ -61,14 +64,14 @@ class AttorneyController extends Controller
         $attorney->email = $request->input('email');
         $attorney->address = $request->input('address');
         $attorney->save();
-        return redirect()->route('attorney.index')->with('success','');
-
+        return redirect()->route('attorney.index')->with('status', 'Attorney Created Successfully');
+        //return redirect()->back()->with('status', 'Attorney Created Successfully');
     }
     public function assignCase($aid, $cid){
         $attorney = Attorney::where('UserId',$aid)->first();
         $case = LegalCase::where('Case_Id',$cid)->first();
         $attorney->Cases()->save($case);
         $attorney->save();
-        return redirect()->back();   
+        return redirect()->back();
     }
 }

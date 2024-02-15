@@ -24,6 +24,7 @@ class User extends Authenticatable
      protected $keyType = 'string';
     protected $fillable = [
         'name',
+        'UserId',
         'email',
         'password',
     ];
@@ -47,5 +48,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function harRole($role){
+        return $this->role == $role;
+    }
     
 }

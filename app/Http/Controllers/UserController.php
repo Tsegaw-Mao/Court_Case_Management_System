@@ -1,107 +1,128 @@
 <?php
-  
+
 namespace App\Http\Controllers;
-   
+
 use App\Models\User;
-use Illuminate\Http\Request;
-  
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Instantiate a new UserController instance.
      */
-    public function index()
+    public function __construct()
     {
-        $users = User::latest()->paginate(5);
-    
-        return view('user.index',compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $this->middleware('auth');
+        $this->middleware('permission:create-user|edit-user|delete-user', ['only' => ['index','show']]);
+        $this->middleware('permission:create-user', ['only' => ['create','store']]);
+        $this->middleware('permission:edit-user', ['only' => ['edit','update']]);
+        $this->middleware('permission:delete-user', ['only' => ['destroy']]);
     }
-     
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): View
+    {
+        return view('users.index', [
+            'users' => User::latest('id')->paginate(3)
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
-        return view('user.create');
+        return view('users.create', [
+            'roles' => Role::pluck('name')->all()
+        ]);
     }
-    
+
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-        ]);
-    
-        User::create($request->all());
-     
-        return redirect()->route('user.index')
-                        ->with('success','User created successfully.');
+        $input = $request->all();
+        $input['password'] = Hash::make($request->password);
+
+        $user = User::create($input);
+        $user->assignRole($request->roles);
+
+        return redirect()->route('users.index')
+                ->withSuccess('New user is added successfully.');
     }
-     
+
     /**
      * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user): View
     {
-        return view('user.show',compact('user'));
-    } 
-     
+        return view('users.show', [
+            'user' => $user
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $user): View
     {
-        return view('user.edit',compact('user'));
+        // Check Only Super Admin can update his own Profile
+        if ($user->hasRole('Super Admin')){
+            if($user->id != auth()->user()->id){
+                abort(403, 'USER DOES NOT HAVE THE RIGHT PERMISSIONS');
+            }
+        }
+
+        return view('users.edit', [
+            'user' => $user,
+            'roles' => Role::pluck('name')->all(),
+            'userRoles' => $user->roles->pluck('name')->all()
+        ]);
     }
-    
+
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-        ]);
-    
-        $user->update($request->all());
-    
-        return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+        $input = $request->all();
+ 
+        if(!empty($request->password)){
+            $input['password'] = Hash::make($request->password);
+        }else{
+            $input = $request->except('password');
+        }
+        
+        $user->update($input);
+
+        $user->syncRoles($request->roles);
+
+        return redirect()->back()
+                ->withSuccess('User is updated successfully.');
     }
-    
+
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
+        // About if user is Super Admin or User ID belongs to Auth User
+        if ($user->hasRole('Super Admin') || $user->id == auth()->user()->id)
+        {
+            abort(403, 'USER DOES NOT HAVE THE RIGHT PERMISSIONS');
+        }
+
+        $user->syncRoles([]);
         $user->delete();
-    
-        return redirect()->route('user.index')
-                        ->with('success','User deleted successfully');
+        return redirect()->route('users.index')
+                ->withSuccess('User is deleted successfully.');
     }
 }

@@ -12,6 +12,10 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\JudgeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -111,3 +115,15 @@ Route::controller(LoginRegisterController::class)->group(function() {
 
 
 
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::resources([
+    'roles' => RoleController::class,
+    'users' => UserController::class,
+    'products' => ProductController::class,
+]);

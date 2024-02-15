@@ -6,10 +6,10 @@
         <div class="card">
             <div class="card-header">
                 <div class="float-start">
-                    User Information
+                    Role Information
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('users.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('roles.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
                 </div>
             </div>
             <div class="card-body">
@@ -17,24 +17,21 @@
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Name:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $user->name }}
+                            {{ $role->name }}
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="email" class="col-md-4 col-form-label text-md-end text-start"><strong>Email Address:</strong></label>
+                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start"><strong>Permissions:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $user->email }}
-                        </div>
-                    </div>
-
-                    <div class="mb-3 row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-end text-start"><strong>Roles:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            @forelse ($user->getRoleNames() as $role)
-                                <span class="badge bg-primary">{{ $role }}</span>
-                            @empty
-                            @endforelse
+                            @if ($role->name=='Super Admin')
+                                <span class="badge bg-primary">All</span>
+                            @else
+                                @forelse ($rolePermissions as $permission)
+                                    <span class="badge bg-primary">{{ $permission->name }}</span>
+                                @empty
+                                @endforelse
+                            @endif
                         </div>
                     </div>
             </div>

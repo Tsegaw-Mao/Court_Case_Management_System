@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attorney;
+use App\Models\LegalCase;
 use Illuminate\Http\Request;
 
 class AttorneyController extends Controller
 {
     //
-    public function index(){
+    public function index($id){
         $viewData = [] ;
-        $viewData["attornies"] = Attorney::all();
+        $attorney = Attorney::where("UserId", $id)->first();
+        $viewData["cases"] = $attorney->Cases()->get();
         return view("attorney.index")->with('viewData', $viewData);
     }
     public function show($id){
@@ -61,5 +63,12 @@ class AttorneyController extends Controller
         $attorney->save();
         return redirect()->route('attorney.index')->with('success','');
 
+    }
+    public function assignCase($aid, $cid){
+        $attorney = Attorney::where('UserId',$aid)->first();
+        $case = LegalCase::where('Case_Id',$cid)->first();
+        $attorney->Cases()->save($case);
+        $attorney->save();
+        return redirect()->back();   
     }
 }

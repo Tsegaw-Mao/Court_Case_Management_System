@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Detective;
+use App\Models\LegalCase;
 use Illuminate\Http\Request;
 
 class DetectiveController extends Controller
 {
     //
-    public function index(){
+    public function index($id){
         $viewData = [] ;
-        $viewData["detectives"] = Detective::all();
+        $detective = Detective::where("UserId", $id)->first();
+        $viewData["cases"] = $detective->Cases()->get();
         return view("detective.index")->with('viewData', $viewData);
     }
     public function show($id){
@@ -61,5 +63,12 @@ class DetectiveController extends Controller
         $detective->save();
         return redirect()->route('detective.index')->with('success','');
 
+    }
+    public function assignCase($did, $cid){
+        $detective = Detective::where('UserId',$did)->first();
+        $case = LegalCase::where('Case_Id',$cid)->first();
+        $detective->Cases()->save($case);
+        $detective->save();
+        return redirect()->back();   
     }
 }

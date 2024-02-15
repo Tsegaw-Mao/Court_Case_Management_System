@@ -4,7 +4,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AttorneyController;
 use App\Http\Controllers\DefendantController;
 use App\Http\Controllers\DetectiveController;
-use App\Http\Controllers\Judge\JudgeCaseController;
 use App\Http\Controllers\LawyerController;
 use App\Http\Controllers\PlaintiffController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +26,8 @@ use App\Http\Controllers\Auth\LoginRegisterController;
 
 
 route::get('/', [TemplateController::class,'index'])->name('landing');
+
+
 route::get('/admin/home', [AdminController::class,'index'])->name('admin.home');
 route::get('/admin/create', [AdminController::class,'create'])->name('admin.create');
 route::get('/find/{id}',[AdminController::class,'show'])->name('admin.show');
@@ -52,22 +53,27 @@ route::post('/defendant/store', [ DefendantController::class,'store'])->name('de
 route::get('/lawyer/create',[LawyerController::class,'create'])->name('lawyer.create');
 route::post('/lawyer/store', [ LawyerController::class,'store'])->name('lawyer.store');
 
+
 route::get('/attorney/create',[AttorneyController::class,'create'])->name('attorney.create');
 route::post('/attorney/store', [ AttorneyController::class,'store'])->name('attorney.store');
+route::get('/attorney/cases/show/{id}', [AttorneyController::class,'index'])->name('attorney.index');
+route::get('/attorney/case/assign/{aid}/{cid}', [AttorneyController::class, 'assignCase'])->name('attorney.case');
 
 route::get('/judge/create',[JudgeController::class,'create'])->name('judge.create');
 route::post('/judge/store', [ JudgeController::class,'store'])->name('judge.store');
+route::get('/judge/cases/show/{id}', [JudgeController::class,'index'])->name('judge.index');
+route::get('/judge/case/assign/{jid}/{cid}', [JudgeController::class, 'assignCase'])->name('judge.case');
+
 
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
+route::get('/detective/cases/show/{id}', [DetectiveController::class,'index'])->name('detective.index');
+route::get('/detective/case/assaign/{did}/{cid}', [DetectiveController::class,'assignCase'])->name('detective.case');
 
 
 
 
 
-
-
-route::get('/judge',[JudgeController::class,'index'])->name('judge.index');
 
 
 Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');

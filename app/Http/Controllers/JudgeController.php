@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Judge;
+use App\Models\LegalCase;
 use Illuminate\Http\Request;
 
 class JudgeController extends Controller
 {
     //
-    public function index(){
+    public function index($id){
         $viewData = [];
-        $viewData["judges"] = Judge::all();
+        $judge = Judge::where("UserId", $id)->first();
+        $viewData["cases"] = $judge->Cases()->get();
         return view("judge.index")->with ("viewData",$viewData);
 
     }
@@ -62,5 +64,12 @@ class JudgeController extends Controller
         $judge->save();
         return redirect()->route('judge.index')->with('success','');
 
+    }
+    public function assignCase($jid, $cid){
+        $judge = Judge::where('UserId',$jid)->first();
+        $case = LegalCase::where('Case_Id',$cid)->first();
+        $judge->Cases()->save($case);
+        $judge->save();
+        return redirect()->back();   
     }
 }

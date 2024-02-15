@@ -5,6 +5,15 @@
         Manage Case {{$viewData['case']->Case_Title}}
     </div>
     <div class="card-body">
+        <div>
+            <a href="{{ route('categories.create',['id'=>$viewData['case']->Case_Id]) }}">
+                <button type="button" class="btn btn-primary float-end">
+                    Add Document
+                </button>
+            </a>
+
+            <br>
+        </div>
         <table>
             <thead>
                 <th>

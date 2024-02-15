@@ -42,9 +42,6 @@ class AdminController extends Controller
 
         $plaintiff->Case()->save( $case );
         $defendant->Cases()->attach([$request->input('id')]);
-        // $defendant->Cases()->attach([$case->Case_Id]);
-        // $case->Defendants()->attach($defendant->UserId);
-        // $case->save();
         return redirect()->back()->with('status', 'Case Created Successfully');
 
     }
@@ -68,7 +65,6 @@ class AdminController extends Controller
     }
     public function update(Request $request, $id)
     {
-        // LegalCase::validate($request);
         $case = LegalCase::where('Case_Id', $id)->first();
         $plaintiff = $case->Plaintiff()->first();
         $case->Case_Id = $request->input('id');

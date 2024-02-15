@@ -107,7 +107,16 @@ Route::controller(LoginRegisterController::class)->group(function() {
 });
 
 
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->name('home');
 
 
 
+Route::middleware('auth')->group(function(){
+  //admin pages
+});
 
+Route::group(['middleware'=> ['auth']], function(){
+    Route::resource('roles','\App\Http\Controllers\Admin\RoleController');
+    Route::resource('users','\App\Http\Controllers\Admin\UserController');
+});

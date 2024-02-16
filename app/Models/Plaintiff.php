@@ -11,6 +11,11 @@ class Plaintiff extends Model
     protected $table = "plaintiffs";
     protected $primaryKey = "UserId";
      protected $keyType = 'string';
+     protected $fillable = [
+        'UserId',
+        'email',
+        'FirstName',
+    ];
 
     public function Case(){
         return $this->hasOne(LegalCase::class);

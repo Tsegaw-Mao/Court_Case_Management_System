@@ -11,6 +11,11 @@ class Detective extends Model
     protected $table = "detectives";
     protected $primaryKey = "UserId";
      protected $keyType = 'string';
+     protected $fillable = [
+        'UserId',
+        'email',
+        'FirstName',
+    ];
 
     public function Cases(){
         return $this->hasMany(LegalCase::class);

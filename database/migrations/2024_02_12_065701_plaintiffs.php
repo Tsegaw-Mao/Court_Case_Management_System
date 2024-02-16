@@ -16,9 +16,9 @@ return new class extends Migration
             $table->bigIncrements("id");
             $table->string("UserId")->unique();
             $table->string("FirstName");
-            $table->string("LastName");
+            $table->string("LastName")->nullable();
             $table->string("email");
-            $table->string("address");
+            $table->string("address")->nullable();
             $table->string("lawyers_UserId")->nullable();
             $table->string("legal_case_Case_Id")->nullable();
             $table->timestamps();

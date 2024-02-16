@@ -11,6 +11,11 @@ class Clerk extends Model
     protected $table="clerks";
     protected $primaryKey = "UserId";
      protected $keyType = 'string';
+     protected $fillable = [
+      'UserId',
+      'email',
+      'FirstName',
+  ];
      public function Cases(){
         return $this->belongsToMany( LegalCase::class);
      }

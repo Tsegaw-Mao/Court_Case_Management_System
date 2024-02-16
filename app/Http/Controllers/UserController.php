@@ -9,6 +9,11 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Plaintiff;
+use App\Models\Attorney;
+use App\Models\Detective;
+use App\Models\Defendant;
+use App\Models\Judge;
 
 class UserController extends Controller
 {
@@ -105,6 +110,14 @@ class UserController extends Controller
 
         $user->syncRoles($request->roles);
 
+        $rolesss = [];
+        $rolesss['roles'] = $request->roles;
+        $rolesss['uid'] = $request->email;
+        $rolesss['name'] = $request->name;
+        if($rolesss != null){
+            $this->addUser($rolesss);
+        }
+
         return redirect()->back()
                 ->withSuccess('User is updated successfully.');
     }
@@ -124,5 +137,52 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')
                 ->withSuccess('User is deleted successfully.');
+    }
+    public function addUser($rolesss)
+    {
+        foreach ($rolesss['roles'] as $role) {
+            if ($role == 'judge' || $role == 'admin_judge') {
+                $user = User::where('email', $rolesss['uid'])->first();
+                $judge = Judge::create([
+                    'UserId' => $user->UserId,
+                    'FirstName' => $user->name,
+                    'email' => $user->email
+
+                ]);
+            } elseif ($role == 'attorney' || $role == 'admin_attorney') {
+                $user = User::where('email', $rolesss['uid'])->first();
+                $attorney = Attorney::create([
+                    'UserId' => $user->UserId,
+                    'FirstName' => $user->name,
+                    'email' => $user->email
+
+                ]);
+            } elseif ($role == 'detective' || $role == 'admin_detective') {
+                $user = User::where('email', $rolesss['uid'])->first();
+                $detective = Detective::create([
+                    'UserId' => $user->UserId,
+                    'FirstName' => $user->name,
+                    'email' => $user->email
+
+                ]);
+            } elseif ($role == 'plaintiff') {
+                $user = User::where('email', $rolesss['uid'])->first();
+                $plaintiff = Plaintiff::create([
+                    'UserId' => $user->UserId,
+                    'FirstName' => $user->name,
+                    'email' => $user->email
+
+                ]);
+            } elseif ($role == 'defendant') {
+                $user = User::where('email', $rolesss['uid'])->first();
+                $defendant = Defendant::create([
+                    'UserId' => $user->UserId,
+                    'FirstName' => $user->name,
+                    'email' => $user->email
+
+                ]);
+            }
+
+        }
     }
 }

@@ -76,7 +76,7 @@
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-            <a href="{{ route('admin.home')}}" class="get-started-btn scrollto">Get Started</a>
+            <a href="{{ route('login')}}" class="get-started-btn scrollto">Get Started</a>
 
         </div>
     </header><!-- End Header -->

@@ -1,11 +1,15 @@
 @extends('master')
 
 @section('title',$viewData['title'])
+
 @section('body')
 <div class="card">
-    <div class="card-header"> Manage Cases
+    <div class="card-header bold"> Manage Cases
     </div>
     <div class="card-body">
+        @if (session('status'))
+<div class="alert alert-success">{{session('status')}}</div>
+@endif
         <div>
             <a href="{{ route('admin.create') }}">
                 <button type="button" class="btn btn-primary float-end">
@@ -21,9 +25,11 @@
             <br>
             <thead>
 
-                <tr>
+                <tr class = "bold">
                     <th scope="col">#</th>
                     <th scope="col">Case ID</th>
+                    <th scope="col">Plaintiff</th>
+                    <th scope="col">Defendant</th>
                     <th scope="col">Case Title</th>
                     <th scope="col">Case Type</th>
                     <th scope="col">Case Detail</th>
@@ -45,6 +51,8 @@
                 <tr>
                     <td>{{ $count }}</td>
                     <td>{{ $case->Case_Id }}</td>
+                    <td>{{ $case->Plaintiff()->get()->value("FirstName") }}</td>
+                    <td>{{ $case->Defendants()->get()->value("FirstName") }}</td>
                     <td>{{ $case->Case_Title }}</td>
                     <td>{{ $case->Case_Type }}</td>
                     <td>{{ $case->Case_Details }}</td>
@@ -67,7 +75,7 @@
                         <form action="{{ route('admin.delete', ['id' => $case->Case_Id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger">
+                            <button class="btn btn-danger"  onclick="return confirm('Are you sure you want delete the case?')">
                                 <i class="bi-trash"></i>
                             </button>
                         </form>

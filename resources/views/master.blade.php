@@ -4,17 +4,18 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
+    
     <title>
         @yield('title','MoD Justice Department - Index')
     </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-
+    @notifyCss
 
     <!-- Google Fonts -->
-    <link href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.569271278221!2d38.718601775508105!3d9.011721089258169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8796645cf1b9%3A0x4804833e4b29b819!2zVG9yIEhheWxvY2ggUm91bmQgQWJvdXQgfCDhjKbhiK0g4YiQ4Yut4YiO4Ym9IOGKoOGLsOGJo-GJo-GLrQ!5e0!3m2!1sen!2sjp!4v1706949364095!5m2!1sen!2sjp">
+    <link
+        href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.569271278221!2d38.718601775508105!3d9.011721089258169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8796645cf1b9%3A0x4804833e4b29b819!2zVG9yIEhheWxvY2ggUm91bmQgQWJvdXQgfCDhjKbhiK0g4YiQ4Yut4YiO4Ym9IOGKoOGLsOGJo-GJo-GLrQ!5e0!3m2!1sen!2sjp!4v1706949364095!5m2!1sen!2sjp">
     <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.569271278221!2d38.718601775508105!3d9.011721089258169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8796645cf1b9%3A0x4804833e4b29b819!2zVG9yIEhheWxvY2ggUm91bmQgQWJvdXQgfCDhjKbhiK0g4YiQ4Yut4YiO4Ym9IOGKoOGLsOGJo-GJo-GLrQ!5e0!3m2!1sen!2sjp!4v1706949364095!5m2!1sen!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
 
     <!-- Vendor CSS Files -->
@@ -44,24 +45,33 @@
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-lg-between">
 
-            <h1 class="logo me-auto me-lg-0"><a href=""><img src="{{asset('assets/img/judge hammer.jpg')}}" class="img-fluid" alt=""><span> Justice Dep.</span></a></h1>
+            <h1 class="logo me-auto me-lg-0"><a href=""><img src="{{asset('assets/img/judge hammer.jpg')}}"
+                        class="img-fluid" alt=""><span> Justice Dep.</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">Home</a></li>
-                    <li><a class="nav-link scrollto " href="#hero">Case</a></li>
-                    <li><a class="nav-link scrollto " href="#hero">Home2</a></li>
-                    <li><a class="nav-link scrollto " href="#hero">Home3</a></li>
-                    <li><a class="nav-link scrollto " href="#hero">Home4</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('admin.index')}}">Cases</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Users</a></li>
+                    <li><a class="nav-link scrollto " href="#">Calendar</a></li>
+                    <li><a class="nav-link scrollto " href="#">Courts</a></li>
 
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
             <a href="#about" class="get-started-btn scrollto">Account</a>
-
+            @guest
+            <a class= "get-started-btn scrollto" href="{{ route('login') }}">Login</a>
+            <a class="get-started-btn scrollto" href="{{ route('register') }}">Register</a>
+            @else
+            <form id="logout" action="{{ route('logout') }}" method="post">
+                <a role="button" class="get-started-btn scrollto" onclick="document.getElementById('logout').submit();">Logout</a>
+                @csrf
+            </form>
+            @endguest
         </div>
     </header><!-- End Header -->
 
@@ -152,7 +162,8 @@
     </footer><!-- End Footer -->
 
     <div id="preloader"></div>
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="{{asset('assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
@@ -166,6 +177,8 @@
     <!-- Template Main JS File -->
     <script src="{{asset('assets/js/main.js')}}"></script>
 
+    @notifyJs
+    @include('notify::components.notify')
 </body>
 
 </html>

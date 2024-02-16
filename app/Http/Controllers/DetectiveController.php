@@ -71,4 +71,10 @@ class DetectiveController extends Controller
         $detective->save();
         return redirect()->back();
     }
+    public function assign(){
+        $viewData = [] ;
+        $viewData["cases"] = LegalCase::all();
+        return view("attorney.assign")->with('viewData', $viewData);
+
+    }
 }

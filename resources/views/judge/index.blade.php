@@ -1,4 +1,4 @@
-@extends('master')
+@extends('master1')
 @section('body')
 @if (session('status'))
 <div class="alert alert-success">{{session('status')}}</div>

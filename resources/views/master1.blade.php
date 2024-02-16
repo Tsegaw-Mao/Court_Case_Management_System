@@ -53,7 +53,8 @@
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">Home</a></li>
-                    <li><a class="nav-link scrollto " href="{{route('admin.index')}}">Cases</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('judge.index',['id'=>'id'])}}">Cases</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('judge.assign')}}">Assign Cases to Judges</a></li>
                     <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Users</a></li>
                     <li><a class="nav-link scrollto " href="#">Calendar</a></li>
                     <li><a class="nav-link scrollto " href="#">Courts</a></li>

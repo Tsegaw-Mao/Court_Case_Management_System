@@ -17,7 +17,8 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label">ID:</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input name="id" value="{{ $viewData['case']->Case_Id }}" type="text" class="form-control" placeholder="case Id is not modified" required ><br>
+                            <!-- <input name="id" value="{{ $viewData['case']->Case_Id }}" type="text" class="form-control" placeholder="case Id is not modified" required ><br> -->
+                            <label class="col-lg-4 col-md-6 col-sm-12 col-form-label">{{$viewData['case']->Case_Id}}</label>
                         </div>
                     </div>
                 </div>

@@ -1,1 +1,1 @@
-@extends('master')
+@extends('master1')

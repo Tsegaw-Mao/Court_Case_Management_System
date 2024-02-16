@@ -1,4 +1,4 @@
-@extends('master')
+@extends('master3')
 
 @section('body')
 @if (session('status'))

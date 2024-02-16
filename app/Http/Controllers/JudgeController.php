@@ -72,4 +72,9 @@ class JudgeController extends Controller
         $judge->save();
         return redirect()->back();
     }
+    public function assign(){
+        $viewData = [] ;
+        $viewData["cases"] = LegalCase::all();
+        return view("attorney.assign")->with('viewData', $viewData);
+    }
 }

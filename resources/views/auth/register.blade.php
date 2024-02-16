@@ -19,7 +19,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="mb-3 row">
+<div class="mb-3 row">
                         <label for="id" class="col-md-4 col-form-label text-md-end text-start">User Id</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('id') is-invalid @enderror" id="id" name="id" value="{{ old('id') }}">

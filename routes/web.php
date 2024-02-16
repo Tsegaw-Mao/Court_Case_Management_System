@@ -33,6 +33,8 @@ route::get('/', [TemplateController::class,'index'])->name('landing');
 
 
 route::get('/admin/home', [AdminController::class,'index'])->name('admin.home');
+Route::get('/admin/index', [AdminController::class,'index2'])->name('admin.index');
+Route::get('/admin/index2', [AdminController::class,'index3'])->name('admin.users');
 route::get('/admin/create', [AdminController::class,'create'])->name('admin.create');
 route::get('/find/{id}',[AdminController::class,'show'])->name('admin.show');
 route::get('/admin/edit/{id}',[AdminController::class,'edit'])->name('admin.edit');
@@ -62,17 +64,20 @@ route::get('/attorney/create',[AttorneyController::class,'create'])->name('attor
 route::post('/attorney/store', [ AttorneyController::class,'store'])->name('attorney.store');
 route::get('/attorney/cases/show/{id}', [AttorneyController::class,'index'])->name('attorney.index');
 route::get('/attorney/case/assign/{aid}/{cid}', [AttorneyController::class, 'assignCase'])->name('attorney.case');
+route::get('/attorney/assign',[AttorneyController::class, 'assign'])->name('attorney.assign');
 
 route::get('/judge/create',[JudgeController::class,'create'])->name('judge.create');
 route::post('/judge/store', [ JudgeController::class,'store'])->name('judge.store');
 route::get('/judge/cases/show/{id}', [JudgeController::class,'index'])->name('judge.index');
 route::get('/judge/case/assign/{jid}/{cid}', [JudgeController::class, 'assignCase'])->name('judge.case');
+route::get('/judge/assign',[JudgeController::class, 'assign'])->name('judge.assign');
 
 
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
 route::get('/detective/cases/show/{id}', [DetectiveController::class,'index'])->name('detective.index');
 route::get('/detective/case/assaign/{did}/{cid}', [DetectiveController::class,'assignCase'])->name('detective.case');
+route::get('/detective/assign',[DetectiveController::class, 'assign'])->name('detective.assign');
 
 
 
@@ -87,7 +92,7 @@ Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUplo
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
     Route::get('categories/{id}', 'index')->name('categories.index');
     Route::get('categories/create/{id}', 'create')->name('categories.create');
-    Route::post('categories/create/{id}', 'store')->name('categories.store');
+    Route::post('categories/store/{id}', 'store')->name('categories.store');
     Route::get('categories/{id}/edit/{cId}', 'edit')->name('categories.edit');
     Route::put('categories/{id}/edit/{cId}', 'update')->name('categories.update');
     Route::get('categories/{id}/delete/{cId}', 'destroy')->name('categories.delete');
@@ -97,9 +102,6 @@ Route::controller(App\Http\Controllers\CategoryController::class)->group(functio
 Route::controller(AuthController::class)->group(function(){
     Route::get('register', 'register')->name('register');
 });
-
-
-
 
 Route::controller(LoginRegisterController::class)->group(function() {
     Route::get('/register', 'register')->name('register');

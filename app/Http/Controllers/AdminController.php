@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Defendant;
 use App\Models\LegalCase;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Plaintiff;
 
@@ -19,8 +20,13 @@ class AdminController extends Controller
     }
     public function index2(){
         $viewData = [];
-        $viewData = null;
+        $viewData['cases'] =LegalCase::all();
         return view("admin.index")->with("viewData",$viewData);
+    }
+    public function index3(){
+        $viewData = [];
+        $viewData['cases'] = User::all();
+        return view("admin.indexx")->with("viewData",$viewData);
     }
     public function create(Request $request)
     {
@@ -35,13 +41,15 @@ class AdminController extends Controller
         $plaintiff = Plaintiff::where("UserId", $request->input("pid"))->first();
         $defendant = Defendant::where("UserId", $request->input("did"))->first();
 
-        $case->Case_Id = $request->input('id');
+         
+        $cid= $this->createid();
+        $case->Case_Id = $cid;
         $case->Case_Title = $request->input('title');
         $case->Case_Type = $request->input('type');
         $case->Case_Details = $request->input('details');
 
         $plaintiff->Case()->save( $case );
-        $defendant->Cases()->attach([$request->input('id')]);
+        $defendant->Cases()->attach([$cid]);
         return redirect()->back()->with('status', 'Case Created Successfully');
 
     }
@@ -67,7 +75,7 @@ class AdminController extends Controller
     {
         $case = LegalCase::where('Case_Id', $id)->first();
         $plaintiff = $case->Plaintiff()->first();
-        $case->Case_Id = $request->input('id');
+        $case->Case_Id = $id;
         $case->Case_Title = $request->input('title');
         $case->Case_Type = $request->input('type');
         $case->Case_Details = $request->input('details');
@@ -122,5 +130,25 @@ class AdminController extends Controller
     {
         LegalCase::onlyTrashed()->where("Case_Id", $id)->forceDelete();
         return redirect()->back()->with("success", "Case Deleted Permanently");
+    }
+    public function createid(){
+        $case = LegalCase::all()->last();
+        
+        if($case==null){
+            return $id = 'Case0001';
+        }
+        else{
+           
+            $lastid = $case->Case_Id;
+            $id1 = substr($lastid,4);
+            $id2 = $id1*1;
+            $id3 = $id2 + 1;
+            $id4 = 'Case';
+            for($i=4; $i>strlen($id3); $i--){
+                $id4 = $id4 . 0;
+            }
+            $id = $id4 . $id3;
+            return $id;
+        }
     }
 }

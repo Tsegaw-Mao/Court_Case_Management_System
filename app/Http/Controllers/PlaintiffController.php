@@ -20,7 +20,7 @@ class PlaintiffController extends Controller
         $viewData = [];
         $viewData['plaintiff'] = Plaintiff::where('UserId', $id)->get();
         return view('plaintiff.show')->with ('viewData',$viewData);
-    
+
     }
     public function create(){
 
@@ -37,13 +37,13 @@ class PlaintiffController extends Controller
         $plaintiff->address = $request->input('address');
 
         $plaintiff->save();
-        return redirect()->back()->with("success", "Case Created Successfully");
+        return redirect()->back()->with('status', 'plaintiff Created Successfully');
 
     }
     public function delete($id){
         $plaintiff = Plaintiff::where('UserId',$id)->first();
         $plaintiff->delete();
-        return redirect()->back()->with('success','Deleted');
+        return redirect()->back()->with('status','Deleted Successfully');
 
     }
     public function edit($id){
@@ -60,7 +60,7 @@ class PlaintiffController extends Controller
         $plaintiff->email = $request->input('email');
         $plaintiff->address = $request->input('address');
         $plaintiff->save();
-        return redirect()->route('plaintiff.index')->with('success','');
+        return redirect()->route('plaintiff.index')->with('status','updated Successfully');
 
     }
 }

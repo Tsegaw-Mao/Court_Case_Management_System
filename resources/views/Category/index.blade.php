@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Multitple File Upload</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link href="{{asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-</head>
-<body>
+@extends('master')
 
-   <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-
-            @if (session('status'))
-                <div class="alert alert-success">{{session('status')}}</div>
-            @endif
-
-            <!-- <div class="card">
-                <div class="card-header">
-                    <h4>Add Categories
-                        <a href="{{ url('categories') }}" class="btn btn-primary float-end">Back</a>
-                    </h4>
-                </div> -->
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
+@section('body')
+    @if (session('status'))
+        <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
             <div class="card">
                 <div class="card-header">
                     <h4>DOCUMENTS
@@ -93,6 +64,4 @@
 </div>
 </tbody>
 
-</body>
-</html
-
+@endsection

@@ -56,8 +56,11 @@
                     <li><a class="nav-link scrollto " href="{{route('admin.index')}}">Cases</a></li>
                     <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Users</a></li>
                     <li><a class="nav-link scrollto " href="#">Calendar</a></li>
-                    <li><a class="nav-link scrollto " href="#">Courts</a></li>
-
+                    <li><a class="nav-link scrollto " href="{{route('attorney.create')}}">Add Attorney</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('detective.create')}}">Add Detective</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('defendant.create')}}">Add Defendant</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('judge.create')}}">Add Judge</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('plaintiff.create')}}">Add Plaintiff</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->

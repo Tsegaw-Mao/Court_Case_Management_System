@@ -22,7 +22,7 @@ class JudgeController extends Controller
         $viewData = [];
         $viewData['judge'] = Judge::where('UserId', $id)->get();
         return view('judge.show')->with ('viewData',$viewData);
-    
+
     }
     public function create(){
 
@@ -39,13 +39,13 @@ class JudgeController extends Controller
         $judge->address = $request->input('address');
 
         $judge->save();
-        return redirect()->back()->with("success", "Case Created Successfully");
+        return redirect()->back()->with('status', "Judge Created Successfully");
 
     }
     public function delete($id){
         $judge = Judge::where('UserId',$id)->first();
         $judge->delete();
-        return redirect()->back()->with('success','Deleted');
+        return redirect()->back()->with('status','Deleted Successfully');
 
     }
     public function edit($id){
@@ -62,7 +62,7 @@ class JudgeController extends Controller
         $judge->email = $request->input('email');
         $judge->address = $request->input('address');
         $judge->save();
-        return redirect()->route('judge.index')->with('success','');
+        return redirect()->route('judge.index')->with('status','updated Successfully!');
 
     }
     public function assignCase($jid, $cid){
@@ -70,6 +70,11 @@ class JudgeController extends Controller
         $case = LegalCase::where('Case_Id',$cid)->first();
         $judge->Cases()->save($case);
         $judge->save();
-        return redirect()->back();   
+        return redirect()->back();
+    }
+    public function assign(){
+        $viewData = [] ;
+        $viewData["cases"] = LegalCase::all();
+        return view("attorney.assign")->with('viewData', $viewData);
     }
 }

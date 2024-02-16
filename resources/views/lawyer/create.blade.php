@@ -1,6 +1,9 @@
 @extends('master')
 
 @section('body')
+@if (session('status'))
+<div class="alert alert-success">{{session('status')}}</div>
+@endif
 <div class="card">
         <div class="card-header bold"> Lawyer Registration</div>
         <div class="card-body">

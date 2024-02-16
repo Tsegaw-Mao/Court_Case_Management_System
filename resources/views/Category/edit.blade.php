@@ -46,7 +46,7 @@
                             @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                             <label>Upload File/file</label>
-                            <input type="file" name="file" class="form-control" />
+                            <input type="readonly" name="file" class="form-control" value="{{$category->file}}"/>
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary">Update</button>

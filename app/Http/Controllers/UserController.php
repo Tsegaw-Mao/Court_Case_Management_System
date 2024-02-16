@@ -143,44 +143,59 @@ class UserController extends Controller
         foreach ($rolesss['roles'] as $role) {
             if ($role == 'judge' || $role == 'admin_judge') {
                 $user = User::where('email', $rolesss['uid'])->first();
+                $exist = Judge::where('UserId', $user->UserId)->first();
+                if($exist != null) {}
+                else{
                 $judge = Judge::create([
                     'UserId' => $user->UserId,
                     'FirstName' => $user->name,
                     'email' => $user->email
 
-                ]);
+                ]);}
             } elseif ($role == 'attorney' || $role == 'admin_attorney') {
                 $user = User::where('email', $rolesss['uid'])->first();
+                $exist = Attorney::where('UserId', $user->UserId)->first();
+                if($exist != null) {}
+                else{
                 $attorney = Attorney::create([
                     'UserId' => $user->UserId,
                     'FirstName' => $user->name,
                     'email' => $user->email
 
-                ]);
+                ]);}
             } elseif ($role == 'detective' || $role == 'admin_detective') {
                 $user = User::where('email', $rolesss['uid'])->first();
+                $exist = Detective::where('UserId', $user->UserId)->first();
+                if($exist != null) {}
+                else{
                 $detective = Detective::create([
                     'UserId' => $user->UserId,
                     'FirstName' => $user->name,
                     'email' => $user->email
 
-                ]);
+                ]);}
             } elseif ($role == 'plaintiff') {
                 $user = User::where('email', $rolesss['uid'])->first();
+                $exist = Plaintiff::where('UserId', $user->UserId)->first();
+                if($exist != null) {}
+                else{
                 $plaintiff = Plaintiff::create([
                     'UserId' => $user->UserId,
                     'FirstName' => $user->name,
                     'email' => $user->email
 
-                ]);
+                ]);}
             } elseif ($role == 'defendant') {
                 $user = User::where('email', $rolesss['uid'])->first();
+                $exist = Defendant::where('UserId', $user->UserId)->first();
+                if($exist != null) {}
+                else{
                 $defendant = Defendant::create([
                     'UserId' => $user->UserId,
                     'FirstName' => $user->name,
                     'email' => $user->email
 
-                ]);
+                ]);}
             }
 
         }

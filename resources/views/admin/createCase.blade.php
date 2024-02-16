@@ -68,7 +68,7 @@
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label bold">Case Details</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
 
-                            <input type="text" name="details" value="{{ old('details') }}" class="form-control" placeholder="Enter Case details" required><br>
+                            <textarea name="details" value="{{ old('details') }}" class="form-control" placeholder="Enter Case details" required><br>
                         </div>
                     </div>
                 </div>

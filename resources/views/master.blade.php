@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    
+
     <title>
         @yield('title','MoD Justice Department - Index')
     </title>
@@ -54,23 +54,56 @@
                 <ul>
                     <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">Home</a></li>
                     <li><a class="nav-link scrollto " href="{{route('admin.index')}}">Cases</a></li>
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Users</a></li>
+                    @can('list-judges')
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Judges</a></li>
+                    @endcan
+                    @can('list-attornies')
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Attornies</a></li>
+                    @endcan
+                    @can('list-lawyers')
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Lawyers</a></li>
+                    @endcan
+                    @can('list-detectives')
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Detectives</a></li>
+                    @endcan
+                    @can('list-plaintiffs')
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Plaintiffs</a></li>
+                    @endcan
+                    @can('list-defendants')
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Defendants</a></li>
+                    @endcan
+                    @can('list-wittnesses')
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Wittness</a></li>
+                    @endcan
+                    @can('view-schedule')
                     <li><a class="nav-link scrollto " href="#">Calendar</a></li>
-                    <li><a class="nav-link scrollto " href="#">Courts</a></li>
+                    @endcan
 
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-            <a href="#about" class="get-started-btn scrollto">Account</a>
+
             @guest
-            <a class= "get-started-btn scrollto" href="{{ route('login') }}">Login</a>
-            <a class="get-started-btn scrollto" href="{{ route('register') }}">Register</a>
+            <div class='float-end'>
+                <a class="get-started-btn scrollto" href="{{ route('login') }}">Login</a>
+                <a class="get-started-btn scrollto" href="{{ route('register') }}">Register</a>
+            </div>
             @else
-            <form id="logout" action="{{ route('logout') }}" method="post">
-                <a role="button" class="get-started-btn scrollto" onclick="document.getElementById('logout').submit();">Logout</a>
-                @csrf
-            </form>
+            <div class='float-end'>
+                <li class="nav-item dropdown">
+                    <a class="get-started-btn scrollto dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="get-started-btn scrollto dropdown-item bg-black" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
+                        </li>
+            </div>
             @endguest
         </div>
     </header><!-- End Header -->
@@ -89,64 +122,6 @@
     </main><!-- End #main -->
     <!-- ======= Footer ======= -->
     <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-info">
-                            <h3>MoD Justice Dep.<span>.</span></h3>
-                            <p>
-                                Tor Hayloch Round About <br>
-                                Addis Ababa, Ethiopia<br><br>
-                                <strong>Phone:</strong> +251 111 111 111<br>
-                                <strong>Email:</strong> info@example.com<br>
-                            </p>
-                            <div class="social-links mt-3">
-                                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 1</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 2</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 3</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 4</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 5</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Our Newsletter</h4>
-                        <p>Follow and Subscribe to our Gasha News Letter</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
         <div class="container">
             <div class="copyright">
                 &copy; Copyright <strong><span>MoD Justice Dept</span></strong>. All Rights Reserved

@@ -32,7 +32,8 @@ class PermissionSeeder extends Seeder
             'delete-document',
             'view-document',
             'approve-request',
-            'reject-request'
+            'reject-request',
+            'view-schedule'
 
          ];
  

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plaintiff;
+use App\Models\User;
 
 class PlaintiffController extends Controller
 {
@@ -35,9 +36,14 @@ class PlaintiffController extends Controller
         $plaintiff->LastName = $request->input('lastName');
         $plaintiff->email = $request->input('email');
         $plaintiff->address = $request->input('address');
-
+        if(User::where('UserId',$plaintiff->UserID)->first() != null){
+        $user = User::where('UserId',$plaintiff->UserID)->first() ;
+        $user->assignRole('plaintiff');
         $plaintiff->save();
         return redirect()->back()->with('status', 'plaintiff Created Successfully');
+        }else{
+            return redirect()->back()->with('status','No User By this User Id');
+        }
 
     }
     public function delete($id){

@@ -100,7 +100,7 @@
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="get-started-btn scrollto dropdown-item bg-black" href="{{ route('logout') }}"
+                        <li><a class="get-started-btn scrollto dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">

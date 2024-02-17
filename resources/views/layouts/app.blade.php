@@ -66,9 +66,7 @@
                         </li>
                         @endif
                         @else
-                        @canany(['create-role', 'edit-role', 'delete-role'])
                         <li><a class="nav-link" href="{{ route('admin.home') }}">Home</a></li>
-                        @endcanany
                         <div class='float-end'>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" role="button"

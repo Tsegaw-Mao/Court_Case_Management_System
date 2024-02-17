@@ -8,14 +8,12 @@ use App\Http\Controllers\LawyerController;
 use App\Http\Controllers\PlaintiffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TemplateController;
-use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\JudgeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,15 +78,6 @@ route::get('/detective/case/assaign/{did}/{cid}', [DetectiveController::class,'a
 route::get('/detective/assign',[DetectiveController::class, 'assign'])->name('detective.assign');
 
 
-
-
-
-
-
-Route::get('/file-upload', [FileUploadController::class, 'index'])->name('fileupload.index');
-Route::post('/multiple-file-upload', [FileUploadController::class, 'multipleUpload'])->name('multiple.fileupload');
-
-
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
     Route::get('categories/{id}', 'index')->name('categories.index');
     Route::get('categories/create/{id}', 'create')->name('categories.create');
@@ -123,5 +112,4 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resources([
     'roles' => RoleController::class,
     'users' => UserController::class,
-    'products' => ProductController::class,
 ]);

@@ -52,6 +52,9 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
+                    @can('edit-user')
+                    <li><a class="nav-link scrollto " href="{{route('home')}}">Admin Panel</a></li>
+                    @endcan
                     <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">Home</a></li>
                     <li><a class="nav-link scrollto " href="{{route('admin.index')}}">Cases</a></li>
                     @can('list-judges')
@@ -97,7 +100,8 @@
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="get-started-btn scrollto dropdown-item bg-black" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <li><a class="get-started-btn scrollto dropdown-item bg-black" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">Logout</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf

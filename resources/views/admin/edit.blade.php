@@ -48,7 +48,7 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label">Case Details</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <textarea name="details" value="{{ $viewData['case']->Case_Details }} " class="form-control"  placeholder="Enter case details" required ><br>
+                            <textarea name="details" value="{{ $viewData['case']->Case_Details }} " class="form-control"  placeholder="Enter case details" required rows='4'></textarea><br>
                         </div>
                     </div>
                 </div>

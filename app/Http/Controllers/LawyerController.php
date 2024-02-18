@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lawyer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LawyerController extends Controller
@@ -35,9 +36,14 @@ class LawyerController extends Controller
         $lawyer->LastName = $request->input('lastName');
         $lawyer->email = $request->input('email');
         $lawyer->address = $request->input('address');
-
-        $lawyer->save();
-        return redirect()->back()->with('status', 'lawyer Created Successfully');
+        if (User::where('UserId', $lawyer->UserID)->first() != null) {
+            $user = User::where('UserId', $lawyer->UserID)->first();
+            $user->assignRole('lawyer');
+            $lawyer->save();
+            return redirect()->back()->with("status", "Lawyer Created Successfully");
+        } else {
+            return redirect()->back()->with("status", "No User by this User ID");
+        }
 
     }
     public function delete($id){

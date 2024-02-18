@@ -6,29 +6,34 @@ use App\Http\Controllers\Controller;
 use App\Models\Detective;
 use App\Models\LegalCase;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DetectiveController extends Controller
 {
     //
-    public function index($id){
-        $viewData = [] ;
+    public function index($id)
+    {
+        $viewData = [];
         $detective = Detective::where("UserId", $id)->first();
         $viewData["cases"] = $detective->Cases()->get();
         return view("detective.index")->with('viewData', $viewData);
     }
-    public function show($id){
+    public function show($id)
+    {
 
         $viewData = [];
         $viewData['detective'] = Detective::where('UserId', $id)->get();
-        return view('detective.show')->with ('viewData',$viewData);
+        return view('detective.show')->with('viewData', $viewData);
 
     }
-    public function create(){
+    public function create()
+    {
 
         return view('detective.create');
 
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $detective = new Detective();
         $detective->UserID = $request->input('id');
@@ -37,42 +42,53 @@ class DetectiveController extends Controller
         $detective->email = $request->input('email');
         $detective->address = $request->input('address');
 
-        $detective->save();
-        return redirect()->back()->with("status", "Detective Created Successfully");
+        if (User::where('UserId', $detective->UserID)->first() != null) {
+            $user = User::where('UserId', $detective->UserID)->first();
+            $user->assignRole('detective');
+            $detective->save();
+            return redirect()->back()->with("status", "Detective Created Successfully");
+        } else {
+            return redirect()->back()->with("status", "No User by this User ID");
+        }
 
     }
-    public function delete($id){
-        $detective = Detective::where('UserId',$id)->first();
+    public function delete($id)
+    {
+        $detective = Detective::where('UserId', $id)->first();
         $detective->delete();
-        return redirect()->back()->with('status','Deleted Successfully');
+        return redirect()->back()->with('status', 'Deleted Successfully');
 
     }
-    public function edit($id){
+    public function edit($id)
+    {
         $viewData = [];
-        $viewData['detective'] = Detective::where('UserId',$id)->first();
-        return view('detective.edit')->with('viewData',$viewData);
+        $viewData['detective'] = Detective::where('UserId', $id)->first();
+        return view('detective.edit')->with('viewData', $viewData);
 
     }
-    public function update(Request $request, $id){
-        $detective = Detective::where('Case_Id',$id)->first();
+    public function update(Request $request, $id)
+    {
+        $detective = Detective::where('Case_Id', $id)->first();
         $detective->UserID = $request->input('id');
         $detective->FirstName = $request->input('firstName');
         $detective->LastName = $request->input('lastName');
         $detective->email = $request->input('email');
         $detective->address = $request->input('address');
         $detective->save();
-        return redirect()->route('detective.index')->with('status','updated sucessfully');
+        return redirect()->route('detective.index')->with('status', 'updated sucessfully');
 
     }
-    public function assignCase($did, $cid){
-        $detective = Detective::where('UserId',$did)->first();
-        $case = LegalCase::where('Case_Id',$cid)->first();
+    public function assignCase($did, $cid)
+    {
+        $detective = Detective::where('UserId', $did)->first();
+        $case = LegalCase::where('Case_Id', $cid)->first();
         $detective->Cases()->save($case);
         $detective->save();
         return redirect()->back();
     }
-    public function assign(){
-        $viewData = [] ;
+    public function assign()
+    {
+        $viewData = [];
         $viewData["cases"] = LegalCase::all();
         return view("attorney.assign")->with('viewData', $viewData);
 

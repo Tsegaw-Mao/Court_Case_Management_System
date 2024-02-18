@@ -18,6 +18,17 @@ class DetectiveController extends Controller
         $viewData["cases"] = $detective->Cases()->get();
         return view("detective.index")->with('viewData', $viewData);
     }
+    public function allcase($uid){
+        $viewData['cases'] = LegalCase::where('status','status1')->get();
+        return view('admin.home')->with('viewData', $viewData);
+
+    }
+    public function mycases($uid){
+        $user = User::find($uid);
+        $detective = Detective::where('UserId',$user->UserId)->first();
+        $viewData['cases'] = $detective->Cases()->get();
+        return view('admin.home')->with('viewData', $viewData);
+    }
     public function show($id)
     {
 

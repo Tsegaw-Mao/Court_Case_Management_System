@@ -1,4 +1,4 @@
-@extends('master2')
+@extends('master')
 @section('body')
 <div class="card">
     <div class="card-header bold"> Manage Cases

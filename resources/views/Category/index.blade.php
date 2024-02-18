@@ -7,10 +7,13 @@
     @endif
             <div class="card">
                 <div class="card-header">
+                    @can('create-document')
                     <h4>DOCUMENTS
                         <a href="{{ url('categories/create/'.$categories['id']) }}" class="btn btn-primary float-end">Upload File</a>
                     </h4>
+                    @endcan
                 </div>
+                @can('view-document')
                 <div class="card-body">
 
                     <table class="table table-bordered table-striped">
@@ -41,8 +44,10 @@
                                     @endif
                                 </td> --}}
                                 <td>
+                                    @can('edit-document')
                                     <a href="{{ url('categories/'.$item->id.'/edit/'.$item->legal_case_Case_Id) }}" class="btn btn-success mx-2">Edit</a>
-
+                                    @endcan
+                                    @can('delete-document')
                                     <a
                                         href="{{ url('categories/'.$item->id.'/delete/'.$item->legal_case_Case_Id) }}"
                                         class="btn btn-danger mx-1"
@@ -50,6 +55,7 @@
                                     >
                                         Delete
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
@@ -57,6 +63,7 @@
                     </table>
 
                 </div>
+                @endcan
             </div>
         </div>
     </div>

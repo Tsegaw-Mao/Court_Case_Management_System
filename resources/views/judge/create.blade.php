@@ -1,4 +1,4 @@
-@extends('master1')
+@extends('master')
 
 @section('body')
 <div class="card">

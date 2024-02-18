@@ -32,6 +32,7 @@
                 <a href="{{ url('categories/' . $Case_Id) }}" class="btn btn-primary float-end">Back</a>
             </h3>
         </div>
+        @can('create-document')
         <div class="card-body">
             <form action="{{ route('categories.store', ['id' => $Case_Id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -84,6 +85,7 @@
 
             </form>
         </div>
+        @endcan
     </div>
     </div>
     </div>

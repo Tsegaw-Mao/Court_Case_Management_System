@@ -30,6 +30,7 @@
                         <a href="{{ url('categories/'.$category->legal_case_Case_Id) }}" class="btn btn-primary float-end">Back</a>
                     </h4>
                 </div>
+                @can('edit-document')
                 <div class="card-body">
                     <form action="{{ url('categories/'.$category->id.'/edit/'.$category->legal_case_Case_Id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -53,6 +54,7 @@
                         </div>
                     </form>
                 </div>
+                @endcan
             </div>
         </div>
     </div>

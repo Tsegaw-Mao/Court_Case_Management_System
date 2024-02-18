@@ -18,6 +18,17 @@ class AttorneyController extends Controller
         $viewData["cases"] = $attorney->Cases()->get();
         return view("attorney.index")->with('viewData', $viewData);
     }
+    public function allcase($uid){
+        $viewData['cases'] = LegalCase::where('status','status2')->get();
+        return view('admin.home')->with('viewData', $viewData);
+
+    }
+    public function mycases($uid){
+        $user = User::find($uid);
+        $attorney = Attorney::where('UserId',$user->UserId)->first();
+        $viewData['cases'] = $attorney->Cases()->get();
+        return view('admin.home')->with('viewData', $viewData);
+    }
     public function show($id)
     {
 

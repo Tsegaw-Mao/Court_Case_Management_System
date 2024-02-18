@@ -33,57 +33,50 @@ class RoleSeeder extends Seeder
             'create-user',
             'edit-user',
             'delete-user',
-            'view-user',
-            'assign-user',
-            'create-case',
-            'edit-case',
-            'delete-case',
-            'view-case',
-            'create-document',
-            'edit-document',
-            'delete-document',
-            'view-document',
-            'approve-request',
-            'reject-request'
+            'view-user'
         ]);
 
         $judge->givePermissionTo([
             'approve-request',
             'reject-request',
             'view-document',
-            'view-role',
-            'view-user',
-            'view-document',
-            'view-case'
+            'view-case',
+            'list-judges'
         ]);
 
         $attorney->givePermissionTo([
-            'edit-document',
-            'delete-document',
             'view-document',
-            'view-role',
-            'view-user',
-            'view-document',
-            'view-case'
+            'view-case',
+            'list-attornies'
+
         ]);
         $detective->givePermissionTo([
             'edit-document',
             'delete-document',
             'view-document',
-            'view-role',
-            'view-user',
-            'view-document',
-            'view-case'
+            'create-document',
+            'view-case',
+            'list-detectives'
         ]);
         $clerk->givePermissionTo([
             'create-user',
             'edit-user',
             'delete-user',
             'view-user',
+            'create-role',
+            'view-role',
+            'edit-role',
+            'delete-role',
             'create-case',
             'edit-case',
             'delete-case',
             'view-case',
+            'list-judges',
+            'list-attornies',
+            'list-detectives',
+            'list-wittnesses',
+            'list-plaintiffs',
+            'list-defendants'
         ]);
         $plaintiff->givePermissionTo([
             'view-case',
@@ -95,31 +88,26 @@ class RoleSeeder extends Seeder
             'approve-request',
             'reject-request',
             'view-document',
-            'view-role',
-            'view-user',
-            'view-document',
             'view-case',
-            'assign-user'
+            'assign-judge',
+            'list-judges',
+
         ]);
         $admin_attorney->givePermissionTo([
-            'edit-document',
-            'delete-document',
+            'assign-attorney',
             'view-document',
-            'view-role',
-            'view-user',
-            'view-document',
-            'assign-user',
-            'view-case'
+            'view-case',
+            'list-attornies'
+
         ]);
         $admin_detective->givePermissionTo([
+            'assign-detective',
             'edit-document',
             'delete-document',
             'view-document',
-            'view-role',
-            'view-user',
-            'view-document',
-            'assign-user',
-            'view-case'
+            'create-document',
+            'view-case',
+            'list-detectives'
         ]);
 
     }

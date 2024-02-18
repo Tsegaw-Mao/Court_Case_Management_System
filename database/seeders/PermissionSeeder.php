@@ -22,7 +22,6 @@ class PermissionSeeder extends Seeder
             'edit-user',
             'delete-user',
             'view-user',
-            'assign-user',
             'create-case',
             'edit-case',
             'delete-case',
@@ -33,7 +32,18 @@ class PermissionSeeder extends Seeder
             'view-document',
             'approve-request',
             'reject-request',
-            'view-schedule'
+            'view-schedule',
+            'list-attornies',
+            'list-judges',
+            'list-lawyers',
+            'list-detectives',
+            'list-wittnesses',
+            'list-plaintiffs',
+            'list-defendants',
+            'assign-attorney',
+            'assign-detective',
+            'assign-judge'
+
 
          ];
  

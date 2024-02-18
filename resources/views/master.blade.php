@@ -52,11 +52,32 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
+                <?php
+                $home = 'admin.home';
+                $us3r = Auth::user();
+                $rol3s=$us3r->getRoleNames();
+                foreach($rol3s as $rol3){
+                    if($rol3 == 'clerk'){
+                        $home = 'admin.home'; break;
+                    }elseif($rol3 == 'judge' || $rol3 == 'admin_judge'){
+                        $home = 'judge.index'; break;
+                    }elseif($rol3 == 'attorney'|| $rol3 == 'admin_attorney'){
+                        $home = 'attorney.index'; break;
+                    }elseif($rol3 == 'detective' || $rol3 == 'admin_detective'){
+                        $home = 'detective.index'; break;
+                    }elseif($rol3 == 'plaintiff'|| $rol3 == 'defendant'){
+                        $home = 'plaintiff.index'; break;
+                    }
+                    else{
+                        $home = 'home'; break;
+                    }
+                }
+                ?>
                     @can('edit-user')
                     <li><a class="nav-link scrollto " href="{{route('home')}}">Admin Panel</a></li>
                     @endcan
-                    <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">Home</a></li>
-                    <li><a class="nav-link scrollto " href="{{route('admin.index')}}">Cases</a></li>
+                    <li><a class="nav-link scrollto active" href="{{route($home,['uid'=>$us3r->id])}}">Home</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('admin.index')}}">My Cases</a></li>
                     @can('list-judges')
                     <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Judges</a></li>
                     @endcan

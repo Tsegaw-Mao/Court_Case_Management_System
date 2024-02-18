@@ -19,6 +19,17 @@ class JudgeController extends Controller
         return view("judge.index")->with("viewData", $viewData);
 
     }
+    public function allcase($uid){
+        $viewData['cases'] = LegalCase::where('status','status3')->get();
+        return view('admin.home')->with('viewData', $viewData);
+
+    }
+    public function mycases($uid){
+        $user = User::find($uid);
+        $judge = Judge::where('UserId',$user->UserId)->first();
+        $viewData['cases'] = $judge->Cases()->get();
+        return view('admin.home')->with('viewData', $viewData);
+    }
     public function show($id)
     {
 

@@ -66,7 +66,7 @@
                         </li>
                         @endif
                         @else
-                        <li><a class="nav-link" href="{{ route('admin.home') }}">Home</a></li>
+                        <li><a class="nav-link" href="{{ route('admin.home',['uid'=>Auth::user()->id]) }}">Home</a></li>
                         <div class='float-end'>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" role="button"

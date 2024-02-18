@@ -37,7 +37,7 @@
                     <div class="mb-3 row">
                         <label class="col-lg-2 col-md-0 col-sm-1 col-form-label bold">Last Name:</label>
                         <div class="col-lg-4 col-md-4 col-sm-10">
-                            <input name="lastName" value="{{ old('last') }}" type="text" class="form-control"placeholder="Enter your last name" required>
+                            <input name="lastName" value="{{ old('last') }}" type="text" class="form-control"placeholder="Enter your last name" >
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="mb-3 row">
                         <label class="col-lg-2 col-md-0 col-sm-1 col-form-label bold">Adress:</label>
                         <div class="col-lg-4 col-md-4 col-sm-10">
-                            <input name="address" value="{{ old('mobile') }}" type="text" class="form-control"placeholder="Enter your Mobile Number" required maxlength="10">
+                            <input name="address" value="{{ old('mobile') }}" type="text" class="form-control"placeholder="Enter your Mobile Number" maxlength="10">
                         </div>
                     </div>
                 </div>

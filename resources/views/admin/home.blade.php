@@ -87,7 +87,7 @@
                         @can('assign-detective')
                         <a href="{{ route('detective.assign', ['cid' => $case->Case_Id]) }}">
                             <button class="btn btn-primary">
-                                <i class="bi-pencil"></i>
+                                <i class="bi-clip"></i>
                             </button>
                         </a>
                         @endcan

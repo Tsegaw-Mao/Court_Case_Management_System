@@ -62,20 +62,20 @@ route::get('/attorney/create',[AttorneyController::class,'create'])->name('attor
 route::post('/attorney/store', [ AttorneyController::class,'store'])->name('attorney.store');
 route::get('/attorney/cases/show/{uid}', [AttorneyController::class,'allcase'])->name('attorney.index');
 route::get('/attorney/case/assign/{aid}/{cid}', [AttorneyController::class, 'assignCase'])->name('attorney.case');
-route::get('/attorney/assign',[AttorneyController::class, 'assign'])->name('attorney.assign');
+route::get('/attorney/assign/{cid}',[AttorneyController::class, 'assign'])->name('attorney.assign');
 
 route::get('/judge/create',[JudgeController::class,'create'])->name('judge.create');
 route::post('/judge/store', [ JudgeController::class,'store'])->name('judge.store');
 route::get('/judge/cases/show/{uid}', [JudgeController::class,'allcase'])->name('judge.index');
 route::get('/judge/case/assign/{jid}/{cid}', [JudgeController::class, 'assignCase'])->name('judge.case');
-route::get('/judge/assign',[JudgeController::class, 'assign'])->name('judge.assign');
+route::get('/judge/assign/{cid}',[JudgeController::class, 'assign'])->name('judge.assign');
 
 
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
 route::get('/detective/cases/show/{uid}', [DetectiveController::class,'allcase'])->name('detective.index');
 route::get('/detective/case/assaign/{did}/{cid}', [DetectiveController::class,'assignCase'])->name('detective.case');
-route::get('/detective/assign',[DetectiveController::class, 'assign'])->name('detective.assign');
+route::get('/detective/assign/{cid}',[DetectiveController::class, 'assign'])->name('detective.assign');
 
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {

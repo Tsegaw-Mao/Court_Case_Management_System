@@ -18,14 +18,20 @@ class AttorneyController extends Controller
         $viewData["cases"] = $attorney->Cases()->get();
         return view("attorney.index")->with('viewData', $viewData);
     }
-    public function allcase($uid){
-        $viewData['cases'] = LegalCase::where('status','status2')->get();
+    public function allcase($uid)
+    {
+        $viewData = [];
+        $viewData['title'] = 'Cases under Investigation';
+        $viewData['cases'] = LegalCase::where('status', 'status2')->get();
         return view('admin.home')->with('viewData', $viewData);
 
     }
-    public function mycases($uid){
+    public function mycases($uid)
+    {
+        $viewData = [];
         $user = User::find($uid);
-        $attorney = Attorney::where('UserId',$user->UserId)->first();
+        $viewData['title'] = 'Cases Under' . $user->name;
+        $attorney = Attorney::where('UserId', $user->UserId)->first();
         $viewData['cases'] = $attorney->Cases()->get();
         return view('admin.home')->with('viewData', $viewData);
     }
@@ -100,10 +106,11 @@ class AttorneyController extends Controller
         $attorney->save();
         return redirect()->back();
     }
-    public function assign()
+    public function assign($cid)
     {
         $viewData = [];
-        $viewData["cases"] = LegalCase::all();
+        $viewData["case"] = $cid;
+        $viewData["attornies"] = Attorney::all();
         return view("attorney.assign")->with('viewData', $viewData);
 
     }

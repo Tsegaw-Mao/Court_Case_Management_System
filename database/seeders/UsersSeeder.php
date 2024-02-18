@@ -58,6 +58,7 @@ class UsersSeeder extends Seeder
                 'email' => $email,
                 'password' => Hash::make($email)
             ]);
+            
         }
     }
 }

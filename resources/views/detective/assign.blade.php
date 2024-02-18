@@ -5,24 +5,9 @@
 <div class="alert alert-success">{{session('status')}}</div>
 @endif
 <div class="card">
-    <div class="card-header"> List of Cases
+    <div class="card-header"> List of Detectives
     </div>
     <div class="card-body">
-        <div>
-            <a href="{{  }}">
-                <button type="button" class="btn btn-primary float-end">
-                    List Unassigned Cases
-                </button>
-            </a>
-            <a href="{{  }}">
-                <button type="button" class="btn btn-primary float-end">
-                    List Assigned Cases
-                </button>
-            </a>
-
-
-            <br>
-        </div>
 
 
         <table class="table table-bordered table-striped">
@@ -31,11 +16,10 @@
 
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Case ID</th>
-                    <th scope="col">Case Title</th>
-                    <th scope="col">Plaintiff</th>
-                    <th scope="col">Defendant</th>
-                    <th scope="col">Assigned</th>
+                    <th scope="col">Detective Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Detective User ID</th>
+                    <th scope="col">Cases Currently on Hand</th>
                 </tr>
 
             </thead>
@@ -43,31 +27,68 @@
                 <?php
                 $count = 0;
                 ?>
-                @foreach ($viewData['cases'] as $case)
+                @foreach ($viewData["detectives"] as $detective)
                 <?php
                 $count++;
                 ?>
+                <a href="{{route('detective.case',['did'=>$detective->UserId,'cid'=>$viewData['case']])}}">
+                    <tr>
+                        <td>{{ $count }}</td>
+                        <td>{{ $detective->FirstName }}</td>
+                        <td>{{ $detective->email }}</td>
+                        <td>{{ $detective->UserId }}</td>
+                        <td>{{ $detective->Cases()->get()-count()}}</td>
+                    </tr>
+                </a>
+                @endforeach
+            </tbody>
+        </table>
+        <div>
+        </div>
+    </div>
+</div>
+@endsection@extends('master')
+
+@section('body')
+@if (session('status'))
+<div class="alert alert-success">{{session('status')}}</div>
+@endif
+<div class="card">
+    <div class="card-header"> List of Attornies
+    </div>
+    <div class="card-body">
+
+
+        <table class="table table-bordered table-striped">
+            <br>
+            <thead>
+
                 <tr>
-                    <td>{{ $count }}</td>
-                    <td>{{ $case->Case_Id }}</td>
-                    <td>{{ $case->Case_Title }}</td>
-                    <td>{{ $case->Plaintiff()->get()->value("FirstName") }}</td>
-                    <td>{{ $case->Defendants()->get()->value("FirstName") }}</td>
-                    <td>
-                        <a href="{{ route('admin.show', ['id' => $case->Case_Id]) }}">
-                            <button class="btn btn-primary">
-                                <i class="bi-attach">Assign</i>
-                            </button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.edit', ['id' => $case->Case_Id]) }}">
-                            <button class="btn btn-primary">
-                                <i class="bi-pencil"></i>
-                            </button>
-                        </a>
-                    </td>
+                    <th scope="col">#</th>
+                    <th scope="col">Attorney Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Attorney User ID</th>
+                    <th scope="col">Cases Currently on Hand</th>
                 </tr>
+
+            </thead>
+            <tbody>
+                <?php
+                $count = 0;
+                ?>
+                @foreach ($viewData["attornies"] as $attorney)
+                <?php
+                $count++;
+                ?>
+                <a href="{{route('attorney.case',['did'=>$attorney->UserId,'cid'=>$viewData['case']])}}">
+                    <tr>
+                        <td>{{ $count }}</td>
+                        <td>{{ $attorney->FirstName }}</td>
+                        <td>{{ $attorney->email }}</td>
+                        <td>{{ $attorney->UserId }}</td>
+                        <td>{{ $attorney->Cases()->get()-count()}}</td>
+                    </tr>
+                </a>
                 @endforeach
             </tbody>
         </table>

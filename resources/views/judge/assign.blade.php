@@ -5,24 +5,9 @@
 <div class="alert alert-success">{{session('status')}}</div>
 @endif
 <div class="card">
-    <div class="card-header"> List of Cases
+    <div class="card-header"> List of Judges
     </div>
     <div class="card-body">
-        <div>
-            <a href="{{  }}">
-                <button type="button" class="btn btn-primary float-end">
-                    List Unassigned Cases
-                </button>
-            </a>
-            <a href="{{  }}">
-                <button type="button" class="btn btn-primary float-end">
-                    List Assigned Cases
-                </button>
-            </a>
-
-
-            <br>
-        </div>
 
 
         <table class="table table-bordered table-striped">
@@ -31,11 +16,10 @@
 
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Case ID</th>
-                    <th scope="col">Case Title</th>
-                    <th scope="col">Plaintiff</th>
-                    <th scope="col">Defendant</th>
-                    <th scope="col">Assigned</th>
+                    <th scope="col">Judge Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Judge User ID</th>
+                    <th scope="col">Cases Currently on Hand</th>
                 </tr>
 
             </thead>
@@ -43,31 +27,19 @@
                 <?php
                 $count = 0;
                 ?>
-                @foreach ($viewData['cases'] as $case)
+                @foreach ($viewData["judges"] as $judge)
                 <?php
                 $count++;
                 ?>
-                <tr>
-                    <td>{{ $count }}</td>
-                    <td>{{ $case->Case_Id }}</td>
-                    <td>{{ $case->Case_Title }}</td>
-                    <td>{{ $case->Plaintiff()->get()->value("FirstName") }}</td>
-                    <td>{{ $case->Defendants()->get()->value("FirstName") }}</td>
-                    <td>
-                        <a href="{{ route('admin.show', ['id' => $case->Case_Id]) }}">
-                            <button class="btn btn-primary">
-                                <i class="bi-attach">Assign</i>
-                            </button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.edit', ['id' => $case->Case_Id]) }}">
-                            <button class="btn btn-primary">
-                                <i class="bi-pencil"></i>
-                            </button>
-                        </a>
-                    </td>
-                </tr>
+                <a href="{{route('judge.case',['jid'=>$judge->UserId,'cid'=>$viewData['case']])}}">
+                    <tr>
+                        <td>{{ $count }}</td>
+                        <td>{{ $judge->FirstName }}</td>
+                        <td>{{ $judge->email }}</td>
+                        <td>{{ $judge->UserId }}</td>
+                        <td>{{ $judge->Cases()->get()-count()}}</td>
+                    </tr>
+                </a>
                 @endforeach
             </tbody>
         </table>

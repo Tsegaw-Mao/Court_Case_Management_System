@@ -19,12 +19,16 @@ class DetectiveController extends Controller
         return view("detective.index")->with('viewData', $viewData);
     }
     public function allcase($uid){
+        $viewData = [];
+        $viewData['title'] = 'Cases under Investigation';
         $viewData['cases'] = LegalCase::where('status','status1')->get();
         return view('admin.home')->with('viewData', $viewData);
 
     }
     public function mycases($uid){
+        $viewData = [];
         $user = User::find($uid);
+        $viewData['title'] = 'Cases Under' . $user->name;
         $detective = Detective::where('UserId',$user->UserId)->first();
         $viewData['cases'] = $detective->Cases()->get();
         return view('admin.home')->with('viewData', $viewData);
@@ -97,11 +101,12 @@ class DetectiveController extends Controller
         $detective->save();
         return redirect()->back();
     }
-    public function assign()
+    public function assign($cid)
     {
         $viewData = [];
-        $viewData["cases"] = LegalCase::all();
-        return view("attorney.assign")->with('viewData', $viewData);
+        $viewData["case"] = $cid;
+        $viewData["detectives"] = Detective::all();
+        return view("detective.assign")->with('viewData', $viewData);
 
     }
 }

@@ -20,12 +20,16 @@ class JudgeController extends Controller
 
     }
     public function allcase($uid){
+        $viewData = [];
+        $viewData['title'] = 'Cases under Trial';
         $viewData['cases'] = LegalCase::where('status','status3')->get();
         return view('admin.home')->with('viewData', $viewData);
 
     }
     public function mycases($uid){
+        $viewData = [];
         $user = User::find($uid);
+        $viewData['title'] = 'Cases Under' . $user->name;
         $judge = Judge::where('UserId',$user->UserId)->first();
         $viewData['cases'] = $judge->Cases()->get();
         return view('admin.home')->with('viewData', $viewData);
@@ -98,10 +102,11 @@ class JudgeController extends Controller
         $judge->save();
         return redirect()->back();
     }
-    public function assign()
+    public function assign($cid)
     {
         $viewData = [];
-        $viewData["cases"] = LegalCase::all();
+        $viewData["case"] = $cid;
+        $viewData["judges"] = User::all();
         return view("attorney.assign")->with('viewData', $viewData);
     }
 }

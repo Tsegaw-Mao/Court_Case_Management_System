@@ -37,8 +37,6 @@
                         <td>{{ $attorney->FirstName }}</td>
                         <td>{{ $attorney->email }}</td>
                         <td>{{ $attorney->UserId }}</td>
-                        <td>{{ $attorney->Cases()->get()-count()}}</td>
-                    </tr>
                 </a>
                 @endforeach
             </tbody>

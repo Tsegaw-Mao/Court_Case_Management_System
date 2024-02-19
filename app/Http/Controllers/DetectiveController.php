@@ -7,28 +7,29 @@ use App\Models\Detective;
 use App\Models\LegalCase;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class DetectiveController extends Controller
 {
     //
-    public function index($id)
+    public function index()
     {
         $viewData = [];
-        $detective = Detective::where("UserId", $id)->first();
-        $viewData["cases"] = $detective->Cases()->get();
-        return view("detective.index")->with('viewData', $viewData);
+        $viewData["cases"] = Detective::all();
+        $viewData['title'] = "Detectives List";
+        return view("admin.indexx")->with("viewData", $viewData);
     }
     public function allcase($uid){
         $viewData = [];
         $viewData['title'] = 'Cases under Investigation';
-        $viewData['cases'] = LegalCase::where('status','status1')->get();
+        $viewData['cases'] = LegalCase::where('status','status1')->orWhere('status','status1.0')->get();
         return view('admin.home')->with('viewData', $viewData);
 
     }
-    public function mycases($uid){
+    public function mycases(){
         $viewData = [];
-        $user = User::find($uid);
-        $viewData['title'] = 'Cases Under' . $user->name;
+        $user = Auth::user();
+        $viewData['title'] = 'Cases Under ' . $user->name;
         $detective = Detective::where('UserId',$user->UserId)->first();
         $viewData['cases'] = $detective->Cases()->get();
         return view('admin.home')->with('viewData', $viewData);
@@ -109,4 +110,14 @@ class DetectiveController extends Controller
         return view("detective.assign")->with('viewData', $viewData);
 
     }
+    public function statusup($cid){
+        $case = LegalCase::where('Case_Id',$cid)->first();
+        $laststatus = substr($case->status,6);
+        $laststatus = $laststatus * 1;
+        $laststatus = $laststatus + 0.5;
+        $case->status = 'status' . $laststatus;
+        $case->save();
+        return redirect()->route('detective.allcase',['uid'=>Auth::user()->UserId])->with('status','case transfed to attorney for approval');
+    }
+
 }

@@ -60,16 +60,33 @@
                     if($rol3 == 'clerk'){
                         $home = 'admin.home'; break;
                     }elseif($rol3 == 'judge' || $rol3 == 'admin_judge'){
-                        $home = 'judge.index'; break;
+                        $home = 'judge.allcase'; break;
                     }elseif($rol3 == 'attorney'|| $rol3 == 'admin_attorney'){
-                        $home = 'attorney.index'; break;
+                        $home = 'attorney.allcase'; break;
                     }elseif($rol3 == 'detective' || $rol3 == 'admin_detective'){
-                        $home = 'detective.index'; break;
+                        $home = 'detective.allcase'; break;
                     }elseif($rol3 == 'plaintiff'|| $rol3 == 'defendant'){
-                        $home = 'plaintiff.index'; break;
+                        $home = 'plaintiff.allcase'; break;
                     }
                     else{
                         $home = 'home'; break;
+                    }
+                }
+                $mycase = 'admin.home';
+                $us3rr = Auth::user();
+                $rol3ss=$us3rr->getRoleNames();
+                foreach($rol3ss as $rol33){
+                    if($rol3 == 'judge' || $rol3 == 'admin_judge'){
+                        $mycase = 'judge.mycase'; break;
+                    }elseif($rol3 == 'attorney'|| $rol3 == 'admin_attorney'){
+                        $mycase = 'attorney.mycase'; break;
+                    }elseif($rol3 == 'detective' || $rol3 == 'admin_detective'){
+                        $mycase = 'detective.mycase'; break;
+                    }elseif($rol3 == 'plaintiff'|| $rol3 == 'defendant'){
+                        $mycase = 'plaintiff.mycase'; break;
+                    }
+                    else{
+                        $mycase = 'home'; break;
                     }
                 }
                 ?>
@@ -77,27 +94,27 @@
                     <li><a class="nav-link scrollto " href="{{route('home')}}">Admin Panel</a></li>
                     @endcan
                     <li><a class="nav-link scrollto active" href="{{route($home,['uid'=>$us3r->id])}}">Home</a></li>
-                    <li><a class="nav-link scrollto " href="{{route('admin.index')}}">My Cases</a></li>
+                    <li><a class="nav-link scrollto " href="{{route($mycase)}}">My Cases</a></li>
                     @can('list-judges')
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Judges</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('judge.index')}}">Judges</a></li>
                     @endcan
                     @can('list-attornies')
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Attornies</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('attorney.index')}}">Attornies</a></li>
                     @endcan
                     @can('list-lawyers')
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Lawyers</a></li>
+                    <li><a class="nav-link scrollto " href="#">Lawyers</a></li>
                     @endcan
                     @can('list-detectives')
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Detectives</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('detective.index')}}">Detectives</a></li>
                     @endcan
                     @can('list-plaintiffs')
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Plaintiffs</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('plaintiff.index')}}">Plaintiffs</a></li>
                     @endcan
                     @can('list-defendants')
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Defendants</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('defendant.index')}}">Defendants</a></li>
                     @endcan
                     @can('list-wittnesses')
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Wittness</a></li>
+                    <li><a class="nav-link scrollto " href="#">Wittness</a></li>
                     @endcan
                     @can('view-schedule')
                     <li><a class="nav-link scrollto " href="#">Calendar</a></li>

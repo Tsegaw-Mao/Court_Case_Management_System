@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Defendant;
 use App\Models\LegalCase;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Plaintiff;
 
@@ -41,7 +42,7 @@ class AdminController extends Controller
         $plaintiff = Plaintiff::where("UserId", $request->input("pid"))->first();
         $defendant = Defendant::where("UserId", $request->input("did"))->first();
 
-         
+
         $cid= $this->createid();
         $case->Case_Id = $cid;
         $case->Case_Title = $request->input('title');
@@ -88,7 +89,7 @@ class AdminController extends Controller
     {
         $case = LegalCase::where("Case_Id", $id)->first();
         $case->delete();
-         return redirect()->route("admin.home")->with("status", "Case Deleted");
+         return redirect()->route("admin.home",['uid'=>Auth::user()->id])->with("status", "Case Deleted");
 
     }
     public function readSoftDeletes($id)
@@ -133,12 +134,12 @@ class AdminController extends Controller
     }
     public function createid(){
         $case = LegalCase::all()->last();
-        
+
         if($case==null){
             return $id = 'Case0001';
         }
         else{
-           
+
             $lastid = $case->Case_Id;
             $id1 = substr($lastid,4);
             $id2 = $id1*1;

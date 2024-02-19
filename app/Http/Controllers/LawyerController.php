@@ -6,15 +6,34 @@ use App\Http\Controllers\Controller;
 use App\Models\Lawyer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\LegalCase;
+use Illuminate\Support\Facades\Auth;
 
 class LawyerController extends Controller
 {
     //
     public function index(){
         $viewData = [];
-        $viewData["lawyers"] = Lawyer::all();
-        return view("lawyer.index")->with ("viewData",$viewData);
+        $viewData['title'] = "Lawyer List";
+        $viewData["cases"] = Lawyer::all();
+        return view("admin.indexx")->with("viewData", $viewData);
 
+    }
+    public function allcase($uid)
+    {
+        $viewData = [];
+        $viewData['title'] = 'Cases under Investigation';
+        $viewData['cases'] = LegalCase::where('status', 'status3')->get();
+        return view('admin.home')->with('viewData', $viewData);
+
+    }
+    public function mycases(){
+        $viewData = [];
+        $user = Auth::user();
+        $viewData['title'] = 'Cases Under ' . $user->name;
+        $lawyer = Lawyer::where('UserId',$user->UserId)->first();
+        $viewData['cases'] = $lawyer->Cases()->get();
+        return view('admin.home')->with('viewData', $viewData);
     }
     public function show($id){
 

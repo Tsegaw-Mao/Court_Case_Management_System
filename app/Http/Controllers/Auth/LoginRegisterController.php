@@ -40,13 +40,14 @@ class LoginRegisterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:250',
+            'UserId' => 'required|max:10|unique:users',
             'email' => 'required|email|max:250|unique:users',
             'password' => 'required|min:8|confirmed'
         ]);
 
         User::create([
             'name' => $request->name,
-            'UserId' => $request->id,
+            'UserId' => $request->UserId,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
@@ -92,8 +93,8 @@ class LoginRegisterController extends Controller
             'email' => 'Your provided credentials do not match in our records.',
         ])->onlyInput('email');
 
-    } 
-    
+    }
+
     /**
      * Display a dashboard to authenticated users.
      *
@@ -105,13 +106,13 @@ class LoginRegisterController extends Controller
         {
             return view('auth.dashboard');
         }
-        
+
         return redirect()->route('login')
             ->withErrors([
             'email' => 'Please login to access the dashboard.',
         ])->onlyInput('email');
-    } 
-    
+    }
+
     /**
      * Log out the user from application.
      *
@@ -125,6 +126,6 @@ class LoginRegisterController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('login')
             ->withSuccess('You have logged out successfully!');;
-    }    
+    }
 
 }

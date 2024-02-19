@@ -6,14 +6,37 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Defendant;
 use App\Models\User;
+use App\Models\LegalCase;
+use Illuminate\Support\Facades\Auth;
+
 class DefendantController extends Controller
 {
     //
     public function index()
     {
         $viewData = [];
-        $viewData["defendants"] = Defendant::all();
-        return view("defendant.index")->with('viewData', $viewData);
+        $viewData['title'] = "Defendants List";
+
+        $viewData["cases"] = Defendant::all();
+        return view("admin.indexx")->with("viewData", $viewData);
+    }
+
+    public function allcase($uid)
+    {
+        $viewData = [];
+        $viewData['title'] = 'Cases under Investigation';
+        $viewData['cases'] = LegalCase::where('status', 'status3')->get();
+        return view('admin.home')->with('viewData', $viewData);
+
+    }
+    public function mycases()
+    {
+        $viewData = [];
+        $user = Auth::user();
+        $viewData['title'] = 'Cases Under ' . $user->name;
+        $defendant = Defendant::where('UserId', $user->UserId)->first();
+        $viewData['cases'] = $defendant->Cases()->get();
+        return view('admin.home')->with('viewData', $viewData);
     }
     public function show($id)
     {
@@ -46,7 +69,7 @@ class DefendantController extends Controller
 
             return redirect()->back()->with('status', 'defendant Created Successfully');
         } else {
-            return redirect()->back()->with('status','No User by this User ID');
+            return redirect()->back()->with('status', 'No User by this User ID');
         }
 
 

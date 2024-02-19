@@ -20,7 +20,7 @@
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
                         <div class="col-md-6">
-                          <input type="readonly" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $user->name }} (readonly)">
+                          <input type="readonly" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $user->name }}">
                             @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
                             @endif
@@ -30,7 +30,7 @@
                     <div class="mb-3 row">
                         <label for="email" class="col-md-4 col-form-label text-md-end text-start">Email Address</label>
                         <div class="col-md-6">
-                          <input type="readonly" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $user->email }} (readonly)">
+                          <input type="readonly" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $user->email }}">
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
@@ -40,7 +40,7 @@
                     <div class="mb-3 row">
                         <label for="password" class="col-md-4 col-form-label text-md-end text-start">User ID</label>
                         <div class="col-md-6">
-                          <input type="readonly" class="form-control @error('id') is-invalid @enderror" id="id" name="id" value="{{ $user->UserId }} (readonly)">
+                          <input type="readonly" class="form-control @error('id') is-invalid @enderror" id="id" name="id" value="{{ $user->UserId }}">
                             @if ($errors->has('id'))
                                 <span class="text-danger">{{ $errors->first('id') }}</span>
                             @endif
@@ -49,7 +49,7 @@
 
                     <div class="mb-3 row">
                         <label for="roles" class="col-md-4 col-form-label text-md-end text-start">Roles</label>
-                        <div class="col-md-6">           
+                        <div class="col-md-6">
                             <select class="form-select @error('roles') is-invalid @enderror" multiple aria-label="Roles" id="roles" name="roles[]">
                                 @forelse ($roles as $role)
 
@@ -58,7 +58,7 @@
                                         {{ $role }}
                                     </option>
                                     @else
-                                        @if (Auth::user()->hasRole('Super Admin'))   
+                                        @if (Auth::user()->hasRole('Super Admin'))
                                         <option value="{{ $role }}" {{ in_array($role, $userRoles ?? []) ? 'selected' : '' }}>
                                             {{ $role }}
                                         </option>
@@ -74,14 +74,14 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Update User">
                     </div>
-                    
+
                 </form>
             </div>
         </div>
     </div>
-</div>    
+</div>
 @endsection

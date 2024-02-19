@@ -42,13 +42,21 @@ class PermissionSeeder extends Seeder
             'list-defendants',
             'assign-attorney',
             'assign-detective',
-            'assign-judge'
+            'assign-judge',
+            'send-to-attorney',
+            'send-to-judge',
+            'send-back-to-attorney',
+            'send-back-to-detective',
+            'attorney-accept',
+            'judge-accept',
+            'judge-veridct'
 
 
          ];
- 
+
           // Looping and Inserting Array's Permissions into Permission Table
          foreach ($permissions as $permission) {
+            if(Permission::where('name',$permission)->first() == null)
             Permission::create(['name' => $permission]);
           }
     }

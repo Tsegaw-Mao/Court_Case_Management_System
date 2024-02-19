@@ -66,7 +66,28 @@
                         </li>
                         @endif
                         @else
-                        <li><a class="nav-link" href="{{ route('admin.home',['uid'=>Auth::user()->id]) }}">Home</a></li>
+                        <?php
+                $home = 'admin.home';
+                $us3r = Auth::user();
+                $rol3s=$us3r->getRoleNames();
+                foreach($rol3s as $rol3){
+                    if($rol3 == 'clerk'){
+                        $home = 'admin.home'; break;
+                    }elseif($rol3 == 'judge' || $rol3 == 'admin_judge'){
+                        $home = 'judge.allcase'; break;
+                    }elseif($rol3 == 'attorney'|| $rol3 == 'admin_attorney'){
+                        $home = 'attorney.allcase'; break;
+                    }elseif($rol3 == 'detective' || $rol3 == 'admin_detective'){
+                        $home = 'detective.allcase'; break;
+                    }elseif($rol3 == 'plaintiff'|| $rol3 == 'defendant'){
+                        $home = 'plaintiff.allcase'; break;
+                    }
+                    else{
+                        $home = 'home'; break;
+                    }
+                }
+                ?>
+                        <li><a class="nav-link" href="{{ route($home,['uid'=>Auth::user()->id]) }}">Home</a></li>
                         <div class='float-end'>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" role="button"

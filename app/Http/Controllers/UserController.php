@@ -99,13 +99,13 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         $input = $request->all();
- 
+
         if(!empty($request->password)){
             $input['password'] = Hash::make($request->password);
         }else{
             $input = $request->except('password');
         }
-        
+
         $user->update($input);
 
         $user->syncRoles($request->roles);
@@ -118,7 +118,7 @@ class UserController extends Controller
             $this->addUser($rolesss);
         }
 
-        return redirect()->back()
+        return redirect()->route('users.index')
                 ->withSuccess('User is updated successfully.');
     }
 

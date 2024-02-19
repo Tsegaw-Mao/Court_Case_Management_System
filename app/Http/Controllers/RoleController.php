@@ -48,7 +48,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->name]);
 
         $permissions = Permission::whereIn('id', $request->permissions)->get(['name'])->toArray();
-        
+
         $role->syncPermissions($permissions);
 
         return redirect()->route('roles.index')
@@ -101,9 +101,9 @@ class RoleController extends Controller
 
         $permissions = Permission::whereIn('id', $request->permissions)->get(['name'])->toArray();
 
-        $role->syncPermissions($permissions);    
-        
-        return redirect()->back()
+        $role->syncPermissions($permissions);
+
+        return redirect()->route('roles.index')
                 ->withSuccess('Role is updated successfully.');
     }
 

@@ -5,17 +5,37 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Plaintiff;
+use App\Models\LegalCase;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PlaintiffController extends Controller
 {
     //
     public function index(){
         $viewData = [];
-        $viewData["plaintiffs"] = Plaintiff::all();
-        return view("plaintiff.index")->with ("viewData",$viewData);
+        $viewData['title'] = "Plaintiff List";
+        $viewData["cases"] = Plaintiff::all();
+        return view("admin.indexx")->with("viewData", $viewData);
+    }
+    public function allcase($uid)
+    {
+        $viewData = [];
+        $viewData['title'] = 'Cases under Investigation';
+        $viewData['cases'] = LegalCase::where('status', 'status3')->get();
+        return view('admin.home')->with('viewData', $viewData);
 
     }
+    public function mycases(){
+        $viewData = [];
+        $user = Auth::user();
+        $viewData['title'] = 'Cases Under ' . $user->name;
+        $plaintiff = Plaintiff::where('UserId',$user->UserId)->first();
+        $viewData['cases'] = $plaintiff->Cases()->get();
+        return view('admin.home')->with('viewData', $viewData);
+    }
+
+
     public function show($id){
 
         $viewData = [];
@@ -48,14 +68,13 @@ class PlaintiffController extends Controller
     }
     public function delete($id){
         $plaintiff = Plaintiff::where('UserId',$id)->first();
-        $plaintiff->delete();
         return redirect()->back()->with('status','Deleted Successfully');
 
     }
     public function edit($id){
         $viewData = [];
-        $viewData['plaintiff'] = Plaintiff::where('UserId',$id)->first();
-        return view('plaintiff.edit')->with('viewData',$viewData);
+        $viewData["cases"] = Plaintiff::all();
+        return view("admin.indexx")->with("viewData", $viewData);
 
     }
     public function update(Request $request, $id){

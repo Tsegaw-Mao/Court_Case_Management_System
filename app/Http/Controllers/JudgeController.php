@@ -6,30 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Models\Judge;
 use App\Models\LegalCase;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class JudgeController extends Controller
 {
     //
-    public function index($id)
+    public function index()
     {
         $viewData = [];
-        $judge = Judge::where("UserId", $id)->first();
-        $viewData["cases"] = $judge->Cases()->get();
-        return view("judge.index")->with("viewData", $viewData);
+        $viewData['title'] = "Judge List";
+        $viewData["cases"] = Judge::all();
+        return view("admin.indexx")->with("viewData", $viewData);
 
     }
     public function allcase($uid){
         $viewData = [];
         $viewData['title'] = 'Cases under Trial';
-        $viewData['cases'] = LegalCase::where('status','status3')->get();
+        $viewData['cases'] = LegalCase::where('status','status3')->orWhere('status','status3.0')->orWhere('status','status2.5')->get();
         return view('admin.home')->with('viewData', $viewData);
 
     }
-    public function mycases($uid){
+    public function mycases(){
         $viewData = [];
-        $user = User::find($uid);
-        $viewData['title'] = 'Cases Under' . $user->name;
+        $user = Auth::user();
+        $viewData['title'] = 'Cases Under ' . $user->name;
         $judge = Judge::where('UserId',$user->UserId)->first();
         $viewData['cases'] = $judge->Cases()->get();
         return view('admin.home')->with('viewData', $viewData);
@@ -108,5 +109,21 @@ class JudgeController extends Controller
         $viewData["case"] = $cid;
         $viewData["judges"] = User::all();
         return view("attorney.assign")->with('viewData', $viewData);
+    }
+    public function statusup($cid){
+        $case = LegalCase::where('Case_Id',$cid)->first();
+        $laststatus = substr($case->status,6);
+        $laststatus = $laststatus + 0.5;
+        $case->status = 'status' . $laststatus;
+        $case->save();
+        return redirect()->route('judge.allcase',['uid'=>Auth::user()->UserId])->with('status','case Closed');
+    }
+    public function statusdown($cid){
+        $case = LegalCase::where('Case_Id',$cid)->first();
+        $laststatus = substr($case->status,6);
+        $laststatus = $laststatus - 0.5;
+        $case->status = 'status' . $laststatus;
+        $case->save();
+        return redirect()->route('judge.allcase',['uid'=>Auth::user()->UserId])->with('status','case redirected back to attorney');
     }
 }

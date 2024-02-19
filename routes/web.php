@@ -50,32 +50,51 @@ route::post('/create/case', [AdminController::class,'store'])->name('admin.store
 
 route::get('/plaintiff/create',[PlaintiffController::class,'create'])->name('plaintiff.create');
 route::post('/plaintiff/store', [ PlaintiffController::class,'store'])->name('plaintiff.store');
+route::get('/plaintiff/list',[PlaintiffController::class, 'index'])->name('plaintiff.index');
+route::get('/plaintiff/cases/show/{uid}', [PlaintiffController::class,'allcase'])->name('plaintiff.allcase');
+route::get('/plaintiff/mycase',[PlaintiffController::class, 'mycases'])->name('plaintiff.mycase');
 
 route::get('/defendant/create',[DefendantController::class,'create'])->name('defendant.create');
 route::post('/defendant/store', [ DefendantController::class,'store'])->name('defendant.store');
+route::get('/defendant/list',[DefendantController::class, 'index'])->name('defendant.index');
+route::get('/defendant/cases/show/{uid}', [DefendantController::class,'allcase'])->name('defendant.allcase');
+route::get('/defendant/mycase',[DefendantController::class, 'mycases'])->name('defendant.mycase');
 
 route::get('/lawyer/create',[LawyerController::class,'create'])->name('lawyer.create');
 route::post('/lawyer/store', [ LawyerController::class,'store'])->name('lawyer.store');
-
+route::get('/lawyer/cases/show/{uid}', [LawyerController::class,'allcase'])->name('lawyer.allcase');
+route::get('/lawyer/mycase',[LawyerController::class, 'mycases'])->name('lawyer.mycase');
 
 route::get('/attorney/create',[AttorneyController::class,'create'])->name('attorney.create');
 route::post('/attorney/store', [ AttorneyController::class,'store'])->name('attorney.store');
-route::get('/attorney/cases/show/{uid}', [AttorneyController::class,'allcase'])->name('attorney.index');
+route::get('/attorney/cases/show/{uid}', [AttorneyController::class,'allcase'])->name('attorney.allcase');
 route::get('/attorney/case/assign/{aid}/{cid}', [AttorneyController::class, 'assignCase'])->name('attorney.case');
 route::get('/attorney/assign/{cid}',[AttorneyController::class, 'assign'])->name('attorney.assign');
+route::get('/attorney/list',[AttorneyController::class, 'index'])->name('attorney.index');
+route::get('/attorney/mycase',[AttorneyController::class, 'mycases'])->name('attorney.mycase');
+route::get('/attorney/case/status/up/{cid}',[AttorneyController::class, 'statusup'])->name('attorney.status.up');
+route::get('/attorney/case/status/down/{cid}',[AttorneyController::class, 'statusdown'])->name('attorney.status.down');
 
 route::get('/judge/create',[JudgeController::class,'create'])->name('judge.create');
 route::post('/judge/store', [ JudgeController::class,'store'])->name('judge.store');
-route::get('/judge/cases/show/{uid}', [JudgeController::class,'allcase'])->name('judge.index');
+route::get('/judge/cases/show/{uid}', [JudgeController::class,'allcase'])->name('judge.allcase');
 route::get('/judge/case/assign/{jid}/{cid}', [JudgeController::class, 'assignCase'])->name('judge.case');
 route::get('/judge/assign/{cid}',[JudgeController::class, 'assign'])->name('judge.assign');
-
+route::get('/judge/list',[JudgeController::class,'index'])->name('judge.index');
+route::get('/judge/mycase',[JudgeController::class, 'mycases'])->name('judge.mycase');
+route::get('/judge/case/status/down/{cid}',[JudgeController::class, 'statusdown'])->name('judge.status.down');
+route::get('/judge/case/status/up/{cid}',[JudgeController::class, 'statusup'])->name('judge.status.up');
 
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
-route::get('/detective/cases/show/{uid}', [DetectiveController::class,'allcase'])->name('detective.index');
+route::get('/detective/cases/show/{uid}', [DetectiveController::class,'allcase'])->name('detective.allcase');
 route::get('/detective/case/assaign/{did}/{cid}', [DetectiveController::class,'assignCase'])->name('detective.case');
 route::get('/detective/assign/{cid}',[DetectiveController::class, 'assign'])->name('detective.assign');
+route::get('/detective/list',[DetectiveController::class, 'index'])->name('detective.index');
+route::get('/detective/mycase',[DetectiveController::class, 'mycases'])->name('detective.mycase');
+route::get('/detective/case/status/up/{cid}',[DetectiveController::class, 'statusup'])->name('detective.status.up');
+
+
 
 
 Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {

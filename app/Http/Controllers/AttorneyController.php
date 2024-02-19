@@ -105,7 +105,7 @@ class AttorneyController extends Controller
         $case = LegalCase::where('Case_Id', $cid)->first();
         $attorney->Cases()->save($case);
         $attorney->save();
-        return redirect()->back();
+        return redirect()->route('attorney.allcase',['uid'=>Auth::user()->UserId])->with('status','Case Assigned to '.$attorney->FirstName);
     }
     public function assign($cid)
     {

@@ -100,7 +100,7 @@ class DetectiveController extends Controller
         $case = LegalCase::where('Case_Id', $cid)->first();
         $detective->Cases()->save($case);
         $detective->save();
-        return redirect()->back();
+        return redirect()->route('detective.allcase',['uid'=>Auth::user()->UserId])->with('status','Case Assigned to '.$detective->FirstName);
     }
     public function assign($cid)
     {

@@ -101,14 +101,14 @@ class JudgeController extends Controller
         $case = LegalCase::where('Case_Id', $cid)->first();
         $judge->Cases()->save($case);
         $judge->save();
-        return redirect()->back();
+        return redirect()->route('judge.allcase',['uid'=>Auth::user()->UserId])->with('status','Case Assigned to '.$judge->FirstName);
     }
     public function assign($cid)
     {
         $viewData = [];
         $viewData["case"] = $cid;
-        $viewData["judges"] = User::all();
-        return view("attorney.assign")->with('viewData', $viewData);
+        $viewData["judges"] = Judge::all();
+        return view("judge.assign")->with('viewData', $viewData);
     }
     public function statusup($cid){
         $case = LegalCase::where('Case_Id',$cid)->first();

@@ -6,7 +6,9 @@
             Manage Case {{ $viewData['case']->Case_Title }}
         </div>
         <div class="card-body">
+
             @can('create-document')
+            @if($viewData['case']->detective_UserId == Auth::user()->UserId)
             <div>
                 <a href="{{ route('categories.create', ['id' => $viewData['case']->Case_Id]) }}">
                     <button type="button" class="btn btn-primary float-end">
@@ -16,6 +18,7 @@
 
                 <br>
             </div>
+            @endif
             @endcan
             <table class="table border">
                 <thead>
@@ -51,6 +54,7 @@
                             <td></td>
                         </tr>
                         @can('view-document')
+                         @if($viewData['case']->detective_UserId == Auth::user()->UserId)
                         <tr>
                             <td scope='col'>Case Files</td>
                             <td>
@@ -63,12 +67,13 @@
                             <td></td>
                             <td></td>
                         </tr>
+                        @endif
                         @endcan
                         <tr>
                             <td scope='col'>Actions</td>
                             @if($viewData['case']->status == 'status1')
                             @can('send-to-attorney')
-
+                             @if($viewData['case']->detective_UserId == Auth::user()->UserId)
 
                             <td>
 
@@ -78,6 +83,7 @@
                                     </button>
                                 </a>
                             </td>
+                            @endif
                             @endcan
                             @elseif ($viewData['case']->status == 'status1.5')
                             @can('attorney-accept')
@@ -100,6 +106,7 @@
                             @endcan
                             @elseif ($viewData['case']->status == 'status2')
                             @can('send-to-judge')
+                            @if($viewData['case']->attorney_UserId == Auth::user()->UserId)
                             <td>
                                 <a href="{{ route('attorney.status.up', ['cid' => $viewData['case']->Case_Id]) }}">
                                     <button type="button" class="btn btn-primary float:right">
@@ -107,6 +114,7 @@
                                     </button>
                                 </a>
                             </td>
+                            @endif
                             @endcan
                             @elseif ($viewData['case']->status == 'status2.5')
                             @can('judge-accept')
@@ -126,6 +134,7 @@
                             @endcan
                             @elseif ($viewData['case']->status == 'status3')
                             @can('judge-verdict')
+                            @if($viewData['case']->judge_UserId == Auth::user()->UserId)
                             <td>
 
                                 <a href="{{ route('detective.status.up', ['cid' => $viewData['case']->Case_Id]) }}">
@@ -133,6 +142,7 @@
                                         Finish
                                     </button></a>
                             </td>
+                            @endif
                             @endcan
                             @endif
 

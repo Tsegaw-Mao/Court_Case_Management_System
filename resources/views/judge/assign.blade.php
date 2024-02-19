@@ -34,10 +34,14 @@
                 <a href="{{route('judge.case',['jid'=>$judge->UserId,'cid'=>$viewData['case']])}}">
                     <tr>
                         <td>{{ $count }}</td>
-                        <td>{{ $judge->FirstName }}</td>
+                        <td>
+                            <a href="{{route('judge.case',['jid'=>$judge->UserId,'cid'=>$viewData['case']])}}">
+                            {{ $judge->FirstName }}
+                            </a>
+                        </td>
                         <td>{{ $judge->email }}</td>
                         <td>{{ $judge->UserId }}</td>
-                        
+
                     </tr>
                 </a>
                 @endforeach

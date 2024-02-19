@@ -85,6 +85,11 @@ class UserController extends Controller
                 abort(403, 'USER DOES NOT HAVE THE RIGHT PERMISSIONS');
             }
         }
+        elseif ($user->hasRole('Admin')){
+            if($user->id != auth()->user()->id){
+                abort(403, 'USER DOES NOT HAVE THE RIGHT PERMISSIONS');
+            }
+        }
 
         return view('users.edit', [
             'user' => $user,

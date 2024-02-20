@@ -133,7 +133,7 @@
                             </td>
                             @endcan
                             @elseif ($viewData['case']->status == 'status3')
-                            @can('judge-verdict')
+                            @can('judge-veridct')
                             @if($viewData['case']->judge_UserId == Auth::user()->UserId)
                             <td>
 

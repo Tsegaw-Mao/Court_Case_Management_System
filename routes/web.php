@@ -29,7 +29,7 @@ use App\Http\Controllers\UserController;
 
 route::get('/', [TemplateController::class,'index'])->name('landing');
 
-
+Route::middleware('auth')->group(function(){
 route::get('/admin/home/{uid}', [AdminController::class,'index'])->name('admin.home');
 Route::get('/admin/index', [AdminController::class,'index2'])->name('admin.index');
 Route::get('/admin/index2', [AdminController::class,'index3'])->name('admin.users');
@@ -65,6 +65,8 @@ route::post('/lawyer/store', [ LawyerController::class,'store'])->name('lawyer.s
 route::get('/lawyer/cases/show/{uid}', [LawyerController::class,'allcase'])->name('lawyer.allcase');
 route::get('/lawyer/mycase',[LawyerController::class, 'mycases'])->name('lawyer.mycase');
 
+
+
 route::get('/attorney/create',[AttorneyController::class,'create'])->name('attorney.create');
 route::post('/attorney/store', [ AttorneyController::class,'store'])->name('attorney.store');
 route::get('/attorney/cases/show/{uid}', [AttorneyController::class,'allcase'])->name('attorney.allcase');
@@ -75,16 +77,6 @@ route::get('/attorney/mycase',[AttorneyController::class, 'mycases'])->name('att
 route::get('/attorney/case/status/up/{cid}',[AttorneyController::class, 'statusup'])->name('attorney.status.up');
 route::get('/attorney/case/status/down/{cid}',[AttorneyController::class, 'statusdown'])->name('attorney.status.down');
 
-route::get('/judge/create',[JudgeController::class,'create'])->name('judge.create');
-route::post('/judge/store', [ JudgeController::class,'store'])->name('judge.store');
-route::get('/judge/cases/show/{uid}', [JudgeController::class,'allcase'])->name('judge.allcase');
-route::get('/judge/case/assign/{jid}/{cid}', [JudgeController::class, 'assignCase'])->name('judge.case');
-route::get('/judge/assign/{cid}',[JudgeController::class, 'assign'])->name('judge.assign');
-route::get('/judge/list',[JudgeController::class,'index'])->name('judge.index');
-route::get('/judge/mycase',[JudgeController::class, 'mycases'])->name('judge.mycase');
-route::get('/judge/case/status/down/{cid}',[JudgeController::class, 'statusdown'])->name('judge.status.down');
-route::get('/judge/case/status/up/{cid}',[JudgeController::class, 'statusup'])->name('judge.status.up');
-
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
 route::get('/detective/cases/show/{uid}', [DetectiveController::class,'allcase'])->name('detective.allcase');
@@ -94,10 +86,23 @@ route::get('/detective/list',[DetectiveController::class, 'index'])->name('detec
 route::get('/detective/mycase',[DetectiveController::class, 'mycases'])->name('detective.mycase');
 route::get('/detective/case/status/up/{cid}',[DetectiveController::class, 'statusup'])->name('detective.status.up');
 
+});
+Route::controller(JudgeController::class)->middleware('auth')->group(function () {
+    route::get('/judge/create','create')->name('judge.create');
+    route::post('/judge/store', 'store')->name('judge.store');
+    route::get('/judge/cases/show/{uid}', 'allcase')->name('judge.allcase');
+    route::get('/judge/case/assign/{jid}/{cid}',  'assignCase')->name('judge.case');
+    route::get('/judge/assign/{cid}','assign')->name('judge.assign');
+    route::get('/judge/list','index')->name('judge.index');
+    route::get('/judge/mycase', 'mycases')->name('judge.mycase');
+    route::get('/judge/case/status/down/{cid}','statusdown')->name('judge.status.down');
+    route::get('/judge/case/status/up/{cid}','statusup')->name('judge.status.up');
+    route::get('/judge/case/date/{cid}','casedate')->name('judge.date');
+    route::post('/judge/case/adddate/{cid}','adddate')->name('judge.adddate');
+    });
 
 
-
-Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
+Route::controller(CategoryController::class)->middleware('auth')->group(function () {
     Route::get('categories/{id}', 'index')->name('categories.index');
     Route::get('categories/create/{id}', 'create')->name('categories.create');
     Route::post('categories/store/{id}', 'store')->name('categories.store');
@@ -132,3 +137,5 @@ Route::resources([
     'roles' => RoleController::class,
     'users' => UserController::class,
 ]);
+
+

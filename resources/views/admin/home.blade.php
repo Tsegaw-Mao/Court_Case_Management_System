@@ -36,6 +36,7 @@
                         <th scope="col">Case Type</th>
                         <th scope="col">Case Detail</th>
                         <th scope="col">Cause of Action</th>
+                        <th scope="col">Appointment Date</th>
                         <th scope="col">Action</th>
                         <!-- <th scope="col">Edit</th>
                         <th scope="col">Delete</th> -->
@@ -59,6 +60,7 @@
                             <td>{{ $case->Case_Type }}</td>
                             <td>{{ $case->Case_Details }}</td>
                             <td>{{ $case->Cause_of_Action }}</td>
+                            <td>{{ $case->appointmentDate}}</td>
                             <td>
                                 @can('view-case')
                                     <a href="{{ route('admin.show', ['id' => $case->Case_Id]) }}">

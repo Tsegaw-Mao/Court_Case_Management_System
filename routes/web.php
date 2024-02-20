@@ -77,21 +77,6 @@ route::get('/attorney/mycase',[AttorneyController::class, 'mycases'])->name('att
 route::get('/attorney/case/status/up/{cid}',[AttorneyController::class, 'statusup'])->name('attorney.status.up');
 route::get('/attorney/case/status/down/{cid}',[AttorneyController::class, 'statusdown'])->name('attorney.status.down');
 
-<<<<<<< HEAD
-route::get('/judge/create',[JudgeController::class,'create'])->name('judge.create');
-route::post('/judge/store', [ JudgeController::class,'store'])->name('judge.store');
-route::get('/judge/cases/show/{uid}', [JudgeController::class,'allcase'])->name('judge.allcase');
-route::get('/judge/case/assign/{jid}/{cid}', [JudgeController::class, 'assignCase'])->name('judge.case');
-route::get('/judge/assign/{cid}',[JudgeController::class, 'assign'])->name('judge.assign');
-route::get('/judge/list',[JudgeController::class,'index'])->name('judge.index');
-route::get('/judge/mycase',[JudgeController::class, 'mycases'])->name('judge.mycase');
-route::get('/judge/case/status/down/{cid}',[JudgeController::class, 'statusdown'])->name('judge.status.down');
-route::get('/judge/case/status/up/{cid}',[JudgeController::class, 'statusup'])->name('judge.status.up');
-route::get('/judge/case/date/{cid}',[JudgeController::class, 'casedate'])->name('judge.date');
-route::post('/judge/case/adddate/{cid}',[JudgeController::class, 'adddate'])->name('judge.adddate');
-
-=======
->>>>>>> e5f5358891364104aeaf56a3a8500659b5ffb19b
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
 route::get('/detective/cases/show/{uid}', [DetectiveController::class,'allcase'])->name('detective.allcase');

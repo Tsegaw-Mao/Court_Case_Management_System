@@ -53,7 +53,7 @@
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                 <?php
-                $home = 'admin.home';
+                // $home = 'admin.home';
                 $us3r = Auth::user();
                 $rol3s=$us3r->getRoleNames();
                 foreach($rol3s as $rol3){
@@ -72,7 +72,7 @@
                         $home = 'home'; break;
                     }
                 }
-                $mycase = 'admin.home';
+                // $mycase = 'admin.home';
                 $us3rr = Auth::user();
                 $rol3ss=$us3rr->getRoleNames();
                 foreach($rol3ss as $rol33){
@@ -93,7 +93,7 @@
                     @can('edit-user')
                     <li><a class="nav-link scrollto " href="{{route('home')}}">Admin Panel</a></li>
                     @endcan
-                    <li><a class="nav-link scrollto active" href="{{route($home,['uid'=>$us3r->id])}}">Home</a></li>
+                    <li><a class="nav-link scrollto active" href="{{route($home,['uid'=>Auth::user()->id])}}">Home</a></li>
                     <li><a class="nav-link scrollto " href="{{route($mycase)}}">My Cases</a></li>
                     @can('list-judges')
                     <li><a class="nav-link scrollto " href="{{route('judge.index')}}">Judges</a></li>

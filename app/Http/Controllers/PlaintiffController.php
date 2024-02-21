@@ -31,7 +31,7 @@ class PlaintiffController extends Controller
         $user = Auth::user();
         $viewData['title'] = 'Cases Under ' . $user->name;
         $plaintiff = Plaintiff::where('UserId',$user->UserId)->first();
-        $viewData['cases'] = $plaintiff->Cases()->get();
+        $viewData['cases'] = $plaintiff->Cases()->where('status','status3')->get();
         return view('admin.home')->with('viewData', $viewData);
     }
 

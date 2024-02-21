@@ -36,9 +36,10 @@
                         <th scope="col">Case Type</th>
                         <th scope="col">Case Detail</th>
                         <th scope="col">Cause of Action</th>
+                        <th scope="col">Appointment Date</th>
                         <th scope="col">Action</th>
                         <!-- <th scope="col">Edit</th>
-                        <th scope="col">Delete</th> -->
+                                        <th scope="col">Delete</th> -->
                     </tr>
 
                 </thead>
@@ -59,6 +60,7 @@
                             <td>{{ $case->Case_Type }}</td>
                             <td>{{ $case->Case_Details }}</td>
                             <td>{{ $case->Cause_of_Action }}</td>
+                            <td>{{ $case->appointmentDate}}</td>
                             <td>
                                 @can('view-case')
                                     <a href="{{ route('admin.show', ['id' => $case->Case_Id]) }}">
@@ -84,50 +86,50 @@
                                         </button>
                                     </form>
                                 @endcan
-                                @if($case->status == 'status1'||$case->status == 'status1.0')
-                                @can('assign-detective')
-                                    <a href="{{ route('detective.assign', ['cid' => $case->Case_Id]) }}">
-                                        <button class="btn btn-primary">
-                                            <i class="bi-link">
-                                                @if ($case->detective_UserId == null)
-                                                    Attach
-                                                @else
-                                                    Reattach
-                                                @endif
-                                            </i>
-                                        </button>
-                                    </a>
-                                @endcan
+                                @if ($case->status == 'status1' || $case->status == 'status1.0')
+                                    @can('assign-detective')
+                                        <a href="{{ route('detective.assign', ['cid' => $case->Case_Id]) }}">
+                                            <button class="btn btn-primary">
+                                                <i class="bi-link">
+                                                    @if ($case->detective_UserId == null)
+                                                        Attach
+                                                    @else
+                                                        Reattach
+                                                    @endif
+                                                </i>
+                                            </button>
+                                        </a>
+                                    @endcan
                                 @endif
-                                @if($case->status == 'status2'||$case->status == 'status2.0')
-                                @can('assign-attorney')
-                                    <a href="{{ route('attorney.assign', ['cid' => $case->Case_Id]) }}">
-                                        <button class="btn btn-primary">
-                                            <i class="bi-link">
-                                                @if ($case->attorney_UserId == null)
-                                                Attach
-                                            @else
-                                                Reattach
-                                            @endif
-                                            </i>
-                                        </button>
-                                    </a>
-                                @endcan
+                                @if ($case->status == 'status2' || $case->status == 'status2.0')
+                                    @can('assign-attorney')
+                                        <a href="{{ route('attorney.assign', ['cid' => $case->Case_Id]) }}">
+                                            <button class="btn btn-primary">
+                                                <i class="bi-link">
+                                                    @if ($case->attorney_UserId == null)
+                                                        Attach
+                                                    @else
+                                                        Reattach
+                                                    @endif
+                                                </i>
+                                            </button>
+                                        </a>
+                                    @endcan
                                 @endif
-                                @if($case->status == 'status3'||$case->status == 'status3.0')
-                                @can('assign-judge')
-                                    <a href="{{ route('judge.assign', ['cid' => $case->Case_Id]) }}">
-                                        <button class="btn btn-primary">
-                                            <i class="bi-link">
-                                                @if ($case->judge_UserId == null)
-                                                Attach
-                                            @else
-                                                Reattach
-                                            @endif
-                                            </i>
-                                        </button>
-                                    </a>
-                                @endcan
+                                @if ($case->status == 'status3' || $case->status == 'status3.0')
+                                    @can('assign-judge')
+                                        <a href="{{ route('judge.assign', ['cid' => $case->Case_Id]) }}">
+                                            <button class="btn btn-primary">
+                                                <i class="bi-link">
+                                                    @if ($case->judge_UserId == null)
+                                                        Attach
+                                                    @else
+                                                        Reattach
+                                                    @endif
+                                                </i>
+                                            </button>
+                                        </a>
+                                    @endcan
                                 @endif
                             </td>
                         </tr>

@@ -10,6 +10,7 @@
             @if (session('status'))
                 <div class="alert alert-success">{{ session('status') }}</div>
             @endif
+            <div> Total of {{count($viewData['cases'])}} Cases</div>
             @can('create-case')
                 <div>
                     <a href="{{ route('admin.create') }}">
@@ -20,6 +21,7 @@
 
                     <br>
                 </div>
+                
             @endcan
 
 

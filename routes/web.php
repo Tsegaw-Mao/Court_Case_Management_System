@@ -62,7 +62,7 @@ route::get('/defendant/mycase',[DefendantController::class, 'mycases'])->name('d
 
 route::get('/lawyer/create',[LawyerController::class,'create'])->name('lawyer.create');
 route::post('/lawyer/store', [ LawyerController::class,'store'])->name('lawyer.store');
-route::get('/lawyer/cases/show/{uid}', [LawyerController::class,'allcase'])->name('lawyer.allcase');
+route::get('/lawyer/cases/show/{upuid}', [LawyerController::class,'allcase'])->name('lawyer.allcase');
 route::get('/lawyer/mycase',[LawyerController::class, 'mycases'])->name('lawyer.mycase');
 
 
@@ -77,7 +77,6 @@ route::get('/attorney/mycase',[AttorneyController::class, 'mycases'])->name('att
 route::get('/attorney/case/status/up/{cid}',[AttorneyController::class, 'statusup'])->name('attorney.status.up');
 route::get('/attorney/case/status/down/{cid}',[AttorneyController::class, 'statusdown'])->name('attorney.status.down');
 
-<<<<<<< HEAD
 route::get('/judge/create',[JudgeController::class,'create'])->name('judge.create');
 route::post('/judge/store', [ JudgeController::class,'store'])->name('judge.store');
 route::get('/judge/cases/show/{uid}', [JudgeController::class,'allcase'])->name('judge.allcase');
@@ -90,8 +89,6 @@ route::get('/judge/case/status/up/{cid}',[JudgeController::class, 'statusup'])->
 route::get('/judge/case/date/{cid}',[JudgeController::class, 'casedate'])->name('judge.date');
 route::post('/judge/case/adddate/{cid}',[JudgeController::class, 'adddate'])->name('judge.adddate');
 
-=======
->>>>>>> e5f5358891364104aeaf56a3a8500659b5ffb19b
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
 route::get('/detective/cases/show/{uid}', [DetectiveController::class,'allcase'])->name('detective.allcase');

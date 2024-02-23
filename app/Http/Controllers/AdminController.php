@@ -29,14 +29,21 @@ class AdminController extends Controller
         $viewData['cases'] = User::all();
         return view("admin.indexx")->with("viewData",$viewData);
     }
-    public function create(Request $request)
-    {
+    public function create()
+    {   
         $viewData = [];
         $viewData["title"] = "Case Create - CCMS";
         return view("admin.createCase")->with("viewData", $viewData);
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'pid' => 'required_if:legal_case_Case_Id,null|exists:App\Models\Plaintiff,UserId',
+            'did' => 'required|exists:App\Models\Defendant,UserId',
+            'title' => 'required|max:250',
+            'type' => 'required|max:250',
+            'details' => 'required'
+        ]);
         $case = new LegalCase();
 
         $plaintiff = Plaintiff::where("UserId", $request->input("pid"))->first();
@@ -74,6 +81,11 @@ class AdminController extends Controller
     }
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:250',
+            'type' => 'required|max:250',
+            'details' => 'required'
+        ]);
         $case = LegalCase::where('Case_Id', $id)->first();
         $plaintiff = $case->Plaintiff()->first();
         $case->Case_Id = $id;

@@ -96,7 +96,7 @@
                                                     @if ($case->detective_UserId == null)
                                                         Attach
                                                     @else
-                                                        Reattach
+                                                    Reattach taking from{{App\Models\Detective::find($case->detective_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -111,7 +111,7 @@
                                                     @if ($case->attorney_UserId == null)
                                                         Attach
                                                     @else
-                                                        Reattach
+                                                    Reattach to others from {{App\Models\Attorney::find($case->attorney_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -126,7 +126,7 @@
                                                     @if ($case->judge_UserId == null)
                                                         Attach
                                                     @else
-                                                        Reattach
+                                                        Reattach taking from{{App\Models\Judge::find($case->judge_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>

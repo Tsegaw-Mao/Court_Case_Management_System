@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('UserId')->unique();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('Rank')->nullable();
+            $table->string('Department')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

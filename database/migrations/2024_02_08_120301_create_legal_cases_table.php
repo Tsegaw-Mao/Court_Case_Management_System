@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Case_Type');
             $table->text('Case_Details');
             $table->string('Cause_of_Action')->nullable();
-            $table->date('Appointment Date')->nullable();
+            $table->date('appointmentDate')->nullable();
             $table->string('status')->default('status1');
             $table->softDeletes('deleted_at');
             $table->string('plaintiff_UserId')->nullable();

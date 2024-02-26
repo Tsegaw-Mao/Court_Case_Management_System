@@ -10,6 +10,7 @@
             @if (session('status'))
                 <div class="alert alert-success">{{ session('status') }}</div>
             @endif
+            <div> Total of {{count($viewData['cases'])}} Cases</div>
             @can('create-case')
                 <div>
                     <a href="{{ route('admin.create') }}">
@@ -20,6 +21,7 @@
 
                     <br>
                 </div>
+
             @endcan
 
 
@@ -94,7 +96,7 @@
                                                     @if ($case->detective_UserId == null)
                                                         {{ __('Attach')}}
                                                     @else
-                                                {{ __('Reattach')}}
+                                                    Reattach taking from{{App\Models\Detective::find($case->detective_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -109,7 +111,7 @@
                                                     @if ($case->attorney_UserId == null)
                                                         {{ __('Attach')}}
                                                     @else
-                                                        {{ __('Reattach')}}
+                                                    Reattach to others from {{App\Models\Attorney::find($case->attorney_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -124,7 +126,7 @@
                                                     @if ($case->judge_UserId == null)
                                                         {{ __('Attach')}}
                                                     @else
-                                                        {{ __('Reattach')}}
+                                                        Reattach taking from{{App\Models\Judge::find($case->judge_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>

@@ -30,16 +30,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col">
-                    <div class="mb-3 row">
-                        <label class="col-lg-4 col-md-6 col-sm-12 col-form-label bold">ID:</label>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input name="id" value="{{ old('Case_Id') }}" type="text" class="form-control" placeholder="Enter Case Id" required><br>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="row">
                 <div class="col">
                     <div class="mb-3 row">

@@ -132,7 +132,7 @@ class JudgeController extends Controller
     }
     public function addDate($cid ,  Request $request){
         $case = LegalCase::where('Case_Id',$cid)->first();
-        $case->AppointmentDate = $request->input('date');
+        $case->appointmentDate = $request->input('date');
         $case->Cause_of_Action = $request->input('causeOfAction');
         $case->save();
         return redirect()->route('judge.allcase',['uid'=>Auth::user()->UserId])->with('status','case appointed for date'. $case->AppointmentDate);

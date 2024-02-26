@@ -17,13 +17,13 @@
 
             <tr class="bold">
                 <th scope="col">#</th>
-                <th scope="col">Case ID</th>
-                <th scope="col">Plaintiff</th>
-                <th scope="col">Defendant</th>
-                <th scope="col">Case Title</th>
-                <th scope="col">Case Type</th>
-                <th scope="col">Case Detail</th>
-                <th scope="col">Cause of Action</th>
+                <th scope="col">{{ __('Case ID')}}</th>
+                <th scope="col">{{ __('Plaintiff')}}</th>
+                <th scope="col">{{ __('Defendant')}}</th>
+                <th scope="col">{{ __('Case Title')}}</th>
+                <th scope="col">{{ __('Case Type')}}</th>
+                <th scope="col">{{ __('Case Detail')}}</th>
+                <th scope="col">{{ __('Cause of Action')}}</th>
             </tr>
 
         </thead>

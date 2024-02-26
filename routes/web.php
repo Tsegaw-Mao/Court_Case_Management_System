@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,9 +26,23 @@ use App\Http\Controllers\UserController;
 |
 */
 
+//   Route::get('/{locale?}', function ($locale = null) {
+//      if (isset($locale) && in_array($locale, config('app.available_locales'))) {
+//       app()->setLocale($locale);
+//    }
+//     $viewData = [];
+//     return view('master')->with("viewData", $viewData);
+
+// });
 
 
-route::get('/', [TemplateController::class,'index'])->name('landing');
+//route::get('/', [TemplateController::class,'index'])->name('landing');
+
+
+
+
+
+route::get('/',[TemplateController::class,'index'])->name('landing');
 
 Route::middleware('auth')->group(function(){
 route::get('/admin/home/{uid}', [AdminController::class,'index'])->name('admin.home');
@@ -138,4 +153,5 @@ Route::resources([
     'users' => UserController::class,
 ]);
 
-
+//Route::get('');
+Route::get('language/{locale}', '\App\Http\Controllers\LocalizationController@changeLocale')->name("locale");

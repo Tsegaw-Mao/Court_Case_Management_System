@@ -5,7 +5,7 @@
 <div class="alert alert-success">{{session('status')}}</div>
 @endif
 <div class="card">
-    <div class="card-header"> List of Detectives
+    <div class="card-header"> {{ __('List of Detectives')}}
     </div>
     <div class="card-body">
 
@@ -16,10 +16,10 @@
 
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Detective Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Detective User ID</th>
-                    <th scope="col">Cases Currently on Hand</th>
+                    <th scope="col">{{ __('Detective Name')}}</th>
+            <th scope="col">{{ __('Email')}}</th>
+                    <th scope="col">{{ __('Detective User ID')}}</th>
+                    <th scope="col">{{ __('Cases Currently on Hand')}}</th>
                 </tr>
 
             </thead>

@@ -6,12 +6,12 @@
         <thead>
             <tr class="bold">
                 <th scope="col">#</th>
-                <th scope="col">User ID</th>
-                <th scope="col">User Name</th>
-                <th scope="col">Rank</th>
-                <th scope="col">Department</th>
-                <th scope="col">Email</th>
-                <th scope="col">Contact</th>
+                <th scope="col">{{ __('User ID')}}</th>
+                <th scope="col">{{ __('User Name')}}</th>
+                <th scope="col">{{ __('Rank')}}</th>
+                <th scope="col">{{ __('Department')}}</th>
+                <th scope="col">{{ __('Email')}}</th>
+                <th scope="col">{{ __('Contact')}}</th>
             </tr>
 
         </thead>

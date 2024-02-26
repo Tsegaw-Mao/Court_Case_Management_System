@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    
+
     <title>
         @yield('title','MoD Justice Department - Index')
     </title>
@@ -52,10 +52,10 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">Home</a></li>
-                    <li><a class="nav-link scrollto " href="{{route('judge.index',['id'=>'id'])}}">Cases</a></li>
-                    <li><a class="nav-link scrollto " href="{{route('judge.assign')}}">Assign Cases to Judges</a></li>
-                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">Users</a></li>
+                    <li><a class="nav-link scrollto active" href="{{route('admin.home')}}">{{ __('Home')}}</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('judge.index',['id'=>'id'])}}">{{ __('Cases')}}</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('judge.assign')}}">{{ __('Assign Cases to Judges')}}</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('admin.users')}}">{{ __('Users')}}</a></li>
                     <li><a class="nav-link scrollto " href="#">Calendar</a></li>
                     <li><a class="nav-link scrollto " href="#">Courts</a></li>
 
@@ -96,12 +96,12 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-info">
-                            <h3>MoD Justice Dep.<span>.</span></h3>
+                            <h3>{{ __('MoD Justice Dep. ')}}<span>.</span></h3>
                             <p>
-                                Tor Hayloch Round About <br>
-                                Addis Ababa, Ethiopia<br><br>
-                                <strong>Phone:</strong> +251 111 111 111<br>
-                                <strong>Email:</strong> info@example.com<br>
+                                 {{ __('Tor Hayloch Round About  ')}} <br>
+                                 {{ __(' Addis Ababa, Ethiopia ')}}<br><br>
+                                <strong>  {{ __('Phone: ')}}</strong> +251 111 111 111<br>
+                                <strong>   {{ __('Email:')}}</strong> info@example.com<br>
                             </p>
                             <div class="social-links mt-3">
                                 <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -116,28 +116,29 @@
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">{{ _('Home')}}</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#"> {{ __('About us ')}}</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">  {{ __('Services')}}</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">  {{ __('Terms of service')}}</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#"> {{ __('Privacy policy ')}}</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Our Services</h4>
                         <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 1</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 2</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 3</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 4</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Service 5</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">{{ __('Service 1 ')}}</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">{{ __('Service 2 ')}}</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">{{ __('Service 3')}}</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">{{ __('Service 4 ')}}</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">{{ __('Service 5 ')}}</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Our Newsletter</h4>
-                        <p>Follow and Subscribe to our Gasha News Letter</p>
+                        <h4>{{ __('Our Newsletter   ')}}</h4>
+                        <p>  {{ __('Follow and Subscribe to our Gasha News Letter ')}}</p>
                         <form action="" method="post">
                             <input type="email" name="email"><input type="submit" value="Subscribe">
                         </form>
@@ -150,14 +151,14 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>MoD Justice Dept</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>{{ __('MoD Justice Dept')}}</span></strong>.    {{ __('All Rights Reserved')}}
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Designed by   {{ __('')}} <a href="https://bootstrapmade.com/">BootstrapMade   {{ __('')}}</a>
             </div>
         </div>
     </footer><!-- End Footer -->

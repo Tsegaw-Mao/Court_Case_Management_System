@@ -4,7 +4,7 @@
 
 @section('body')
     <div class="card">
-        <div class="card-header bold"> Manage Cases
+        <div class="card-header bold">{{ __('Manage Cases')}}
         </div>
         <div class="card-body">
             @if (session('status'))
@@ -14,7 +14,7 @@
                 <div>
                     <a href="{{ route('admin.create') }}">
                         <button type="button" class="btn btn-primary float-end">
-                            Create Case
+                            {{ __('Create Case')}}
                         </button>
                     </a>
 
@@ -29,15 +29,15 @@
 
                     <tr class="bold">
                         <th scope="col">#</th>
-                        <th scope="col">Case ID</th>
-                        <th scope="col">Plaintiff</th>
-                        <th scope="col">Defendant</th>
-                        <th scope="col">Case Title</th>
-                        <th scope="col">Case Type</th>
-                        <th scope="col">Case Detail</th>
-                        <th scope="col">Cause of Action</th>
-                        <th scope="col">Appointment Date</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">{{ __('Case ID')}}</th>
+                        <th scope="col">{{ __('Plaintiff')}}</th>
+                        <th scope="col">{{ __('Defendant')}}</th>
+                        <th scope="col">{{ __('Case Title')}}</th>
+                        <th scope="col">{{ __('Case Type')}}</th>
+                        <th scope="col">{{ __('Case Detail')}}</th>
+                        <th scope="col">{{ __('Cause of Action')}}</th>
+                        <th scope="col">{{ __('Appointment Date')}}</th>
+                        <th scope="col">{{ __('Action')}}</th>
                         <!-- <th scope="col">Edit</th>
                                         <th scope="col">Delete</th> -->
                     </tr>
@@ -92,9 +92,9 @@
                                             <button class="btn btn-primary">
                                                 <i class="bi-link">
                                                     @if ($case->detective_UserId == null)
-                                                        Attach
+                                                        {{ __('Attach')}}
                                                     @else
-                                                        Reattach
+                                                {{ __('Reattach')}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -107,9 +107,9 @@
                                             <button class="btn btn-primary">
                                                 <i class="bi-link">
                                                     @if ($case->attorney_UserId == null)
-                                                        Attach
+                                                        {{ __('Attach')}}
                                                     @else
-                                                        Reattach
+                                                        {{ __('Reattach')}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -122,9 +122,9 @@
                                             <button class="btn btn-primary">
                                                 <i class="bi-link">
                                                     @if ($case->judge_UserId == null)
-                                                        Attach
+                                                        {{ __('Attach')}}
                                                     @else
-                                                        Reattach
+                                                        {{ __('Reattach')}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -140,7 +140,7 @@
                 <div>
                     <a href="{{ route('admin.readalldeletes') }}">
                         <button type="button" class="btn btn-primary left">
-                            <i>Restore Deletes</i>
+                            <i>{{ __('Restore Deletes')}}</i>
                         </button>
                     </a>
                 </div>

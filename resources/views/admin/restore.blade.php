@@ -4,7 +4,7 @@
 @section('body')
     <div class="card">
         @can('delete-case')
-            <div class="card-header"> Manage Cases
+            <div class="card-header"> {{ __('Manage Cases')}}
             </div>
             <div class="card-body">
 
@@ -14,14 +14,14 @@
 
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Case ID</th>
-                            <th scope="col">Case Title</th>
-                            <th scope="col">Case Type</th>
-                            <th scope="col">Case Detail</th>
-                            <th scope="col">Cause of Action</th>
-                            <th scope="col">Deleted at</th>
-                            <th scope="col">Restore</th>
-                            <th scope="col">Permanent Delete</th>
+                            <th scope="col">{{ __('Case ID')}}</th>
+                            <th scope="col">{{ __('Case Title')}}</th>
+                            <th scope="col">{{ __('Case Type')}}</th>
+                            <th scope="col">{{ __('Case Detail')}}</th>
+                            <th scope="col">{{ __('Cause of Action')}}</th>
+                            <th scope="col">{{ __('Deleted at')}}</th>
+                            <th scope="col">{{ __('Restore')}}</th>
+                            <th scope="col">{{('Permanent Delete')}}</th>
                         </tr>
 
                     </thead>
@@ -66,7 +66,7 @@
                 <div>
                     <a href="{{ route('admin.restoreall') }}">
                         <button type="button" class="btn btn-primary left">
-                            <i class="bi-recycle">Restore All</i>
+                            <i class="bi-recycle">{{ __('Restore All')}}</i>
                         </button>
                     </a>
                 </div>

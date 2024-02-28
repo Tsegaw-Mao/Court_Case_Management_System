@@ -28,8 +28,8 @@
 
     <div class="card">
         <div class="card-header">
-            <h3>Upload File
-                <a href="{{ url('categories/' . $Case_Id) }}" class="btn btn-primary float-end">Back</a>
+            <h3>{{ __('Upload File')}}
+                <a href="{{ url('categories/' . $Case_Id) }}" class="btn btn-primary float-end">{{ __('Back')}}</a>
             </h3>
         </div>
         @can('create-document')
@@ -38,7 +38,7 @@
                 @csrf
 
                 <div class="mb-3 row">
-                    <label class="col-lg-2 col-md-0 col-sm-1 col-form-label bold">Name:</label>
+                    <label class="col-lg-2 col-md-0 col-sm-1 col-form-label bold">{{ __('Name:')}}</label>
                     <div class="col-lg-10 col-md-8 col-sm-20">
                         <div class="col-lg-7 col-md-4 col-sm-10">
                             <input type="text" name="name" class="form-control" value="{{ old('name') }}" />
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="mb-4 row">
-                    <label class="col-lg-2 col-md-0 col-sm-1 col-form-label bold">Description:</label><br>
+                    <label class="col-lg-2 col-md-0 col-sm-1 col-form-label bold">{{ __('Description:')}}</label><br>
                     <div class="col-lg-10 col-md-1 col-sm-10">
                         <div class="col-lg-7 col-md-4 col-sm-10">
 
@@ -71,7 +71,7 @@
                 </div>
                 <div class="mb-3">
                     <div class="mb-3 row">
-                        <label class="col-lg-3 col-md-0 col-sm-1 col-form-label bold">Upload File/Image:</label>
+                        <label class="col-lg-3 col-md-0 col-sm-1 col-form-label bold">{{ __('Upload File/Image:')}}</label>
                         <div class="col-lg-9 col-md-2 col-sm-10">
 
                              <div class="col-lg-6 col-md-4 col-sm-10">
@@ -80,7 +80,7 @@
                             <input type="file" name="file" class="form-control" />
                 </div>
                 <div class="mb-3"><br>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">{{ __("Save")}}</button>
                 </div>
 
             </form>

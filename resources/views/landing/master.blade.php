@@ -46,7 +46,9 @@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center justify-content-lg-between">
-
+            <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+                <div class="col-xl-6 col-lg-8">
+            @include('partials.language_switcher')</div></div>
             <h1 class="logo me-auto me-lg-0"><a href=""><img src="{{asset('assets/img/judge hammer.jpg')}}" class="img-fluid" alt=""><span>{{ __('JUSTICE DEP.')}}</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -492,7 +494,7 @@ Assign roles to the people who use the system to use the system as they should.'
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
                 {{-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> --}}
-                @include('partials.language_switcher')
+
             </div>
         </div>
     </footer><!-- End Footer -->

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Mod CCMS</title>
+    <title>{{ __('Mod CCMS')}}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -36,7 +36,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-black shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Mod CCMS
+                    {{ __('Back To Landing Page')}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -87,7 +87,7 @@
                     }
                 }
                 ?>
-                        <li><a class="nav-link" href="{{ route($home,['uid'=>Auth::user()->id]) }}">Home</a></li>
+                        <li><a class="nav-link" href="{{ route($home,['uid'=>Auth::user()->id]) }}">{{ __('Home')}}</a></li>
                         <div class='float-end'>
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle" href="#" role="button"
@@ -97,7 +97,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="get-started-btn scrollto dropdown-item"
                                             href="{{ route('logout') }}" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">Logout</a>
+                            document.getElementById('logout-form').submit();">{{ __('Logout')}}</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                             @csrf
                                         </form>
@@ -120,7 +120,7 @@
                         </div>
                         @endif
 
-                        <h3 class="text-center mt-3 mb-3">Ministry of Defence Court Case management System</h3>
+                        <h3 class="text-center mt-3 mb-3">{{ __('Ministry of Defence Court Case management System')}}</h3>
                         @yield('content')
 
                         <div class="row justify-content-center text-center mt-3">

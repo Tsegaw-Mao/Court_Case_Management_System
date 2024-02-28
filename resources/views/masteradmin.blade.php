@@ -51,18 +51,18 @@
             </a>
             <hr />
             <ul class="nav flex-column sidebar">
-                <li><a href="{{ route('admin.home') }}" class="nav-link text-white">- SuperAdmin - Home</a></li>
+                <li><a href="{{ route('admin.home') }}" class="nav-link text-white">{{ __('- SuperAdmin - Home')}}</a></li>
 
                 @can('case-list')
                 <li><a href="{{ route('admin.home') }}" class="nav-link text-white">- SuperAdmin - Cases</a></li>
                 @endcan
 
                 @can('user-list')
-                <li><a class="nav-link text-white" href="{{ route('users.index') }}">Manage Users</a></li>
+                <li><a class="nav-link text-white" href="{{ route('users.index') }}">{{ __('Manage Users')}}</a></li>
                 @endcan
 
                 @can('role-list')
-                <li><a class="nav-link text-white" href="{{ route('roles.index') }}">Manage Role</a></li>
+                <li><a class="nav-link text-white" href="{{ route('roles.index') }}">{{ __('Manage Role')}}</a></li>
                 @endcan
 
                 <li><a href="{{ route('admin.home') }}" class="mt-2 btn bg-primary text-white">Go back to the home page</a></li>

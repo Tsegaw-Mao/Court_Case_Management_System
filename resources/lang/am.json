@@ -15,7 +15,7 @@
 "Defendants":"ተከሳሾች",
 "Wittness":"ምስክር",
 "Calendar":"የቀን መቁጠሪያ",
-"Login":"ግባ",
+"Login Page":"መግቢያ ገፅ ",
 "Register":"ይመዝገቡ",
 "Logout":"ውጣ",
 "Assign Cases to Judges":"ጉዳዮችን ለዳኞች መድብ",
@@ -127,7 +127,7 @@
 "Plaintiff":"ከሳሽ",
 "Defendant":"ተከሳሽ",
 "Cause of Action":"የተወሰደው ውሳኔ",
-"User ID":"የተጠቃሚው መለያ ቁጥር",
+"User ID:":"የተጠቃሚው መለያ ቁጥር:",
 "User Name":"የተጠቃሚው ስም",
 "Rank":"ማዕረግ",
 "Department":"ክፍል",
@@ -154,7 +154,58 @@
 "Detective Name":"የመርማሪው ስም",
 "Detective User ID":"የመርማሪው መለያ ቁጥር",
 "Cases Currently on Hand":"አሁን በእጁ ያለ ምርመራ",
-"Detective Registration":"መርማሪዎች ይመዝግቡ "
+"Detective Registration":"መርማሪዎች ይመዝግቡ ",
+"Email Address":"የኢሜል አድራሻዎን",
+"Password":"የሚስጥር ቁጥር ",
+"Login":"ግባ",
+"Manage Role":"የሥራ ድረሻ መስጫ",
+"Manage Users":"ተጠቃሚዎችን ማስተዳደር",
+"Back To Landing Page":"ወደ ማረፊያ ገፅ ይመለሱ",
+"Ministry of Defence Court Case management System":"የመከላከያ ሚኒስተር የፍ/ቤት አስተዳደር መተግበሪያ",
+"Add New User":"ተጠቃሚ ይመዝግቡ",
+"Name":"ስም",
+"S#":"ተ/ቁ",
+"Roles":"ሃላፊነት",
+"Action":"ተግባር",
+"Confirm Password":"የሚስጥር ቁጥርዎን ያረጋግጡ",
+"Forget Password? Reset":"የይለፍ ቃል ረሳው? ዳግም አስጀምር",
+"You are logged in!":"ገብተሃል!",
+"Lawyer Registration" :"የሕግ ባለሙያ ምዝገባ",
+"Show":" አሳይ",
+"No User Found!":"ምንም አልተገኘም",
+" Plaintiff Registration":"የከሳሽ መመዝገቢያ ገፅ",
+"User Information":"የተጠቃሚው መረጃ",
+"add document with file type":"መረጃውን ያሥገቡ",
+"Multitple File Upload":"ባለብዙ ፋይል ማስገቢያ",
+"file Name":"የፋይል ስም",
+"file descreption":"የፋይሉ ዝርዝር ሃሳብ ",
+"file type":"የፋይል አይነት",
+"Add document":"የፋይል አስገባ",
+"Back":"ተመለስ",
+"Name:":"የፋይሉ ስም ",
+"Description:":"የፋይሉ ዝርዝር ሃሳብ",
+"Upload File/Image:":"ፋይል አስገባ",
+"Save":"አስቀምጥ",
+"- SuperAdmin - Home":"",
+"This is your application dashboard.":"ይህ የአንተ መተግበሪያ ገፅ ነው!",
+"Add New Role":"አዲስ ሃላፊነት ጨምር",
+"Permissions":"ፈቃዶች",
+"Add Role":"ሃላፊነት ጨምር",
+"Edit Role":"ሃላፊነት ያስተካክሉ",
+"Manage Roles":"ሚናዎችን ያስተዳድሩ",
+"Case Type":"የክስ አይነት",
+"Appointment Date":"የቀጠሮ ቀን",
+"Restore Deletes":"የጠፉ ክሶችን መመለሻ",
+"Total of":"ጠቅላላ ",
+"Cases":"ክስ"
+
+
+
+
+
+
+
+
 
 
 

@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Multitple File Upload</title>
+    <title>{{ __('Multitple File Upload')}}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <h4>add document with file type
-        <a href="{{ url('document')}}" class="btn  btn-danger float-end">Back</a>
+    <h4>{{ __('add document with file type')}}
+        <a href="{{ url('document')}}" class="btn  btn-danger float-end">{{ __('Back')}}</a>
     </h4>
 
 </head>
 <body>
 
 <div class="container">
-    <h2 class="text-center mt-5 mb-3">Multitple File Upload</h2>
+    <h2 class="text-center mt-5 mb-3">{{ __('Multitple File Upload')}}</h2>
     <div class="card">
         <div class="card-body"><form action=""method ="POST">
             <div class="form-group mb-3">
-                <label for="">file Name</label>
+                <label for="">{{ __('file Name')}}</label>
                 <input type="text" class="form-control">
             </div>
             <div class="form-group mb-3">
-                <label for="">file descreption</label>
+                <label for="">{{ __('file descreption')}}</label>
                 <input type="text" class="form-control">
             </div>
             <div class="form-group mb-3">
-                <label for="">file type</label>
+                <label for="">{{ __('file type')}}</label>
                 <input type="text" class="form-control">
             </div>
             <div class="form-group mb-3">
-                <button type="submit" class="btn btn-primary">Add document</button>
+                <button type="submit" class="btn btn-primary">{{ __('Add document')}}</button>
             </div>
         </form>
 
@@ -76,7 +76,7 @@
                         <td>{{ $fileUpload->filepath }}</td>
                         <td>{{ $fileUpload->type }}</td>
 
-                    </tr> --}}
+                    </tr>
                 @endforeach
                 </tbody>
 

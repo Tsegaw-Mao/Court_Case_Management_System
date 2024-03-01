@@ -175,14 +175,14 @@
                     @endcan
                     @endif
 
-                    </tr>
+                </tr>
 
 
 
-                </thead>
+            </thead>
 
-            </table>
+        </table>
 
-        </div>
     </div>
+</div>
 @endsection

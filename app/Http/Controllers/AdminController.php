@@ -49,7 +49,7 @@ class AdminController extends Controller
         $plaintiff = Plaintiff::where("UserId", $request->input("pid"))->first();
         $defendant = Defendant::where("UserId", $request->input("did"))->first();
 
-
+        if($plaintiff->legal_case_Case_Id == null){
         $cid= $this->createid();
         $case->Case_Id = $cid;
         $case->Case_Title = $request->input('title');
@@ -59,6 +59,9 @@ class AdminController extends Controller
         $plaintiff->Case()->save( $case );
         $defendant->Cases()->attach([$cid]);
         return redirect()->back()->with('status', 'Case Created Successfully');
+        }else{
+            return redirect()->back()->with('status','Plaintiff Has already an other case on hand');
+        }
 
     }
 

@@ -103,6 +103,9 @@ route::get('/judge/case/status/down/{cid}',[JudgeController::class, 'statusdown'
 route::get('/judge/case/status/up/{cid}',[JudgeController::class, 'statusup'])->name('judge.status.up');
 route::get('/judge/case/date/{cid}',[JudgeController::class, 'casedate'])->name('judge.date');
 route::post('/judge/case/adddate/{cid}',[JudgeController::class, 'adddate'])->name('judge.adddate');
+route::get('/judge/report', [JudgeController::class, 'report'])->name('judge.report');
+route::post('/judge/filter', [JudgeController::class, 'filter'])->name('judge.filter');
+route::get('/judge/report/pdf/{data}', [JudgeController::class, 'leaveReport'])->name('judge.report.pdf');
 
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');

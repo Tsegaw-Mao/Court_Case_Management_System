@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::table('legal_cases', function (Blueprint $table) {
             //
-            $table->date('appointmentDate')->nullable();
+            $table->date('assignedDate')->nullable();
+            $table->date('verdictedDate')->nullable();
         });
     }
 
@@ -24,7 +25,8 @@ return new class extends Migration
     {
         Schema::table('legal_cases', function (Blueprint $table) {
             //
-            $table->dropColumn('appointmentDate');
+            $table->dropColumn('assignedDate');
+            $table->dropColumn('verdictedDate');
         });
     }
 };

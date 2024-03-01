@@ -109,10 +109,11 @@ class JudgeController extends Controller
     {
         $case = LegalCase::where('Case_Id', $cid)->first();
         $laststatus = substr($case->status, 6);
-        if($case->status == 'status2.5'){
+        if ($case->status == 'status2.5') {
             $case->assignedDate = date('Y-m-d');
-        }if($case->status == 'status3'){
-            $case->verdicteddDate = date('Y-m-d');
+        }
+        if ($case->status == 'status3') {
+            $case->verdictedDate = date('Y-m-d');
         }
         $laststatus = $laststatus + 0.5;
         $case->status = 'status' . $laststatus;
@@ -138,6 +139,24 @@ class JudgeController extends Controller
         $case = LegalCase::where('Case_Id', $cid)->first();
         $case->appointmentDate = $request->input('date');
         $case->Cause_of_Action = $request->input('causeOfAction');
+        if($request->Decision == 'warrant'){
+            $case->warant = true;
+        }
+        if($request->Decision == 'bail'){
+            $case->bail = true;
+        }
+        if($request->Decision == 'deny_bail'){
+            $case->bail = false;
+        }
+        if($request->Decision == 'catch'){
+            $case->catch = true;
+        }
+        if($request->Decision == 'detain'){
+            $case->detain = true;
+        }
+        if($request->Decision == 'undetain'){
+            $case->detain = false;
+        }
         $case->save();
         return redirect()->route('judge.allcase', ['uid' => Auth::user()->UserId])->with('status', 'case appointed for date' . $case->AppointmentDate);
     }
@@ -147,19 +166,33 @@ class JudgeController extends Controller
         $viewData = [];
         $query = LegalCase::query();
         $viewData['cases'] = $query->get();
+        $viewData['dateFrom'] = 2023-03-01;
         return view('judge.report')->with('viewData', $viewData);
     }
 
-    public function leaveReport($data)
+    public function leaveReport($appointed,$closedByAttorney,$bail,$warrant,$catch,$detained,$undetained,$lastYear,$newCase,$totalCase,$verdicted,$transfered)
     {
-        $pdf = PDF::loadView('judge.reportPdf',$data);
-        return $pdf->download();
-        
+
+        $data = [];
+        $data['appointed'] = $appointed;
+        $data['closedByAttorney'] = $closedByAttorney;
+        $data['bail'] = $bail;
+        $data['warrant'] = $warrant;
+        $data['catch'] = $catch;
+        $data['detained'] = $detained;
+        $data['undetained'] = $undetained;
+        $data['lastYear'] = $lastYear;
+        $data['newCase'] = $newCase;
+        $data['totalCase'] = $totalCase;
+        $data['verdicted'] = $verdicted;
+        $data['transfered'] = $transfered ;
+        return view('judge.reportPdf')->with('data',$data);
     }
     public function filter(Request $request)
     {
 
         $viewData = [];
+        $viewData['dateFrom'] = 2023-03-01;
         $query = LegalCase::query();
         $now = date('Y-m-d');
         $begin = 2020 - 02 - 28;
@@ -180,11 +213,23 @@ class JudgeController extends Controller
         $viewData['past'] = $past;
         $viewData['new'] = $new;
         $viewData['next'] = $next;
-        $data = [];
-        // $this->leaveReport($data);
-        $pdf = PDF::loadView('judge.reportPdf',$data);
-        $pdf->download()->send();
+        $viewData['dateFrom'] = $request->dateFrom;
+        $viewData['dateTo'] = $request->dateTo;
         return view('judge.report')->with('viewData', $viewData);
     }
-
+    public function verdict(Request $request, $cid){
+        $case = LegalCase::where('Case_Id', $cid)->first();
+        $case->verdict = $request->verdict;
+        $case->verdictedDate = date('Y-m-d');
+        $case->save();
+        return redirect()->route('judge.allcase', ['uid' => Auth::user()->UserId])->with('status', 'case Closed by ' . $case->verdict);
+    }
+    public function assignLawyer($cid, Request $request){
+        $case = LegalCase::where('Case_Id', $cid)->first();
+        $defendant = $case->Defendants();
+        $lawyer = $request->lawyer;
+        $lawyer->Defendants()->save($defendant);
+        $lawyer->refresh();
+        return redirect()->back();
+    }
 }

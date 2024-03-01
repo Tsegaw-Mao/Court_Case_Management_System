@@ -46,8 +46,15 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label bold">{{ __('Case type')}}</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input type="text" name="type" value="{{ old('type') }}" class="form-control" placeholder="{{ __('Enter Case type')}}" required><br>
-
+                            <select name="type">
+                                <option value="Murder">Murder</option>
+                                <option value="Treason">Treason</option>
+                                <option value="Desertion">Desertion</option>
+                                <option value="Failure to report for duty">Failure to report for duty</option>
+                                <option value="Insubordination">Insubordination</option>
+                                <option value="Disobeying orders">Disobeying orders</option>
+                                <option value="Disrespect of superiors">Disrespect of superiors</option>
+                            </select>
                         </div>
                     </div>
                 </div>

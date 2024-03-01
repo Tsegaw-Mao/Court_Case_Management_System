@@ -14,6 +14,7 @@ use App\Models\Attorney;
 use App\Models\Detective;
 use App\Models\Defendant;
 use App\Models\Judge;
+use App\Models\Lawyer;
 
 class UserController extends Controller
 {
@@ -179,7 +180,19 @@ class UserController extends Controller
                     'email' => $user->email
 
                 ]);}
-            } elseif ($role == 'plaintiff') {
+            }elseif ($role == 'lawyer') {
+                $user = User::where('email', $rolesss['uid'])->first();
+                $exist = Lawyer::where('UserId', $user->UserId)->first();
+                if($exist != null) {}
+                else{
+                $lawyer = Lawyer::create([
+                    'UserId' => $user->UserId,
+                    'FirstName' => $user->name,
+                    'email' => $user->email
+
+                ]);}
+            }
+             elseif ($role == 'plaintiff') {
                 $user = User::where('email', $rolesss['uid'])->first();
                 $exist = Plaintiff::where('UserId', $user->UserId)->first();
                 if($exist != null) {}

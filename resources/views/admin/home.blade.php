@@ -94,9 +94,9 @@
                                             <button class="btn btn-primary">
                                                 <i class="bi-link">
                                                     @if ($case->detective_UserId == null)
-                                                        {{ __('Attach')}}
+                                                        {{ __('Assign')}}
                                                     @else
-                                                    Reattach taking from{{App\Models\Detective::find($case->detective_UserId)->FirstName}}
+                                                    Reassign taking from{{App\Models\Detective::find($case->detective_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -109,9 +109,9 @@
                                             <button class="btn btn-primary">
                                                 <i class="bi-link">
                                                     @if ($case->attorney_UserId == null)
-                                                        {{ __('Attach')}}
+                                                        {{ __('Assign')}}
                                                     @else
-                                                    Reattach to others from {{App\Models\Attorney::find($case->attorney_UserId)->FirstName}}
+                                                    Reassign to others from {{App\Models\Attorney::find($case->attorney_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>
@@ -124,9 +124,9 @@
                                             <button class="btn btn-primary">
                                                 <i class="bi-link">
                                                     @if ($case->judge_UserId == null)
-                                                        {{ __('Attach')}}
+                                                        {{ __('Assign')}}
                                                     @else
-                                                        Reattach taking from{{App\Models\Judge::find($case->judge_UserId)->FirstName}}
+                                                        Reassign taking from{{App\Models\Judge::find($case->judge_UserId)->FirstName}}
                                                     @endif
                                                 </i>
                                             </button>

@@ -53,7 +53,7 @@ class AdminController extends Controller
         $cid= $this->createid();
         $case->Case_Id = $cid;
         $case->Case_Title = $request->input('title');
-        $case->Case_Type = $request->input('type');
+        $case->Case_Type = $request->type;
         $case->Case_Details = $request->input('details');
 
         $plaintiff->Case()->save( $case );
@@ -93,7 +93,7 @@ class AdminController extends Controller
         $plaintiff = $case->Plaintiff()->first();
         $case->Case_Id = $id;
         $case->Case_Title = $request->input('title');
-        $case->Case_Type = $request->input('type');
+        $case->Case_Type = $request->type;
         $case->Case_Details = $request->input('details');
         $case->save();
         // return view('master');

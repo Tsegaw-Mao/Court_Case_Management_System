@@ -105,7 +105,10 @@ route::get('/judge/case/date/{cid}',[JudgeController::class, 'casedate'])->name(
 route::post('/judge/case/adddate/{cid}',[JudgeController::class, 'adddate'])->name('judge.adddate');
 route::get('/judge/report', [JudgeController::class, 'report'])->name('judge.report');
 route::post('/judge/filter', [JudgeController::class, 'filter'])->name('judge.filter');
-route::get('/judge/report/pdf/{data}', [JudgeController::class, 'leaveReport'])->name('judge.report.pdf');
+route::get('/judge/report/pdf/{appointed}/{closedByAttorney}/{bail}/{warrant}/{catch}/{detained}/{undetained}/{lastYear}/{newCase}/{totalCase}/{verdicted}/{transfered}', [JudgeController::class, 'leaveReport'])->name('judge.report.pdf');
+route::post('/judge/verdict/{cid}',[JudgeController::class, 'verdict'])->name('judge.verdict');
+route::post('/judge/assign/lawyer/{cid}',[JudgeController::class, 'assignLawyer'])->name('judge.assign.lawyer');
+
 
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');

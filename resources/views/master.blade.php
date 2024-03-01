@@ -120,7 +120,7 @@
                     <li><a class="nav-link scrollto " href="#">{{ __('Calendar')}}</a></li>
                     @endcan
                     @can('assign-judge')
-                    <li><a class="nav-link scrollto" href="{{ route('judge.report')}}">Report</a></li>
+                    <li><a class="nav-link scrollto" href="{{ route('judge.report')}}">{{ __('Report')}}</a></li>
                     @endcan
 
                 </ul>

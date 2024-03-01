@@ -1,7 +1,67 @@
 @extends('master')
 @section('body')
 <?php
-    $data = ['cases'=>$viewData['cases']];
+    $appointed = 0;
+    $closedByAttorney = 0;
+    $bail =0;
+    $warrant=0;
+    $catch=0;
+    $detained = 0;
+    $undetained = 0;
+    $lastYear =0;
+    $newCase = 0;
+    $totalCase = 0;
+    $verdicted = 0;
+    $transfered = 0;
+    foreach($viewData['cases'] as $casee){
+        if($casee->status == 'status3' && $casee->Cause_of_Action != null)
+        {
+            $appointed++;
+        }
+        if($casee->status == 'status3.5' && $casee->verdict == 'ClosedByAttorney')
+        {
+            $closedByAttorney++;
+        }
+        if($casee->status == 'status3' && $casee->bail == 'true')
+        {
+            $bail++;
+        }
+        if($casee->status == 'status3' && $casee->warrant == 'true')
+        {
+            $warrant++;
+        }
+        if($casee->status == 'status3' && $casee->catch == 'true')
+        {
+            $catch++;
+        }
+        if($casee->status == 'status3' && $casee->detained == 'true')
+        {
+            $detained++;
+        }
+        if($casee->status == 'status3' && $casee->detained == 'false')
+        {
+            $undetained++;
+        }
+        if($casee->assignedDate < $viewData['dateFrom'])
+        {
+            $lastYear++;
+        }
+        if($casee->assignedDate > $viewData['dateFrom'])
+        {
+            $newCase++;
+        }
+        
+        if($casee->status == 'status3.5')
+        {
+            $verdicted++;
+        }
+        if($casee->status == 'status3')
+        {
+            $transfered++;
+        }
+    }
+    $totalCase = $newCase + $transfered;
+
 ?>
 <div class="card">
     <div class="card-header">
@@ -44,7 +104,7 @@
             </div>
         </form><br>
         <div>
-            <a class="nav-link scrollto " href="{{route('judge.report.pdf',$data)}}">
+            <a class="nav-link scrollto " href="{{ route('judge.report.pdf',[$appointed,$closedByAttorney,$bail,$warrant,$catch,$detained,$undetained,$lastYear,$newCase,$totalCase,$verdicted,$transfered]) }}">
                 <button class="btn btn-primary"> Create a pdf for Report</button>
             </a>
         </div>

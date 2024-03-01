@@ -25,6 +25,7 @@ class RoleSeeder extends Seeder
         $admin_attorney = Role::create(['name' => 'admin_attorney']);
         $admin_detective = Role::create(['name' => 'admin_detective']);
         $user = Role::create(['name'=> 'user']);
+        $lawyer = Role::create(['name'=> 'lawyer']);
 
         $admin->givePermissionTo([
             'create-role',
@@ -112,13 +113,18 @@ class RoleSeeder extends Seeder
         ]);
         $admin_detective->givePermissionTo([
             'edit-document',
-            'delete-document',
             'view-document',
             'create-document',
             'view-case',
             'list-detectives',
             'send-to-attorney',
             'assign-detective'
+        ]);
+        $lawyer->givePermissionTo([
+            'edit-document',
+            'view-document',
+            'create-document',
+            'view-case'
         ]);
 
     }

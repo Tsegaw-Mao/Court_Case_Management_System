@@ -27,6 +27,13 @@ return new class extends Migration
             $table->string('lawyer_UserId')->nullable();
             $table->string('judge_UserId')->nullable();
             $table->string('detective_UserId')->nullable();
+            $table->date('assignedDate')->nullable();
+            $table->date('verdictedDate')->nullable();
+            $table->boolean('warrant')->nullable();
+            $table->boolean('bail')->nullable();
+            $table->boolean('catch')->nullable();
+            $table->boolean('detain')->nullable();
+            $table->string('verdict')->nullable();
         });
     }
 

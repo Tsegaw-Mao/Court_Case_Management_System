@@ -29,10 +29,10 @@ return new class extends Migration
             $table->string('detective_UserId')->nullable();
             $table->date('assignedDate')->nullable();
             $table->date('verdictedDate')->nullable();
-            $table->boolean('warrant')->nullable();
-            $table->boolean('bail')->nullable();
-            $table->boolean('catch')->nullable();
-            $table->boolean('detain')->nullable();
+            $table->boolean('warrant')->default(false);
+            $table->boolean('bail')->default(false);
+            $table->boolean('catch')->default(false);
+            $table->boolean('detain')->default(false);
             $table->string('verdict')->nullable();
         });
     }

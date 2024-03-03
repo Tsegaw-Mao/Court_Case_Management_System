@@ -60,7 +60,7 @@
             $transfered++;
         }
     }
-    $totalCase = $newCase + $transfered;
+    $totalCase = $newCase + $lastYear;
 
 ?>
 <div class="card">

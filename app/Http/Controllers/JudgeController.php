@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Judge;
+use App\Models\Lawyer;
 use App\Models\LegalCase;
 use App\Models\User;
+use Exception;
 use PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Mail;
+use App\Mail\MailNotify;
 
 class JudgeController extends Controller
 {
@@ -139,26 +143,28 @@ class JudgeController extends Controller
         $case = LegalCase::where('Case_Id', $cid)->first();
         $case->appointmentDate = $request->input('date');
         $case->Cause_of_Action = $request->input('causeOfAction');
-        if($request->Decision == 'warrant'){
-            $case->warant = true;
-        }
-        if($request->Decision == 'bail'){
-            $case->bail = true;
-        }
-        if($request->Decision == 'deny_bail'){
-            $case->bail = false;
-        }
-        if($request->Decision == 'catch'){
-            $case->catch = true;
-        }
-        if($request->Decision == 'detain'){
-            $case->detain = true;
-        }
-        if($request->Decision == 'undetain'){
-            $case->detain = false;
+        if(isset($request->Decision)){
+            
+            if($request->Decision == "warrant"){
+                $case->warrant	= true;
+            }
+            elseif($request->Decision == "bail"){
+                $case->bail = true;
+            }elseif($request->Decision == "deny_bail"){
+                $case->bail = false;
+            }elseif($request->Decision == "catch"){
+                $case->catch = true;
+            }elseif($request->Decision == "detain"){
+                $case->detain = true;
+            }elseif($request->Decision == "undetain"){
+                $case->detain = false;
+            }
         }
         $case->save();
+        $case->refresh();
         return redirect()->route('judge.allcase', ['uid' => Auth::user()->UserId])->with('status', 'case appointed for date' . $case->AppointmentDate);
+
+
     }
     public function report(Request $request)
     {
@@ -221,15 +227,27 @@ class JudgeController extends Controller
         $case = LegalCase::where('Case_Id', $cid)->first();
         $case->verdict = $request->verdict;
         $case->verdictedDate = date('Y-m-d');
-        $case->save();
-        return redirect()->route('judge.allcase', ['uid' => Auth::user()->UserId])->with('status', 'case Closed by ' . $case->verdict);
+        $this->statusup($cid);
+        return redirect()->back();
     }
     public function assignLawyer($cid, Request $request){
         $case = LegalCase::where('Case_Id', $cid)->first();
-        $defendant = $case->Defendants();
-        $lawyer = $request->lawyer;
+        $defendant = $case->Defendants()->first();
+        $lawyer = Lawyer::find($request->lawyer);
         $lawyer->Defendants()->save($defendant);
         $lawyer->refresh();
-        return redirect()->back();
+        $this->statusup($cid);
+        $subject = 'Test Subject';
+        $body = 'Test Message body';
+        try {
+            Mail::to('tsegawjohnj@gmail.com')->send(new MailNotify($subject, $body));
+            $status = 'mail sent to assigned lawyer';
+            return response()->json('Great check your email');
+        } catch (Exception $th) {
+         $status = 'something went wrong with mail';
+         return response()->json('Something went wrong check your email');   
+        }
+        return redirect()->back()->with('status',$status);
+
     }
 }

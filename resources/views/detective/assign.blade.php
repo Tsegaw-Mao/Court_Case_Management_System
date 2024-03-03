@@ -41,7 +41,7 @@
                     </td>
                     <td>{{ $detective->email }}</td>
                     <td>{{ $detective->UserId }}</td>
-                    <td></td>
+                    <td>{{count($detective->Cases()->where('status','status1')->get())}}</td>
 
                 </tr>
 

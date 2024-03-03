@@ -12,7 +12,7 @@
         <div>
             <a href="{{ route('categories.create', ['id' => $viewData['case']->Case_Id]) }}">
                 <button type="button" class="btn btn-primary float-end">
-                    {{ __(' Add Document') }}
+                    {{ __('Add Document') }}
                 </button>
             </a>
 
@@ -246,11 +246,12 @@
                             <div class="mb-3 row">
                                 <label class="col-lg-4 col-md-6 col-sm-12 col-form-label bold">{{ __('Select Lawyer')}}</label>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <select name="lawyer">
+                                    <input name="lawyer" list="lawyer" class="form-control" placeholder="{{ __('Select Lawyer')}}" required><br>
+                                    <datalist id="lawyer">
                                         @foreach($lawyers as $lawyer)
-                                        <option value="{{$lawyer->UserId}}">$lawyer->FirstName</option>
+                                        <option value="{{$lawyer->UserId}}">{{$lawyer->FirstName}}</option>
                                         @endforeach
-                                    </select>
+                                    </datalist>
                                 </div>
                             </div>
                         </div>

@@ -5,6 +5,10 @@
 <div class="alert alert-success">{{session('status')}}</div>
 @endif
 <div class="card">
+    <?php
+    $plaintiffs = \App\Models\Plaintiff::all();
+    $defendants = \App\Models\Defendant::all();
+    ?>
     <div class="card-header bold"> {{ __('Create Case')}}</div>
     <div class="card-body">
 
@@ -15,7 +19,12 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label bold">{{ __('Plaintiff UserId:')}}</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input name="pid" value="{{ old('UserId') }}" type="text" class="form-control" placeholder="{{ __('Enter Plaintiff Id')}}" required><br>
+                            <input name="pid" list="pids" class="form-control" placeholder="{{ __('Select Plaintiff Id')}}" required><br>
+                            <datalist id="pids">>
+                                @foreach($plaintiffs as $plaintiff)
+                                <option value="{{$plaintiff->UserId}}">{{$plaintiff->FirstName}}</option>
+                                @endforeach
+                            </datalist>
                         </div>
                     </div>
                 </div>
@@ -25,7 +34,12 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label bold">{{ __('Defendant UserId')}}:</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <input name="did" value="{{ old('UserId') }}" type="text" class="form-control" placeholder="{{ __('Enter Defendant Id')}}" required><br>
+                            <input name="did" list="dids" class="form-control" placeholder="{{ __('Select Defendant Id')}}" required><br>
+                            <datalist id="dids">>
+                                @foreach($defendants as $defendant)
+                                <option value="{{$defendant->UserId}}">{{$defendant->FirstName}}</option>
+                                @endforeach
+                            </datalist>
                         </div>
                     </div>
                 </div>
@@ -46,7 +60,8 @@
                     <div class="mb-3 row">
                         <label class="col-lg-4 col-md-6 col-sm-12 col-form-label bold">{{ __('Case type')}}</label>
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            <select name="type">
+                            <input name="type" list='type' class="form-control" placeholder="{{ __('Select Case Type')}}" required><br>
+                            <datalist id="type">
                                 <option value="Murder">Murder</option>
                                 <option value="Treason">Treason</option>
                                 <option value="Desertion">Desertion</option>
@@ -54,7 +69,7 @@
                                 <option value="Insubordination">Insubordination</option>
                                 <option value="Disobeying orders">Disobeying orders</option>
                                 <option value="Disrespect of superiors">Disrespect of superiors</option>
-                            </select>
+                            </datalist>
                         </div>
                     </div>
                 </div>

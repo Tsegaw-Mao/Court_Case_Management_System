@@ -41,6 +41,7 @@
                         </td>
                         <td>{{ $attorney->email }}</td>
                         <td>{{ $attorney->UserId }}</td>
+                        <td>{{count($attorney->Cases()->where('status','status2')->get())}}</td>
                 </a>
                 @endforeach
             </tbody>

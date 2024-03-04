@@ -24,6 +24,8 @@ class RoleSeeder extends Seeder
         $admin_judge = Role::create(['name' => 'admin_judge']);
         $admin_attorney = Role::create(['name' => 'admin_attorney']);
         $admin_detective = Role::create(['name' => 'admin_detective']);
+        $user = Role::create(['name'=> 'user']);
+        $lawyer = Role::create(['name'=> 'lawyer']);
 
         $admin->givePermissionTo([
             'create-role',
@@ -41,14 +43,20 @@ class RoleSeeder extends Seeder
             'reject-request',
             'view-document',
             'view-case',
-            'list-judges'
+            'list-judges',
+            'judge-veridct',
+            'list-wittnesses',
+            'list-plaintiffs',
+            'list-defendants'
         ]);
 
         $attorney->givePermissionTo([
             'view-document',
             'view-case',
-            'list-attornies'
-
+            'list-attornies',
+            'send-to-judge',
+            'list-defendants',
+            'list-plaintiffs'
         ]);
         $detective->givePermissionTo([
             'edit-document',
@@ -57,24 +65,13 @@ class RoleSeeder extends Seeder
             'create-document',
             'view-case',
             'list-detectives'
+        
         ]);
         $clerk->givePermissionTo([
-            'create-user',
-            'edit-user',
-            'delete-user',
-            'view-user',
-            'create-role',
-            'view-role',
-            'edit-role',
-            'delete-role',
             'create-case',
             'edit-case',
             'delete-case',
             'view-case',
-            'list-judges',
-            'list-attornies',
-            'list-detectives',
-            'list-wittnesses',
             'list-plaintiffs',
             'list-defendants'
         ]);
@@ -84,30 +81,50 @@ class RoleSeeder extends Seeder
         $defendant->givePermissionTo([
             'view-case',
         ]);
+        $user->givePermissionTo([
+            'view-case'
+            ]);
         $admin_judge->givePermissionTo([
             'approve-request',
             'reject-request',
             'view-document',
             'view-case',
-            'assign-judge',
             'list-judges',
+            'judge-veridct',
+            'list-wittnesses',
+            'list-plaintiffs',
+            'list-defendants',
+            'judge-accept',
+            'send-back-to-attorney',
+            'assign-judge'
 
         ]);
         $admin_attorney->givePermissionTo([
-            'assign-attorney',
             'view-document',
             'view-case',
-            'list-attornies'
+            'list-attornies',
+            'send-to-judge',
+            'list-defendants',
+            'list-plaintiffs',
+            'send-back-to-detective',
+            'attorney-accept',
+            'assign-attorney'
 
         ]);
         $admin_detective->givePermissionTo([
-            'assign-detective',
             'edit-document',
-            'delete-document',
             'view-document',
             'create-document',
             'view-case',
-            'list-detectives'
+            'list-detectives',
+            'send-to-attorney',
+            'assign-detective'
+        ]);
+        $lawyer->givePermissionTo([
+            'edit-document',
+            'view-document',
+            'create-document',
+            'view-case'
         ]);
 
     }

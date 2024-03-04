@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Case_Type');
             $table->text('Case_Details');
             $table->string('Cause_of_Action')->nullable();
-            $table->date('Appointment Date')->nullable();
+            $table->date('appointmentDate')->nullable();
             $table->string('status')->default('status1');
             $table->softDeletes('deleted_at');
             $table->string('plaintiff_UserId')->nullable();
@@ -27,6 +27,13 @@ return new class extends Migration
             $table->string('lawyer_UserId')->nullable();
             $table->string('judge_UserId')->nullable();
             $table->string('detective_UserId')->nullable();
+            $table->date('assignedDate')->nullable();
+            $table->date('verdictedDate')->nullable();
+            $table->boolean('warrant')->default(false);
+            $table->boolean('bail')->default(false);
+            $table->boolean('catch')->default(false);
+            $table->boolean('detain')->default(false);
+            $table->string('verdict')->nullable();
         });
     }
 

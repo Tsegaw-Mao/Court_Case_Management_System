@@ -1,16 +1,16 @@
-@extends('auth.Layouts')
+@extends('auth.Layouts') is-invalid
 
 @section('content')
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
 
-            <div class="card">
-                <div class="card-header">Register</div>
+                       <div class="card">
+                <div class="card-header">{{ __('Register')}}</div>
                 <div class="card-body">
                     <form action="{{ route('store') }}" method="post">
                         @csrf
                         <div class="mb-3 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end text-start">{{ __("Name")}}</label>
                             <div class="col-md-6">
                                 <input type="text"
                                     class="form-control
@@ -23,9 +23,9 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="UserId" class="col-md-4 col-form-label text-md-end text-start">User ID : </label>
+                            <label for="UserId" class="col-md-4 col-form-label text-md-end text-start">{{ __("User ID:")}}</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control @error('UserId') is-invalid @enderror" id="UserId"
+                                <input type="text" class="form-control @error('UserId'){{ __(' is-invalid')}} @enderror" id="UserId"
                                     name="UserId">
                                 @if ($errors->has('UserId'))
                                     <span class="text-danger">{{ $errors->first('UserId') }}</span>
@@ -33,8 +33,8 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-end text-start">Email
-                                Address</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end text-start">{{ __("Email Address")}}</label>
+
                             <div class="col-md-6">
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
                                     id="email" name="email" value="{{ old('email') }}">
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-end text-start">Password</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-end text-start">{{ __("Password")}}</label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     id="password" name="password">
@@ -55,18 +55,14 @@
                         </div>
                         <div class="mb-3 row">
                             <label for="password_confirmation"
-                                class="col-md-4 col-form-label text-md-end text-start">Confirm Password</label>
+                                class="col-md-4 col-form-label text-md-end text-start">{{ __("Confirm Password")}}</label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control" id="password_confirmation"
                                     name="password_confirmation">
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Register">
-                        </div>
-                        <div class="mb-3 row">
-                            <input type="submit" class="col-md-3 offset-md-5 btn btn-primary"
-                                value="Forget Password? Reset">
+                            <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value={{ __("Register")}}>
                         </div>
 
                     </form>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,11 +26,25 @@ use App\Http\Controllers\UserController;
 |
 */
 
+//   Route::get('/{locale?}', function ($locale = null) {
+//      if (isset($locale) && in_array($locale, config('app.available_locales'))) {
+//       app()->setLocale($locale);
+//    }
+//     $viewData = [];
+//     return view('master')->with("viewData", $viewData);
+
+// });
 
 
-route::get('/', [TemplateController::class,'index'])->name('landing');
+//route::get('/', [TemplateController::class,'index'])->name('landing');
 
 
+
+
+
+route::get('/',[TemplateController::class,'index'])->name('landing');
+
+Route::middleware('auth')->group(function(){
 route::get('/admin/home/{uid}', [AdminController::class,'index'])->name('admin.home');
 Route::get('/admin/index', [AdminController::class,'index2'])->name('admin.index');
 Route::get('/admin/index2', [AdminController::class,'index3'])->name('admin.users');
@@ -62,8 +77,10 @@ route::get('/defendant/mycase',[DefendantController::class, 'mycases'])->name('d
 
 route::get('/lawyer/create',[LawyerController::class,'create'])->name('lawyer.create');
 route::post('/lawyer/store', [ LawyerController::class,'store'])->name('lawyer.store');
-route::get('/lawyer/cases/show/{uid}', [LawyerController::class,'allcase'])->name('lawyer.allcase');
+route::get('/lawyer/cases/show/{upuid}', [LawyerController::class,'allcase'])->name('lawyer.allcase');
 route::get('/lawyer/mycase',[LawyerController::class, 'mycases'])->name('lawyer.mycase');
+
+
 
 route::get('/attorney/create',[AttorneyController::class,'create'])->name('attorney.create');
 route::post('/attorney/store', [ AttorneyController::class,'store'])->name('attorney.store');
@@ -84,6 +101,14 @@ route::get('/judge/list',[JudgeController::class,'index'])->name('judge.index');
 route::get('/judge/mycase',[JudgeController::class, 'mycases'])->name('judge.mycase');
 route::get('/judge/case/status/down/{cid}',[JudgeController::class, 'statusdown'])->name('judge.status.down');
 route::get('/judge/case/status/up/{cid}',[JudgeController::class, 'statusup'])->name('judge.status.up');
+route::get('/judge/case/date/{cid}',[JudgeController::class, 'casedate'])->name('judge.date');
+route::post('/judge/case/adddate/{cid}',[JudgeController::class, 'adddate'])->name('judge.adddate');
+route::get('/judge/report', [JudgeController::class, 'report'])->name('judge.report');
+route::post('/judge/filter', [JudgeController::class, 'filter'])->name('judge.filter');
+route::get('/judge/report/pdf/{appointed}/{closedByAttorney}/{bail}/{warrant}/{catch}/{detained}/{undetained}/{lastYear}/{newCase}/{totalCase}/{verdicted}/{transfered}', [JudgeController::class, 'leaveReport'])->name('judge.report.pdf');
+route::post('/judge/verdict/{cid}',[JudgeController::class, 'verdict'])->name('judge.verdict');
+route::post('/judge/assign/lawyer/{cid}',[JudgeController::class, 'assignLawyer'])->name('judge.assign.lawyer');
+
 
 route::get('/detective/create',[DetectiveController::class,'create'])->name('detective.create');
 route::post('/detective/store', [ DetectiveController::class,'store'])->name('detective.store');
@@ -94,10 +119,23 @@ route::get('/detective/list',[DetectiveController::class, 'index'])->name('detec
 route::get('/detective/mycase',[DetectiveController::class, 'mycases'])->name('detective.mycase');
 route::get('/detective/case/status/up/{cid}',[DetectiveController::class, 'statusup'])->name('detective.status.up');
 
+});
+Route::controller(JudgeController::class)->middleware('auth')->group(function () {
+    route::get('/judge/create','create')->name('judge.create');
+    route::post('/judge/store', 'store')->name('judge.store');
+    route::get('/judge/cases/show/{uid}', 'allcase')->name('judge.allcase');
+    route::get('/judge/case/assign/{jid}/{cid}',  'assignCase')->name('judge.case');
+    route::get('/judge/assign/{cid}','assign')->name('judge.assign');
+    route::get('/judge/list','index')->name('judge.index');
+    route::get('/judge/mycase', 'mycases')->name('judge.mycase');
+    route::get('/judge/case/status/down/{cid}','statusdown')->name('judge.status.down');
+    route::get('/judge/case/status/up/{cid}','statusup')->name('judge.status.up');
+    route::get('/judge/case/date/{cid}','casedate')->name('judge.date');
+    route::post('/judge/case/adddate/{cid}','adddate')->name('judge.adddate');
+    });
 
 
-
-Route::controller(App\Http\Controllers\CategoryController::class)->group(function () {
+Route::controller(CategoryController::class)->middleware('auth')->group(function () {
     Route::get('categories/{id}', 'index')->name('categories.index');
     Route::get('categories/create/{id}', 'create')->name('categories.create');
     Route::post('categories/store/{id}', 'store')->name('categories.store');
@@ -132,3 +170,6 @@ Route::resources([
     'roles' => RoleController::class,
     'users' => UserController::class,
 ]);
+
+//Route::get('');
+Route::get('language/{locale}', '\App\Http\Controllers\LocalizationController@changeLocale')->name("locale");

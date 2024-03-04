@@ -41,6 +41,7 @@
                         </td>
                         <td>{{ $judge->email }}</td>
                         <td>{{ $judge->UserId }}</td>
+                        <td>{{count($judge->Cases()->where('status','status3')->get())}}</td>
 
                     </tr>
                 </a>

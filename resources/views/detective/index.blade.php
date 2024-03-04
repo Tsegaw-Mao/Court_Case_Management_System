@@ -4,7 +4,7 @@
 <div class="alert alert-success">{{session('status')}}</div>
 @endif
 <div class="card">
-    <div class="card-header bold"> Manage Cases
+    <div class="card-header bold"> {{ __('Manage Cases')}}
     </div>
     <div class="card-body">
         @if (session('status'))
@@ -23,14 +23,14 @@
             <thead>
                 <tr class="bold">
                     <th scope="col">#</th>
-                    <th scope="col">Case ID</th>
-                    <th scope="col">Plaintiff</th>
-                    <th scope="col">Defendant</th>
-                    <th scope="col">Case Title</th>
-                    <th scope="col">Case Type</th>
-                    <th scope="col">Case Detail</th>
-                    <th scope="col">Cause of Action</th>
-                    <th scope="col">View</th>
+                    <th scope="col">{{ __('Case ID')}}</th>
+                    <th scope="col">{{ __('Plaintiff')}}</th>
+                    <th scope="col">{{ __('Defendant')}}</th>
+                    <th scope="col">{{ __('Case Title<')}}/th>
+                    <th scope="col">{{ __('Case Type')}}</th>
+                    <th scope="col">{{ __('Case Detail')}}</th>
+                    <th scope="col">{{ __('Cause of Action<')}}/th>
+                    <th scope="col">{{ __('View')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,7 +64,7 @@
         <div>
             <a href="{{ route('admin.readalldeletes')}}">
                 <button type="button" class="btn btn-primary left">
-                    <i>Restore Deletes</i>
+                    <i>{{ __('Restore Deletes')}}</i>
                 </button>
             </a>
         </div>

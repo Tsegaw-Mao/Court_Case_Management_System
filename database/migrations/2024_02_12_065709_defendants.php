@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("LastName")->nullable();
             $table->string("email");
             $table->string("address")->nullable();
-            $table->string("lawyers_UserId")->nullable();
+            $table->string("lawyer_UserId")->nullable();
             $table->timestamps();
         });
     }

@@ -46,14 +46,14 @@
         <div class="container d-flex align-items-center justify-content-lg-between">
 
             <h1 class="logo me-auto me-lg-0"><a href=""><img src="{{asset('assets/img/judge hammer.jpg')}}"
-                        class="img-fluid" alt=""><span> Justice Dep.</span></a></h1>
+                        class="img-fluid" alt=""><span> {{ __('Justice Dep')}}.</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                 <?php
-                $home = 'admin.home';
+                // $home = 'admin.home';
                 $us3r = Auth::user();
                 $rol3s=$us3r->getRoleNames();
                 foreach($rol3s as $rol3){
@@ -72,7 +72,7 @@
                         $home = 'home'; break;
                     }
                 }
-                $mycase = 'admin.home';
+                // $mycase = 'admin.home';
                 $us3rr = Auth::user();
                 $rol3ss=$us3rr->getRoleNames();
                 foreach($rol3ss as $rol33){
@@ -91,33 +91,36 @@
                 }
                 ?>
                     @can('edit-user')
-                    <li><a class="nav-link scrollto " href="{{route('home')}}">Admin Panel</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('home')}}">{{ __('Admin Panel')}}</a></li>
                     @endcan
-                    <li><a class="nav-link scrollto active" href="{{route($home,['uid'=>$us3r->id])}}">Home</a></li>
-                    <li><a class="nav-link scrollto " href="{{route($mycase)}}">My Cases</a></li>
+                    <li><a class="nav-link scrollto active" href="{{route($home,['uid'=>Auth::user()->id])}}">{{ __('Home')}}</a></li>
+                    <li><a class="nav-link scrollto " href="{{route($mycase)}}">{{ __('My Cases')}}</a></li>
                     @can('list-judges')
-                    <li><a class="nav-link scrollto " href="{{route('judge.index')}}">Judges</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('judge.index')}}">{{ __('Judges')}}</a></li>
                     @endcan
                     @can('list-attornies')
-                    <li><a class="nav-link scrollto " href="{{route('attorney.index')}}">Attornies</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('attorney.index')}}">{{ __('Attornies')}}</a></li>
                     @endcan
                     @can('list-lawyers')
-                    <li><a class="nav-link scrollto " href="#">Lawyers</a></li>
+                    <li><a class="nav-link scrollto " href="#">{{ __('Lawyers')}}</a></li>
                     @endcan
                     @can('list-detectives')
-                    <li><a class="nav-link scrollto " href="{{route('detective.index')}}">Detectives</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('detective.index')}}">{{ __('Detectives')}}</a></li>
                     @endcan
                     @can('list-plaintiffs')
-                    <li><a class="nav-link scrollto " href="{{route('plaintiff.index')}}">Plaintiffs</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('plaintiff.index')}}">{{ __('Plaintiffs')}}</a></li>
                     @endcan
                     @can('list-defendants')
-                    <li><a class="nav-link scrollto " href="{{route('defendant.index')}}">Defendants</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('defendant.index')}}">{{ __('Defendants')}}</a></li>
                     @endcan
                     @can('list-wittnesses')
-                    <li><a class="nav-link scrollto " href="#">Wittness</a></li>
+                    <li><a class="nav-link scrollto " href="#">{{ __('Wittness')}}</a></li>
                     @endcan
                     @can('view-schedule')
-                    <li><a class="nav-link scrollto " href="#">Calendar</a></li>
+                    <li><a class="nav-link scrollto " href="#">{{ __('Calendar')}}</a></li>
+                    @endcan
+                    @can('assign-judge')
+                    <li><a class="nav-link scrollto" href="{{ route('judge.report')}}">{{ __('Report')}}</a></li>
                     @endcan
 
                 </ul>
@@ -127,8 +130,8 @@
 
             @guest
             <div class='float-end'>
-                <a class="get-started-btn scrollto" href="{{ route('login') }}">Login</a>
-                <a class="get-started-btn scrollto" href="{{ route('register') }}">Register</a>
+                <a class="get-started-btn scrollto" href="{{ route('login') }}">{{ __('Login')}}</a>
+                <a class="get-started-btn scrollto" href="{{ route('register') }}">{{ __('Register')}}</a>
             </div>
             @else
             <div class='float-end'>
@@ -140,7 +143,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="get-started-btn scrollto dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">Logout</a>
+                            document.getElementById('logout-form').submit();">{{ __('Logout')}}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
                             </form>
@@ -166,16 +169,21 @@
     <footer id="footer">
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong><span>MoD Justice Dept</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>{{ __('MoD Justice Dept')}}</span></strong>. {{ __('All Rights Reserved')}}
+
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                {{-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> --}}
+
             </div>
+
+
         </div>
+        @include('partials.language_switcher')
     </footer><!-- End Footer -->
 
     <div id="preloader"></div>

@@ -19,17 +19,19 @@ class AdminController extends Controller
         $viewData["cases"] = LegalCase::all();
         return view("admin.home")->with("viewData", $viewData);
     }
-    public function index2(){
+    public function index2()
+    {
         $viewData = [];
-        $viewData['cases'] =LegalCase::all();
-        return view("admin.index")->with("viewData",$viewData);
+        $viewData['cases'] = LegalCase::all();
+        return view("admin.index")->with("viewData", $viewData);
     }
-    public function index3(){
+    public function index3()
+    {
         $viewData = [];
         $viewData['cases'] = User::all();
-        return view("admin.indexx")->with("viewData",$viewData);
+        return view("admin.indexx")->with("viewData", $viewData);
     }
-    public function create(Request $request)
+    public function create()
     {
         $viewData = [];
         $viewData["title"] = "Case Create - CCMS";
@@ -37,22 +39,31 @@ class AdminController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'pid' => 'required_if:legal_case_Case_Id,null|exists:App\Models\Plaintiff,UserId',
+            'did' => 'required|exists:App\Models\Defendant,UserId',
+            'title' => 'required|max:250',
+            'type' => 'required|max:250',
+            'details' => 'required'
+        ]);
         $case = new LegalCase();
 
-        $plaintiff = Plaintiff::where("UserId", $request->input("pid"))->first();
-        $defendant = Defendant::where("UserId", $request->input("did"))->first();
+        $plaintiff = Plaintiff::where("UserId", $request->pid)->first();
+        $defendant = Defendant::where("UserId", $request->did)->first();
 
+        if ($plaintiff->legal_case_Case_Id == null) {
+            $cid = $this->createid();
+            $case->Case_Id = $cid;
+            $case->Case_Title = $request->input('title');
+            $case->Case_Type = $request->type;
+            $case->Case_Details = $request->input('details');
 
-        $cid= $this->createid();
-        $case->Case_Id = $cid;
-        $case->Case_Title = $request->input('title');
-        $case->Case_Type = $request->input('type');
-        $case->Case_Details = $request->input('details');
-
-        $plaintiff->Case()->save( $case );
-        $defendant->Cases()->attach([$cid]);
-        return redirect()->back()->with('status', 'Case Created Successfully');
-
+            $plaintiff->Case()->save($case);
+            $defendant->Cases()->attach([$cid]);
+            return redirect()->back()->with('status', 'Case Created Successfully');
+        } else {
+            return redirect()->back()->with('status', 'Plaintiff Has already an other case on hand');
+        }
     }
 
     public function show($id)
@@ -69,28 +80,30 @@ class AdminController extends Controller
         $viewData['title'] = "Edit Case";
         $viewData["case"] = LegalCase::where('Case_Id', $id)->first();
         return view('admin.edit')->with('viewData', $viewData);
-
-
     }
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'required|max:250',
+            'type' => 'required|max:250',
+            'details' => 'required'
+        ]);
         $case = LegalCase::where('Case_Id', $id)->first();
         $plaintiff = $case->Plaintiff()->first();
         $case->Case_Id = $id;
         $case->Case_Title = $request->input('title');
-        $case->Case_Type = $request->input('type');
+        $case->Case_Type = $request->type;
         $case->Case_Details = $request->input('details');
         $case->save();
         // return view('master');
         // return redirect()->route('admin.home')->with('status', 'Case Edited Sussesfully');
-       return redirect()->back()->with('status', 'Case Edited Sussesfully');
+        return redirect()->back()->with('status', 'Case Edited Sussesfully');
     }
     public function delete($id)
     {
         $case = LegalCase::where("Case_Id", $id)->first();
         $case->delete();
-         return redirect()->route("admin.home",['uid'=>Auth::user()->id])->with("status", "Case Deleted");
-
+        return redirect()->route("admin.home", ['uid' => Auth::user()->id])->with("status", "Case Deleted");
     }
     public function readSoftDeletes($id)
     {
@@ -132,20 +145,20 @@ class AdminController extends Controller
         LegalCase::onlyTrashed()->where("Case_Id", $id)->forceDelete();
         return redirect()->back()->with("success", "Case Deleted Permanently");
     }
-    public function createid(){
+    public function createid()
+    {
         $case = LegalCase::all()->last();
 
-        if($case==null){
+        if ($case == null) {
             return $id = 'Case0001';
-        }
-        else{
+        } else {
 
             $lastid = $case->Case_Id;
-            $id1 = substr($lastid,4);
-            $id2 = $id1*1;
+            $id1 = substr($lastid, 4);
+            $id2 = $id1 * 1;
             $id3 = $id2 + 1;
             $id4 = 'Case';
-            for($i=4; $i>strlen($id3); $i--){
+            for ($i = 4; $i > strlen($id3); $i--) {
                 $id4 = $id4 . 0;
             }
             $id = $id4 . $id3;

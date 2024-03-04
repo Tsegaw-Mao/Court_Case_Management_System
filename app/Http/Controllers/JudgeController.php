@@ -8,6 +8,7 @@ use App\Models\Lawyer;
 use App\Models\LegalCase;
 use App\Models\User;
 use Exception;
+use App\Models\Attorney;
 use PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -141,6 +142,8 @@ class JudgeController extends Controller
     public function addDate($cid,  Request $request)
     {
         $case = LegalCase::where('Case_Id', $cid)->first();
+        $oldDate = $case->appointmentDate;
+        $today = date('Y-m-d');
         $case->appointmentDate = $request->input('date');
         $case->Cause_of_Action = $request->input('causeOfAction');
         if(isset($request->Decision)){
@@ -159,6 +162,23 @@ class JudgeController extends Controller
             }elseif($request->Decision == "undetain"){
                 $case->detain = false;
             }
+        }
+        $defendant = $case->Defendants()->first();
+        $lawyeri = Lawyer::find($defendant->lawyer_UserId);
+        $lawyer = $lawyeri->email;
+        $attorney = Attorney::find($case->attorney_UserId)->email;
+        if($today < $oldDate){
+            $subject = 'Appointment Date Change';
+            $body = 'Case '.$case->Case_Title.' Appointment Chaged From '.$oldDate.' To '.$case->appointmentDate.' Reason of appointment is '.$case->Cause_of_Action;
+        }elseif($today >= $oldDate){
+            $subject = 'Trial Appointment';
+            $body = 'Case '.$case->Case_Title.' has Trial date set on '.$case->appointmentDate.' for '.$case->Cause_of_Action;
+        }
+        try {
+            Mail::to([$lawyer, $attorney])->send(new MailNotify($subject, $body));
+            $status = 'informed parties';
+        } catch (Exception $th) {
+         $status = 'something went wrong with mail';
         }
         $case->save();
         $case->refresh();
@@ -237,15 +257,13 @@ class JudgeController extends Controller
         $lawyer->Defendants()->save($defendant);
         $lawyer->refresh();
         $this->statusup($cid);
-        $subject = 'Test Subject';
-        $body = 'Test Message body';
+        $subject = 'YOU HAVE BEEN ASSIGNED TO NEW CASE';
+        $body = 'YOU ARE ASSIGNED TO DEFENDANT '.$defendant->FirstName.' ON CASE '.$case->Case_Title;
         try {
-            Mail::to('tsegawjohnj@gmail.com')->send(new MailNotify($subject, $body));
+            Mail::to($lawyer->email)->send(new MailNotify($subject, $body));
             $status = 'mail sent to assigned lawyer';
-            return response()->json('Great check your email');
         } catch (Exception $th) {
          $status = 'something went wrong with mail';
-         return response()->json('Something went wrong check your email');   
         }
         return redirect()->back()->with('status',$status);
 

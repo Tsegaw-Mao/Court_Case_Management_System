@@ -22,23 +22,23 @@
         {
             $closedByAttorney++;
         }
-        if($casee->status == 'status3' && $casee->bail == 'true')
+        if($casee->bail == 'true')
         {
             $bail++;
         }
-        if($casee->status == 'status3' && $casee->warrant == 'true')
+        if($casee->warrant == 'true')
         {
             $warrant++;
         }
-        if($casee->status == 'status3' && $casee->catch == 'true')
+        if($casee->catch == 'true')
         {
             $catch++;
         }
-        if($casee->status == 'status3' && $casee->detained == 'true')
+        if($casee->detain == 'true')
         {
             $detained++;
         }
-        if($casee->status == 'status3' && $casee->detained == 'false')
+        if($casee->detain == 'false')
         {
             $undetained++;
         }
